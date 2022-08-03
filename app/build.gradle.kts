@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk =32
+    compileSdk =Versions.COMPILE_SDK
 
     defaultConfig {
         applicationId ="com.hbeonlabs.smartguard"
-        minSdk=21
-        targetSdk=32
-        versionCode =1
-        versionName ="1.0"
+        minSdk=Versions.MIN_Sdk
+        targetSdk=Versions.TARGET_SDK
+        versionCode =Versions.VERSION_CODE
+        versionName =Versions.VERSION_NAME
 
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
@@ -43,9 +43,9 @@ dependencies {
 
     implementation(Libs.KTS_CORE_LIB)
     implementation(Libs.APP_COMPAT_LIB)
-    implementation ("com.google.android.material:material:1.6.1")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation (Libs.MATERIAL_LIB)
+    implementation (Libs.CONSTRAINT_LAYOUT_LIB)
+    testImplementation(Libs.JUNIT_LIB)
+    androidTestImplementation(Libs.JUNIT_EXT_LIB)
+    androidTestImplementation(Libs.ESPRESSO_CORE)
 }
