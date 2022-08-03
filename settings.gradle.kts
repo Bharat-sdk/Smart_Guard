@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Smart Guard"
-include ':app'
+include (":app")
