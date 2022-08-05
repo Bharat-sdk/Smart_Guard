@@ -70,13 +70,6 @@ dependencies {
 
     // Koin main features for Android
     implementation (Libs.KOIN_ANDROID)
-
-// Java Compatibility
-    implementation (Libs.KOIN_COMPAT)
-// Jetpack WorkManager
-    implementation(Libs.KOIN_WORKMANAGER)
-// Navigation Graph
-    implementation(Libs.KOIN_NAVIGATION)
     implementation(Libs.TIMBER_LIB)
     debugImplementation(Libs.LEAK_CANARY_LIB)
 }
