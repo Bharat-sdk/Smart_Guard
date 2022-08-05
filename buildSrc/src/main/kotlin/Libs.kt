@@ -23,11 +23,14 @@ object Libs
    const val JUNIT_LIB="junit:junit:${Versions.JUNIT}"
    const val JUNIT_EXT_LIB="androidx.test.ext:junit:${Versions.JUNIT_TEXT_EXT}"
    const val ESPRESSO_CORE= "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
-   const val KOIN_CORE= "io.insert-koin:koin-android:koin-core:${Versions.KOIN}"
+
+   //Firebase
+   const val FIREBASE_CRASHLYTICS="com.google.firebase:firebase-crashlytics-ktx"
+   //Multidex
+   const val MULTIDEX_LIB="androidx.multidex:multidex:${Versions.MULTI_DEX}"
+   //Koin
+   const val KOIN_CORE="io.insert-koin:koin-core:${Versions.KOIN}"
    const val KOIN_ANDROID="io.insert-koin:koin-android:${Versions.KOIN}"
-   const val KOIN_COMPAT="io.insert-koin:koin-android-compat:${Versions.KOIN}"
-   const val KOIN_WORKMANAGER="io.insert-koin:koin-androidx-workmanager:${Versions.KOIN}"
-   const val KOIN_NAVIGATION="io.insert-koin:koin-androidx-navigation:${Versions.KOIN}"
    //Logging
    const val TIMBER_LIB="com.jakewharton.timber:timber:${Versions.TIMBER_LIB}"
    //Leak Canary
