@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Smart Guard</string>
+    <string name="back">BACK</string>
+    <string name="next">NEXT</string>
 </resources>
