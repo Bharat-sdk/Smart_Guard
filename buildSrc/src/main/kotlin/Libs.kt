@@ -18,7 +18,6 @@ object Libs
    const val LIFECYCELE_JAVA_SUPPORT="androidx.lifecycle:lifecycle-common-java8:${Versions.LIFE_CYCLE}"
    const val FIREBASE_BOM="com.google.firebase:firebase-bom:${Versions.FIREBASE_BOM}"
 
-
    //Testing
    const val JUNIT_LIB="junit:junit:${Versions.JUNIT}"
    const val JUNIT_EXT_LIB="androidx.test.ext:junit:${Versions.JUNIT_TEXT_EXT}"
@@ -35,6 +34,15 @@ object Libs
    const val TIMBER_LIB="com.jakewharton.timber:timber:${Versions.TIMBER_LIB}"
    //Leak Canary
    const val LEAK_CANARY_LIB="com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
+
+   //DP and SP Multiple Size Screen Support
+   const val DP_LIB = "com.intuit.sdp:sdp-android:${Versions.DP}"
+   const val SP_LIB = "com.intuit.ssp:ssp-android:${Versions.SP}"
+
+   //Navigation
+   const val NAV_FRAGMENT_LIB = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
+   const val NAV_UI_LIB = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
+
 
 
 

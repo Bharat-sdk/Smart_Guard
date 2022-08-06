@@ -4,6 +4,8 @@ plugins {
     id("kotlin-kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id ("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -80,5 +82,14 @@ dependencies {
     debugImplementation(Libs.LEAK_CANARY_LIB)
     //Multidex
     implementation(Libs.MULTIDEX_LIB)
+    // Dp SP Support
+    implementation(Libs.DP_LIB)
+    implementation(Libs.SP_LIB)
+
+    // Navigation Components
+    implementation (Libs.NAV_FRAGMENT_LIB)
+    implementation (Libs.NAV_UI_LIB)
+    implementation ("me.relex:circleindicator:2.1.6")
+
 
 }

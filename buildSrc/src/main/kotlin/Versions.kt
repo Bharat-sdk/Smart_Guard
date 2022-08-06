@@ -23,4 +23,10 @@ object Versions {
     const val VERSION_NAME = "1.0"
     const val ESPRESSO_CORE = "3.4.0"
 
+    const val DP = "1.0.6"
+    const val SP = "1.0.6"
+
+    //Navigation
+    const val NAVIGATION = "2.5.1"
+
 }
