@@ -24,7 +24,7 @@
         app:ci_drawable_unselected="@drawable/ic_dot_unselected"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/_100sdp"/>
+        android:layout_marginBottom="@dimen/_90sdp"/>
 
     <LinearLayout
         android:id="@+id/onBoarding_back"
