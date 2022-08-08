@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/fragmentOnBoarding"
         android:name="com.hbeonlabs.smartguard.ui.fragments.onBoarding.FragmentViewPager"
-        android:label="FragmentViewPager" />
+        android:label="FragmentViewPager" >
+        <action
+            android:id="@+id/action_fragmentOnBoarding_to_fragmentAddAHub"
+            app:destination="@id/fragmentAddAHub" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentSplash"
         android:name="com.hbeonlabs.smartguard.ui.fragments.splash.SplashFragment"
@@ -16,5 +20,9 @@
             android:id="@+id/action_fragmentSplash_to_fragmentOnBoarding"
             app:destination="@id/fragmentOnBoarding" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentAddAHub"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.addAHub.FragmentAddAHub"
+        android:label="FragmentAddAHub" />
 
 </navigation>
