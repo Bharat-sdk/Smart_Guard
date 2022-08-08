@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".053" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+    <TextView
+        android:id="@+id/tv_add_hub_heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_hub_heading"
+        app:layout_constraintTop_toBottomOf="@id/guideline_top"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_add_hub_points"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_hub_heading"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_dot_unselected"
+            android:layout_marginTop="@dimen/_4sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_hub_point1"
+            android:layout_marginStart="@dimen/_15sdp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_hub_heading"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_dot_unselected"
+            android:layout_marginTop="@dimen/_4sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_hub_point2"
+            android:layout_marginStart="@dimen/_15sdp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_hub_heading"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_dot_unselected"
+            android:layout_marginTop="@dimen/_4sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_hub_point_3"
+            android:layout_marginStart="@dimen/_15sdp"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_serial_no."
+        app:layout_constraintTop_toBottomOf="@id/layout_add_hub_points"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        android:text="@string/hub_serial_no"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_11ssp"
+        />
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edt_add_hub_serial"
+        android:hint="@string/_91_xxxx_xx_xxxx"
+        app:layout_constraintTop_toBottomOf="@id/tv_serial_no."
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        android:textSize="@dimen/_12ssp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_sim_no."
+        app:layout_constraintTop_toBottomOf="@id/edt_add_hub_serial"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        android:text="@string/hub_sim"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textSize="@dimen/_11ssp"
+        />
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/edt_add_hub_sim_no"
+        android:hint="@string/_91_xxxx_xx_xxxx"
+        app:layout_constraintTop_toBottomOf="@id/tv_sim_no."
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        android:textSize="@dimen/_12ssp"
+        />
+
+
+    <Button
+        android:id="@+id/btn_add_hub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/edt_add_hub_sim_no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/btn_add_hub"
+        android:backgroundTint="#D3D3D3"
+        android:textColor="#4C4949"
+        android:layout_marginTop="@dimen/_10sdp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

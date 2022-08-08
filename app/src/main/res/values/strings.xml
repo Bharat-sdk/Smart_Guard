@@ -2,4 +2,13 @@
     <string name="app_name">Smart Guard</string>
     <string name="back">BACK</string>
     <string name="next">NEXT</string>
+    <string name="add_hub_heading">Hubs are the central base stations of the SmartGuard suite.\nTo register a hub, please do the following:</string>
+    <string name="add_hub_point1">Insert an active SIM card that can send/receive SMS (with sufficient credit) into the Hub</string>
+    <string name="add_hub_point2"><![CDATA[Power on the Hub & let it boot]]></string>
+    <string name="add_hub_point_3">Add the Phone No. of the siM card in the Hub below. and press the \'Add Hub button</string>
+    <string name="btn_add_hub">ADD HUB</string>
+    <string name="_91_xxxx_xx_xxxx">+91 XXXX XX XXXX</string>
+    <string name="hub_sim">HUB SIM Phone No</string>
+    <string name="hub_serial_no">HUB Serial No</string>
+    <string name="verifying">VERIFYING</string>
 </resources>
