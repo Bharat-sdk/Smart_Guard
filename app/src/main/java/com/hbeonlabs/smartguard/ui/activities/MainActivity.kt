@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
 
 
 
-    fun hideShowToolbar()
+    private fun hideShowToolbar()
     {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.toolbarTitle.text = destination.label

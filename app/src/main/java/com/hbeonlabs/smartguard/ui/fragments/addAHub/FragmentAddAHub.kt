@@ -8,6 +8,7 @@ import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.data.local.models.OnBoardingData
 import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.databinding.FragmentOnboardingBinding
+import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.ViewPagerAdapter
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.splash.SplashviewModel
@@ -28,6 +29,9 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
 
     override fun initView() {
         super.initView()
+
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_baseline_help)
+        (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
     }
 
 

@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseActivity<T : BaseViewModel, V : ViewBinding> : AppCompatActivity() {
     private lateinit var viewModel: T
     private lateinit var viewBinding: V
-    protected val binding get() = viewBinding!!
+    val binding get() = viewBinding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
