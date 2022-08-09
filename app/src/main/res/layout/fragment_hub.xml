@@ -24,8 +24,7 @@
         android:layout_height="wrap_content"
         android:adapter="@{adapter}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
+
         />
 
 </LinearLayout>

@@ -11,4 +11,7 @@
     <color name="on_boarding_green">#15C37D</color>
     <color name="on_boarding_orange">#D65320</color>
     <color name="on_boarding_purple">#A411CD</color>
+    <color name="armed">#53CD11</color>
+    <color name="un_armed">#5A5A5A</color>
+
 </resources>
