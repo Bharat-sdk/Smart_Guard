@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/fragmentAddAHub"
         android:name="com.hbeonlabs.smartguard.ui.fragments.addAHub.FragmentAddAHub"
-        android:label="FragmentAddAHub" >
+        android:label="Add A Hub" >
         <action
             android:id="@+id/action_fragmentAddAHub_to_fragmentSelectAHub"
             app:destination="@id/fragmentSelectAHub" />
