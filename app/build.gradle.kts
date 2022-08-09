@@ -89,7 +89,7 @@ dependencies {
     // Navigation Components
     implementation (Libs.NAV_FRAGMENT_LIB)
     implementation (Libs.NAV_UI_LIB)
-    implementation ("me.relex:circleindicator:2.1.6")
+    implementation (Libs.VIEW_PAGER_DOTS)
 
 
 }

@@ -43,6 +43,8 @@ object Libs
    const val NAV_FRAGMENT_LIB = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
    const val NAV_UI_LIB = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
 
+   const val VIEW_PAGER_DOTS = "me.relex:circleindicator:${Versions.VIEW_PAGER_DOTS}"
+
 
 
 

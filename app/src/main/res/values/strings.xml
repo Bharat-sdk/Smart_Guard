@@ -11,4 +11,9 @@
     <string name="hub_sim">HUB SIM Phone No</string>
     <string name="hub_serial_no">HUB Serial No</string>
     <string name="verifying">VERIFYING</string>
+    <string name="smartguard">SMARTGUARD</string>
+    <string name="armed">ARMED</string>
+    <string name="disarmed">DISARMED</string>
+    <string name="tap_to_select_a_hub">Tap to select a Hub</string>
+
 </resources>

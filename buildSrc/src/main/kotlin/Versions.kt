@@ -29,4 +29,6 @@ object Versions {
     //Navigation
     const val NAVIGATION = "2.5.1"
 
+    const val VIEW_PAGER_DOTS = "2.1.6"
+
 }

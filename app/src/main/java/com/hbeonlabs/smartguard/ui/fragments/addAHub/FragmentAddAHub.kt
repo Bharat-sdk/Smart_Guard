@@ -2,6 +2,7 @@ package com.hbeonlabs.smartguard.ui.fragments.addAHub
 
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
@@ -32,6 +33,10 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_baseline_help)
         (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
+
+        binding.btnAddHub.setOnClickListener {
+            findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentSelectAHub())
+        }
     }
 
 
