@@ -15,5 +15,8 @@
     <string name="armed">ARMED</string>
     <string name="disarmed">DISARMED</string>
     <string name="tap_to_select_a_hub">Tap to select a Hub</string>
+    <string name="name">Name</string>
+    <string name="hub_name_here">Hub Name Here</string>
+    <string name="continue_to_add_sensors">CONTINUE TO ADD SENSORS</string>
 
 </resources>
