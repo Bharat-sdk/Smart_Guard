@@ -33,7 +33,6 @@ class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>(
             OnBoardingData("Get Started by adding devices here","Adding a new device to expand your home security is as easy as 3 taps!",ContextCompat.getDrawable(requireContext(),R.drawable.ic_navigate_back)!!,ContextCompat.getColor(requireContext(),R.color.on_boarding_green)),
             OnBoardingData("Add others to your hubs easily","Have the smart guard hub automatically notify other people when any sensor is triggered!", ContextCompat.getDrawable(requireContext(),R.drawable.ic_navigate_back)!!,ContextCompat.getColor(requireContext(),R.color.on_boarding_orange)),
             OnBoardingData("Get help whenever you need it whenever you need it","Help is available at every single step, just tap the 'Help' icon on the top right to get quick answers!", ContextCompat.getDrawable(requireContext(),R.drawable.ic_navigate_back)!!,ContextCompat.getColor(requireContext(),R.color.purple_200)),
-
             )
 
         val adapter = ViewPagerAdapter(fragmentList)

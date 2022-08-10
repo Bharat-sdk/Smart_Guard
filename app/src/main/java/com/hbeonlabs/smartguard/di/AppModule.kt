@@ -1,6 +1,5 @@
 package com.hbeonlabs.smartguard.di
 
-import EditHubViewModel
 import com.hbeonlabs.smartguard.ui.activities.MainViewModel
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.selectHub.SelectHubViewModel
@@ -15,7 +14,7 @@ val appModule = module {
 
     viewModel { AddAHubViewModel() }
 
-    viewModel { EditHubViewModel() }
+/*    viewModel { com.hbeonlabs.smartguard.ui.fragments.editHub.EditHubViewModel() }*/
 
     viewModel { SelectHubViewModel() }
 }

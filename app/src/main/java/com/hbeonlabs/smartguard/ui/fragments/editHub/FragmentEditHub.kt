@@ -1,12 +1,8 @@
 package com.hbeonlabs.smartguard.ui.fragments.editHub
 
-import EditHubViewModel
-import android.view.View
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
-import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.databinding.FragmentEditHubAddSensorsBinding
-import com.hbeonlabs.smartguard.ui.activities.MainActivity
 
 import org.koin.android.ext.android.inject
 
@@ -25,8 +21,10 @@ class FragmentEditHub:BaseFragment<EditHubViewModel,FragmentEditHubAddSensorsBin
     override fun initView() {
         super.initView()
 
+/*
         (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_baseline_help)
         (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
+*/
 
 
     }
