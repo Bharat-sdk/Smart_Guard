@@ -19,5 +19,11 @@
     <string name="hub_name_here">Eg. Home,Office</string>
     <string name="continue_to_add_sensors">CONTINUE TO ADD SENSORS</string>
     <string name="add_hub_name_desc">This is a short name you can assign to this specific Hub to let you know where this device is currently locate.</string>
+    <string name="manual_siren_control">Manual Siren Control</string>
+    <string name="silence">Silence</string>
+    <string name="ring">Ring</string>
+    <string name="device_arming">Device Arming</string>
+    <string name="arm">Arm</string>
+    <string name="disarm">Disarm</string>
 
 </resources>
