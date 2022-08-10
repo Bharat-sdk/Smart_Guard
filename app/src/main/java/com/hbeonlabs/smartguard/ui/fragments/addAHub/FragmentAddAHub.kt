@@ -28,7 +28,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
 
         binding.btnAddHub.setOnClickListener {
-            findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentSelectAHub())
+            findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentPostAddHub())
         }
     }
 

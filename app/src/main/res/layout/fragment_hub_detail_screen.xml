@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="hubData"
+            type="com.hbeonlabs.smartguard.data.local.models.Hub" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_detail_hub_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@color/black"
+        />
+
+    <ImageView
+        android:id="@+id/iv_item_armed_unarmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/iv_detail_hub_image"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_detail_hub_image"
+        android:src="@{hubData.hub_arm_state ? @drawable/ic_lock_close : @drawable/ic_lock_open}"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_armed_unarmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{hubData.hub_arm_state ? @string/armed : @string/disarmed}"
+        app:layout_constraintTop_toTopOf="@id/iv_item_armed_unarmed"
+        app:layout_constraintBottom_toBottomOf="@id/iv_item_armed_unarmed"
+        app:layout_constraintEnd_toStartOf="@id/iv_item_armed_unarmed"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@{hubData.hub_arm_state ? @color/armed : @color/un_armed}"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_manage_sensors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_hub_image"
+        app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+        >
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_manage_sensors_icon"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Image.Circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@color/black"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintStart_toEndOf="@id/iv_manage_sensors_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_manage_sensors_icon"
+        app:layout_constraintBottom_toBottomOf="@id/iv_manage_sensors_icon"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage Sensors"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/iv_manage_sensors_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 Active Sensors"
+            app:layout_constraintStart_toEndOf="@id/iv_manage_sensors_icon"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_navigate_next"
+        android:background="@color/white"
+        app:tint="@color/black"
+        app:layout_constraintTop_toTopOf="@id/iv_manage_sensors_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_manage_sensors_icon"
+        android:layout_marginEnd="@dimen/_20sdp"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/hub_screen_fragment_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_manage_sensors"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/_50sdp"
+        />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/circular_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:ci_drawable="@drawable/ic_dot_selected"
+        app:ci_drawable_unselected="@drawable/ic_dot_unselected"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+     />
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

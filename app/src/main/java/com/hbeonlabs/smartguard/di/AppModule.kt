@@ -2,6 +2,7 @@ package com.hbeonlabs.smartguard.di
 
 import com.hbeonlabs.smartguard.ui.activities.MainViewModel
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubViewModel
+import com.hbeonlabs.smartguard.ui.fragments.postAddHub.PostAddHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.selectHub.SelectHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.splash.SplashviewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,7 +15,10 @@ val appModule = module {
 
     viewModel { AddAHubViewModel() }
 
-/*    viewModel { com.hbeonlabs.smartguard.ui.fragments.editHub.EditHubViewModel() }*/
+
 
     viewModel { SelectHubViewModel() }
+
+    viewModel { PostAddHubViewModel() }
+
 }

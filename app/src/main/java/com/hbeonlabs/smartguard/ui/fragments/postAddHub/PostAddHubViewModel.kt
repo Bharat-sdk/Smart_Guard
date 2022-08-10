@@ -1,4 +1,4 @@
-package com.hbeonlabs.smartguard.ui.fragments.editHub
+package com.hbeonlabs.smartguard.ui.fragments.postAddHub
 
 import com.hbeonlabs.smartguard.base.BaseViewModel
 

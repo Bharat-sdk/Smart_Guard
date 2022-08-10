@@ -1,4 +1,4 @@
-package com.hbeonlabs.smartguard.ui.fragments.editHub
+package com.hbeonlabs.smartguard.ui.fragments.postAddHub
 
 import android.view.View
 import com.hbeonlabs.smartguard.R
