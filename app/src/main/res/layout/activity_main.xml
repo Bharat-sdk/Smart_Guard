@@ -34,13 +34,23 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 />
+        <ImageView
+            android:id="@+id/toolbar_icon_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_gravity="right"
+            android:layout_marginEnd="@dimen/_20sdp"
+            />
             <ImageView
-                android:id="@+id/toolbar_icon_end"
+                android:id="@+id/toolbar_icon_end2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_back"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/_20sdp"
+                android:visibility="invisible"
+
                 />
 
 

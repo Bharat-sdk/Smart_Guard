@@ -27,7 +27,7 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_baseline_add)
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_add)
         (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
         (requireActivity() as MainActivity).binding.toolbarIconEnd.setOnClickListener {
             findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentAddAHub())

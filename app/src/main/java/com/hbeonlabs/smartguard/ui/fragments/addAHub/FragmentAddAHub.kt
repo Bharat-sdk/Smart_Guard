@@ -24,7 +24,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_baseline_help)
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_help)
         (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
 
         binding.btnAddHub.setOnClickListener {
