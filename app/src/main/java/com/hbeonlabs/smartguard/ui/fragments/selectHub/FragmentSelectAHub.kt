@@ -48,7 +48,7 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
 
         adapter.differ.submitList(list)
         adapter.setOnItemClickListener {
-
+            findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentHubDetails())
         }
         binding.adapter = adapter
 

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
     <data>
         <variable
             name="hubData"
             type="com.hbeonlabs.smartguard.data.local.models.Hub" />
+        <variable
+            name="adapter"
+            type="com.hbeonlabs.smartguard.ui.adapters.ViewPagerHubFragmentAdapter" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -14,7 +17,7 @@
         android:id="@+id/iv_detail_hub_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintHeight_percent="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -114,6 +117,7 @@ app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_manage_sensors"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/divider"
         />
 
     <com.google.android.material.divider.MaterialDivider
@@ -123,7 +127,7 @@ app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_55sdp"
         />
 
     <me.relex.circleindicator.CircleIndicator3

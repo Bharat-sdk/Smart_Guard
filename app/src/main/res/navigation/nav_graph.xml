@@ -38,10 +38,25 @@
         <action
             android:id="@+id/action_fragmentSelectAHub_to_fragmentAddAHub"
             app:destination="@id/fragmentAddAHub" />
+        <action
+            android:id="@+id/action_fragmentSelectAHub_to_fragmentHubDetails"
+            app:destination="@id/fragmentHubDetails" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPostAddHub"
         android:name="com.hbeonlabs.smartguard.ui.fragments.postAddHub.FragmentPostAddHub"
-        android:label="FragmentPostAddHub" />
+        android:label="FragmentPostAddHub" >
+        <action
+            android:id="@+id/action_fragmentPostAddHub_to_fragmentSelectAHub"
+            app:destination="@id/fragmentSelectAHub" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHubDetails"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.hubDetails.FragmentHubDetails"
+        android:label="FragmentHubDetails" >
+<!--        <argument
+            android:name="hub_data"
+            app:argType="com.hbeonlabs.smartguard.data.local.models.Hub" />-->
+    </fragment>
 
 </navigation>

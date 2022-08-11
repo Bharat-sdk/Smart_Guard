@@ -1,6 +1,7 @@
 package com.hbeonlabs.smartguard.ui.fragments.postAddHub
 
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddHubPostVerificationBinding
@@ -26,6 +27,9 @@ class FragmentPostAddHub:BaseFragment<PostAddHubViewModel,FragmentAddHubPostVeri
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_help)
         (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
 
+        binding.btnContinueToAddSensors.setOnClickListener {
+            findNavController().navigate(FragmentPostAddHubDirections.actionFragmentPostAddHubToFragmentSelectAHub())
+        }
     }
 
 
