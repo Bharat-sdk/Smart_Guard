@@ -25,5 +25,6 @@
     <string name="device_arming">Device Arming</string>
     <string name="arm">Arm</string>
     <string name="disarm">Disarm</string>
+    <string name="press_and_hold_2s_to_send_an_sos">Press and Hold 2s to send an SOS</string>
 
 </resources>
