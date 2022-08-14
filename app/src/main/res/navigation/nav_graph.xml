@@ -57,6 +57,13 @@
 <!--        <argument
             android:name="hub_data"
             app:argType="com.hbeonlabs.smartguard.data.local.models.Hub" />-->
+        <action
+            android:id="@+id/action_fragmentHubDetails_to_fragmentActivityHistory"
+            app:destination="@id/fragmentActivityHistory" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentActivityHistory"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.activityHistory.FragmentActivityHistory"
+        android:label="FragmentActivityHistory" />
 
 </navigation>

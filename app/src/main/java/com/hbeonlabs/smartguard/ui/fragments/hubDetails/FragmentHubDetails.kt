@@ -2,13 +2,12 @@ package com.hbeonlabs.smartguard.ui.fragments.hubDetails
 
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentHubDetailScreenBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.ViewPagerHubFragmentAdapter
-import com.hbeonlabs.smartguard.ui.fragments.hubDetails.activityHistory.FragmentPagerActivityHistory
+import com.hbeonlabs.smartguard.ui.fragments.hubDetails.pagerActivityHistory.FragmentPagerActivityHistory
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.armDisarm.FragmentPagerSirenArming
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.FragmentPagerSOS
 

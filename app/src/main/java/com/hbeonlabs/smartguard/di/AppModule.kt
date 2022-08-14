@@ -1,9 +1,10 @@
 package com.hbeonlabs.smartguard.di
 
 import com.hbeonlabs.smartguard.ui.activities.MainViewModel
+import com.hbeonlabs.smartguard.ui.fragments.activityHistory.ActivityHistoryViewModel
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
-import com.hbeonlabs.smartguard.ui.fragments.hubDetails.activityHistory.PagerActivityHistoryViewModel
+import com.hbeonlabs.smartguard.ui.fragments.hubDetails.pagerActivityHistory.PagerActivityHistoryViewModel
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.armDisarm.PagerSirenArmingViewModel
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.PagerSOSViewModel
 import com.hbeonlabs.smartguard.ui.fragments.postAddHub.PostAddHubViewModel
@@ -22,5 +23,7 @@ val appModule = module {
     viewModel { PagerSOSViewModel() }
     viewModel { PagerActivityHistoryViewModel() }
     viewModel { PagerSirenArmingViewModel() }
+    viewModel { ActivityHistoryViewModel() }
+
 
 }

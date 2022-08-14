@@ -1,5 +1,6 @@
-package com.hbeonlabs.smartguard.ui.fragments.hubDetails.activityHistory
+package com.hbeonlabs.smartguard.ui.fragments.hubDetails.pagerActivityHistory
 
+import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentPagerActivityHistoryBinding
@@ -21,6 +22,10 @@ class FragmentPagerActivityHistory:BaseFragment<PagerActivityHistoryViewModel,Fr
     override fun initView() {
         super.initView()
 
+
+        binding.txtSeeFullActivityHistory.setOnClickListener {
+                    findNavController().navigate(R.id.fragmentActivityHistory)
+        }
     }
 
 
