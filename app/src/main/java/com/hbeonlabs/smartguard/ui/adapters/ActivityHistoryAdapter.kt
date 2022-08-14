@@ -46,8 +46,16 @@ class ActivityHistoryAdapter(
 
     inner class DateViewHolder(val binding: ItemActivityHistoryDateBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ActivityHistoryDate) {
-            binding.txtDate.text = item.activity_history_time_stamp.toString()
-            binding.txtListSize.text = items.size.toString()
+            val cal = Calendar.getInstance().timeInMillis
+            val formatter = SimpleDateFormat("dd-MMM,yyyy")
+            if (formatter.format(cal) == item.activity_history_time_stamp)
+            {
+                binding.txtDate.text = "Today"
+            }
+            else{
+                binding.txtDate.text = item.activity_history_time_stamp
+            }
+            binding.txtListSize.text = item.size + " events"
         }
     }
 
@@ -56,7 +64,7 @@ class ActivityHistoryAdapter(
             binding.txtActivity.text = item.activity_history_message
             val formatter = SimpleDateFormat(" HH:mm")
 
-            binding.txtTime.text = item.activity_history_time_stamp.toString()
+                binding.txtTime.text = formatter.format(item.activity_history_time_stamp)
         }
     }
 

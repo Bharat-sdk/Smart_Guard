@@ -28,7 +28,7 @@ class FragmentActivityHistory:BaseFragment<ActivityHistoryViewModel,FragmentActi
     override fun initView() {
         super.initView()
 
-        val formatter = SimpleDateFormat(" dd/MM")
+        val formatter = SimpleDateFormat("dd-MMM,yyyy")
 
         val groupedMapMap: Map<String, List<ActivityHistory>> = AppConstants.activityList.groupBy {
             formatter.format(Date(it.activity_history_time_stamp))
@@ -36,8 +36,8 @@ class FragmentActivityHistory:BaseFragment<ActivityHistoryViewModel,FragmentActi
 
         val consolidatedList = mutableListOf<ActivityHistoryItem>()
         for (date:String in groupedMapMap.keys){
-            consolidatedList.add(ActivityHistoryDate(date))
             val groupItems: List<ActivityHistory>? = groupedMapMap[date]
+            consolidatedList.add(ActivityHistoryDate(date,groupItems?.size.toString()))
             groupItems?.forEach {
                 consolidatedList.add(ActivityHistory(it.activity_history_time_stamp,it.activity_history_message,it.hub_id))
             }
