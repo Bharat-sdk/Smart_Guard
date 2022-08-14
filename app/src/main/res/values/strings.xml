@@ -27,5 +27,11 @@
     <string name="disarm">Disarm</string>
     <string name="press_and_hold_2s_to_send_an_sos">Press and Hold 2s to send an SOS</string>
     <string name="activity_history">Activity History</string>
+    <string name="are_you_sure">ARE YOU SURE?</string>
+    <string name="desc_format_hub1">This cannot be undone. Once the device has been formatted, all connected sensors will be disconnected.</string>
+    <string name="yes_i_m_sure">YES, I\'M SURE</string>
+    <string name="no_go_back">NO, GO BACK</string>
+    <string name="desc_hub_format2">This can take up to few minutes. You\'ll be notified via SMS once the device has been formatted.</string>
+    <string name="formatting">FORMATTING</string>
 
 </resources>
