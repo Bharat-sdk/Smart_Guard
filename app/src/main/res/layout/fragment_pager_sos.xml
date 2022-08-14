@@ -15,6 +15,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         />
     <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_2_sec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
@@ -23,10 +24,10 @@
         app:trackCornerRadius="@dimen/_10sdp"
         app:trackThickness="@dimen/_6sdp"
         app:trackColor="@color/white"
-
         />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sos"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_120sdp"
         android:layout_marginStart="@dimen/_30sdp"
@@ -34,9 +35,9 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_20sdp"
         android:background="@drawable/bg_selector_sos"
-
         android:text="SOS"
         android:textColor="@color/white"
+        app:backgroundTint="@null"
         android:textSize="@dimen/_36ssp"
         />
 

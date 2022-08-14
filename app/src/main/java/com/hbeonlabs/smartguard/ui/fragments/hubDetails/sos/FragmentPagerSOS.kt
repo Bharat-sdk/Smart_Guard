@@ -1,17 +1,15 @@
 package com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos
 
+import android.annotation.SuppressLint
+import android.view.MotionEvent
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
-import com.hbeonlabs.smartguard.databinding.FragmentHubDetailScreenBinding
 import com.hbeonlabs.smartguard.databinding.FragmentPagerSosBinding
-import com.hbeonlabs.smartguard.ui.activities.MainActivity
-import com.hbeonlabs.smartguard.ui.adapters.ViewPagerHubFragmentAdapter
-
 import org.koin.android.ext.android.inject
 
-
+@SuppressLint("ClickableViewAccessibility")
 class FragmentPagerSOS:BaseFragment<PagerSOSViewModel,FragmentPagerSosBinding>() {
 
     private  val pagerSOSViewModel: PagerSOSViewModel by inject()
@@ -26,6 +24,29 @@ class FragmentPagerSOS:BaseFragment<PagerSOSViewModel,FragmentPagerSosBinding>()
     override fun initView() {
         super.initView()
 
+        binding.btnSos.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN ->{
+                    getViewModel().startPress()
+                }
+                MotionEvent.ACTION_UP ->{
+                    getViewModel().resetPress()
+                }
+            }
+            true
+        }
+
+
+        lifecycleScope.launchWhenStarted {
+            getViewModel().progressIndicatorLiveData.collect{
+                binding.progress2Sec.progress = it
+                if (it ==100)
+                {
+                    snackBar("Done")
+                }
+            }
+
+        }
     }
 
 
