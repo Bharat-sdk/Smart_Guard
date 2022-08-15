@@ -10,6 +10,7 @@ import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.PagerSOSViewModel
 import com.hbeonlabs.smartguard.ui.fragments.postAddHub.PostAddHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.selectHub.SelectHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.splash.SplashviewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -24,6 +25,10 @@ val appModule = module {
     viewModel { PagerActivityHistoryViewModel() }
     viewModel { PagerSirenArmingViewModel() }
     viewModel { ActivityHistoryViewModel() }
+
+    single{
+        androidApplication()
+    }
 
 
 }

@@ -1,15 +1,21 @@
 package com.hbeonlabs.smartguard.utils
 
+import android.content.Context
+import android.content.res.Resources
+import android.content.res.Resources.getSystem
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistory
+import com.hbeonlabs.smartguard.data.local.models.OnBoardingData
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent.inject
 
 object AppConstants {
-    val activityList = arrayListOf<ActivityHistory>(
-        ActivityHistory(1660453309476,"One","1"),
-        ActivityHistory(1660453067070,"2","1"),
-        ActivityHistory(1660433067070,"3","1"),
-        ActivityHistory(1661433067070,"4","1"),
-        ActivityHistory(1651433067070,"5","1"),
-        ActivityHistory(1651433067070,"55","1"),
-        ActivityHistory(1651433067070,"555","1"),
-    )
+
+
+
+
+
 }

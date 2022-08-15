@@ -49,6 +49,9 @@ class FragmentPagerSOS:BaseFragment<PagerSOSViewModel,FragmentPagerSosBinding>()
         }
     }
 
-
+    override fun onPause() {
+        super.onPause()
+        getViewModel().resetPress()
+    }
 
 }
