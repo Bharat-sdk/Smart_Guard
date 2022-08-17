@@ -28,7 +28,6 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
         super.initView()
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_help)
-        (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
 
 
         val adapter = SecondaryUserAdapter()

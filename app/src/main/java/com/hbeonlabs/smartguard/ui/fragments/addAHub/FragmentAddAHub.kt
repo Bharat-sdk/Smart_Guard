@@ -24,10 +24,6 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconStart.setOnClickListener {
-            findNavController().navigate(R.id.fragmentSelectAHub)
-        }
-
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             setImageResource(R.drawable.ic_baseline_help)
             setOnClickListener { snackBar("Help") }

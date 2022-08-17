@@ -1,6 +1,7 @@
 package com.hbeonlabs.smartguard.ui.fragments.hubDetails
 
 import android.view.View
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
@@ -29,10 +30,12 @@ class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScree
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_help)
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = View.VISIBLE
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_baseline_add)
-        (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_settings)
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = VISIBLE
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
+            setImageResource(R.drawable.ic_baseline_add)
+            setOnClickListener { findNavController().navigate(R.id.fragmentAddAHub) }
+            visibility = VISIBLE}
 
         val fragmentList = arrayListOf<Fragment>(
             FragmentPagerSirenArming(),FragmentPagerSOS(),FragmentPagerActivityHistory()
