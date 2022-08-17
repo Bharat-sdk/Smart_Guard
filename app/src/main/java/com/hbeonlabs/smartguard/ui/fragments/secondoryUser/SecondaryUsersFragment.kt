@@ -27,10 +27,20 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_help)
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = View.INVISIBLE
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
 
 
         val adapter = SecondaryUserAdapter()
+        adapter.setOnItemClickListener { secondaryUser, i ->
+            if (secondaryUser.user_name.isNotBlank() || secondaryUser.user_phone_number.isNotBlank())
+            {
+                // Add Popup Menu
+            }
+            else{
+               // Navigate to Add Sensors Fragment
+            }
+        }
         adapter.differ.submitList(AppLists(requireContext()).secondaryUserList)
         binding.adapter = adapter
     }

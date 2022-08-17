@@ -30,8 +30,11 @@ class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScree
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_settings)
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = VISIBLE
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
+            setImageResource(R.drawable.ic_settings)
+            visibility = VISIBLE
+            setOnClickListener {  }
+        }
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
             setImageResource(R.drawable.ic_baseline_add)
             setOnClickListener { findNavController().navigate(R.id.fragmentAddAHub) }

@@ -28,10 +28,12 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
         super.initView()
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
+            visibility = View.VISIBLE
             setImageResource(R.drawable.ic_baseline_add)
             setOnClickListener {
             findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentAddAHub())
         }}
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
 
         addDummyData()
 

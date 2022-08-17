@@ -16,14 +16,15 @@ class SecondaryUserAdapter : RecyclerView.Adapter<SecondaryUserAdapter.Secondary
     inner class SecondaryUserViewHolder(val binding: ItemSecandoryNumberBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SecondaryUser) {
-            if (data.user_name.isNotEmpty())
+            if (data.user_name.isNotEmpty() || data.user_name.isNotBlank())
             {
-                binding.data = (data)
+                binding.txtName.text = data.user_name
+                binding.txtNumber.text = data.user_phone_number
+                binding.ibIconEnd.setImageResource(R.drawable.ic_three_dots)
             }
             else{
                 binding.txtName.text = "EMPTY SLOT"
                 binding.txtNumber.text = "Tap to register a new user"
-                binding.ibIconEnd.setImageResource(R.drawable.ic_three_dots)
             }
         }
 
