@@ -24,8 +24,10 @@ class FragmentPostAddHub:BaseFragment<PostAddHubViewModel,FragmentAddHubPostVeri
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_help)
-        (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageDrawable(null)
+        (requireActivity() as MainActivity).binding.toolbarIconStart.setOnClickListener {
+
+        }
 
         binding.btnContinueToAddSensors.setOnClickListener {
             findNavController().navigate(FragmentPostAddHubDirections.actionFragmentPostAddHubToFragmentSelectAHub())

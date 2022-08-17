@@ -7,6 +7,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.OnBoardingData
+import com.hbeonlabs.smartguard.data.local.models.SecondaryUser
 
 class AppLists(
     val context: Context
@@ -27,5 +28,13 @@ class AppLists(
         OnBoardingData(context.getString(R.string.onboard_title_2),context.getString(R.string.onboard_desc_2),ContextCompat.getDrawable(context,R.drawable.ic_navigate_back)!!,ContextCompat.getColor(context,R.color.on_boarding_green)),
         OnBoardingData(context.getString(R.string.onboard_title_3),context.getString(R.string.onboard_desc_3), ContextCompat.getDrawable(context,R.drawable.ic_navigate_back)!!,ContextCompat.getColor(context,R.color.on_boarding_orange)),
         OnBoardingData(context.getString(R.string.onboard_title_4),context.getString(R.string.onboard_desc_4), ContextCompat.getDrawable(context,R.drawable.ic_navigate_back)!!,ContextCompat.getColor(context,R.color.purple_200)),
+    )
+
+    val secondaryUserList = arrayListOf(
+        SecondaryUser(1,"","","",""),
+        SecondaryUser(2,"Bharat","1","354855454","1"),
+        SecondaryUser(3,"","","",""),
+        SecondaryUser(4,"Bharat","1","354855454","1"),
+        SecondaryUser(5,"Bharat","1","354855454","1")
     )
 }

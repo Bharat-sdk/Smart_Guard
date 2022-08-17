@@ -16,7 +16,7 @@ class PagerSOSViewModel:BaseViewModel()
     private val _progressIndicator= MutableStateFlow<Int>(0)
     val progressIndicatorLiveData: StateFlow<Int> = _progressIndicator
 
-    lateinit var job :Job
+     var job :Job = viewModelScope.launch {  }
 
     fun startPress() {
         job =  viewModelScope.launch{

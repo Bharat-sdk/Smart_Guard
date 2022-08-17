@@ -8,6 +8,7 @@ import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistory
 import com.hbeonlabs.smartguard.databinding.FragmentActivityHistoryBinding
 import com.hbeonlabs.smartguard.ui.adapters.ActivityHistoryAdapter
 import com.hbeonlabs.smartguard.utils.AppConstants
+import com.hbeonlabs.smartguard.utils.AppLists
 
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
@@ -30,7 +31,7 @@ class FragmentActivityHistory:BaseFragment<ActivityHistoryViewModel,FragmentActi
 
         val formatter = SimpleDateFormat("dd-MMM,yyyy")
 
-        val groupedMapMap: Map<String, List<ActivityHistory>> = AppConstants.activityList.groupBy {
+        val groupedMapMap: Map<String, List<ActivityHistory>> = AppLists(requireContext()).activityList.groupBy {
             formatter.format(Date(it.activity_history_time_stamp))
         }
 

@@ -2,6 +2,7 @@ package com.hbeonlabs.smartguard.ui.fragments.hubDetails
 
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentHubDetailScreenBinding
@@ -38,12 +39,17 @@ class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScree
         )
 
         val adapter = ViewPagerHubFragmentAdapter(fragmentList,requireActivity().supportFragmentManager,lifecycle)
+
         binding.hubScreenFragmentViewPager.adapter = adapter
 
         binding.circularIndicator.setViewPager(binding.hubScreenFragmentViewPager)
 
+        binding.layoutManageSensors.setOnClickListener {
+            findNavController().navigate(FragmentHubDetailsDirections.actionFragmentHubDetailsToSecondaryUsersFragment())
+        }
 
     }
+
 
 
 

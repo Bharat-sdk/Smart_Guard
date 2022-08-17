@@ -3,6 +3,7 @@ package com.hbeonlabs.smartguard.ui.activities
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseActivity
 import com.hbeonlabs.smartguard.databinding.ActivityMainBinding
@@ -24,11 +25,7 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
         navController = findNavController(R.id.navHostFragment)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
-
         hideShowToolbar()
-
-
     }
 
 
@@ -51,6 +48,7 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
             }
         }
     }
+
 
 
 }

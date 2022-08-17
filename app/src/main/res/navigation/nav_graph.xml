@@ -60,10 +60,17 @@
         <action
             android:id="@+id/action_fragmentHubDetails_to_fragmentActivityHistory"
             app:destination="@id/fragmentActivityHistory" />
+        <action
+            android:id="@+id/action_fragmentHubDetails_to_secondaryUsersFragment"
+            app:destination="@id/secondaryUsersFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentActivityHistory"
         android:name="com.hbeonlabs.smartguard.ui.fragments.activityHistory.FragmentActivityHistory"
         android:label="Activity History" />
+    <fragment
+        android:id="@+id/secondaryUsersFragment"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUsersFragment"
+        android:label="SecondaryUsersFragment" />
 
 </navigation>
