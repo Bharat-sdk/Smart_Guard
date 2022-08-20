@@ -43,5 +43,8 @@
     <string name="onboard_desc_2">Adding a new device to expand your home security is as easy as 3 taps!</string>
     <string name="onboard_desc_4">Help is available at every single step, just tap the \'Help\' icon on the top right to get quick answers!</string>
     <string name="onboard_desc_3">Have the smart guard hub automatically notify other people when any sensor is triggered!</string>
+    <string name="desc1_secandory_user">Registered users will be notified via SMS and/or\nPhone call along with your number when the\nSmartHub alarm is triggered.</string>
+    <string name="desc2_secandory_user">Registered users can manually trigger the SmartHub\nAlarm through the App.</string>
+    <string name="confirm_number">CONFIRM NUMBER</string>
 
 </resources>

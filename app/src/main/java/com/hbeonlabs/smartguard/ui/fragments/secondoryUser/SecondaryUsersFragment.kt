@@ -1,6 +1,7 @@
 package com.hbeonlabs.smartguard.ui.fragments.secondoryUser
 
 import android.view.View
+import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
@@ -31,16 +32,12 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
 
 
-        val adapter = SecondaryUserAdapter()
-        adapter.setOnItemClickListener { secondaryUser, i ->
-            if (secondaryUser.user_name.isNotBlank() || secondaryUser.user_phone_number.isNotBlank())
-            {
-                // Add Popup Menu
-            }
-            else{
-               // Navigate to Add Sensors Fragment
-            }
-        }
+        val adapter = SecondaryUserAdapter(requireContext())
+        adapter.setAddUserClickListener { secondaryUser, i ->  } 
+        adapter.setEditUserClickListener { secondaryUser, i ->  }
+        adapter.setDeleteUserClickListener { secondaryUser, i ->  }
+
+        
         adapter.differ.submitList(AppLists(requireContext()).secondaryUserList)
         binding.adapter = adapter
     }
