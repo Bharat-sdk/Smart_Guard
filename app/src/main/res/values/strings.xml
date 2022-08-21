@@ -46,5 +46,11 @@
     <string name="desc1_secandory_user">Registered users will be notified via SMS and/or\nPhone call along with your number when the\nSmartHub alarm is triggered.</string>
     <string name="desc2_secandory_user">Registered users can manually trigger the SmartHub\nAlarm through the App.</string>
     <string name="confirm_number">CONFIRM NUMBER</string>
+    <string name="choose_a_sensor_to_configure">Choose a sensor to configure</string>
+    <string name="add_sensor_desc1">Pick the sensor you would like to configure, and switch it on. Make sure other sensors are off.</string>
+    <string name="add_sensor_desc_3"><![CDATA[Tap the \'Scan & Add\' button on the next screen, and the Hub will automatically detect and pair with the sensor in range.]]></string>
+    <string name="scan_amp_add_the_sensor"><![CDATA[Scan & Add the Sensor]]></string>
+    <string name="add_sensor_desc_2">Decide what name to assign to this sensor, and what custom SMS you\'d like to receive when this specific sensor is triggered.</string>
+    <string name="set_a_custom_name_amp_message"><![CDATA[Set a Custom Name & Message]]></string>
 
 </resources>
