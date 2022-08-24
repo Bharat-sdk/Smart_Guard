@@ -52,5 +52,6 @@
     <string name="scan_amp_add_the_sensor"><![CDATA[Scan & Add the Sensor]]></string>
     <string name="add_sensor_desc_2">Decide what name to assign to this sensor, and what custom SMS you\'d like to receive when this specific sensor is triggered.</string>
     <string name="set_a_custom_name_amp_message"><![CDATA[Set a Custom Name & Message]]></string>
+    <string name="add_sensor_name_desc">This custom name will be used to identify the sensor as registered through the app.</string>
 
 </resources>
