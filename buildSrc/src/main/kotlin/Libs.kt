@@ -45,9 +45,7 @@ object Libs
 
    const val VIEW_PAGER_DOTS = "me.relex:circleindicator:${Versions.VIEW_PAGER_DOTS}"
 
-   const val EPOXY = "com.airbnb.android:epoxy:${Versions.EPOXY_VERSION}"
-   const val EPOXY_AP = "com.airbnb.android:epoxy-processor:${Versions.EPOXY_VERSION}"
-   const val EPOXY_DB = "com.airbnb.android:epoxy-databinding:${Versions.EPOXY_VERSION}"
+   const val IMAGE_PICKER_LIBRARY = "com.github.dhaval2404:imagepicker:2.1"
 
 
 

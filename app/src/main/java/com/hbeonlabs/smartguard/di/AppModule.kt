@@ -11,6 +11,7 @@ import com.hbeonlabs.smartguard.ui.fragments.hubSettings.HubSettingsViewModel
 import com.hbeonlabs.smartguard.ui.fragments.postAddHub.PostAddHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUserViewModel
 import com.hbeonlabs.smartguard.ui.fragments.selectHub.SelectHubViewModel
+import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
 import com.hbeonlabs.smartguard.ui.fragments.splash.SplashviewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -29,6 +30,8 @@ val appModule = module {
     viewModel { ActivityHistoryViewModel() }
     viewModel {SecondaryUserViewModel()}
     viewModel { HubSettingsViewModel() }
+    viewModel { SensorViewModel() }
+
 
     single{
         androidApplication()

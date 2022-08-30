@@ -59,7 +59,7 @@
     <fragment
         android:id="@+id/fragmentHubDetails"
         tools:layout="@layout/fragment_hub_detail_screen"
-        android:name="com.hbeonlabs.smartguard.ui.fragments.hubDetails.FragmentHubDetails"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.hubDetails.FragmentHubHome"
         android:label="FragmentHubDetails" >
 <!--        <argument
             android:name="hub_data"
@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_fragmentHubDetails_to_fragmentHubSettings"
             app:destination="@id/fragmentHubSettings" />
+        <action
+            android:id="@+id/action_fragmentHubDetails_to_sensorListFragment"
+            app:destination="@id/sensorListFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentActivityHistory"
@@ -89,6 +92,54 @@
         <action
             android:id="@+id/action_fragmentHubSettings_to_secondaryUsersFragment"
             app:destination="@id/secondaryUsersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sensorListFragment"
+        tools:layout="@layout/fragment_sensor_list"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.SensorListFragment"
+        android:label="MANAGE SENSORS" >
+        <action
+            android:id="@+id/action_sensorListFragment_to_addSensorPrepareToAddFragment"
+            app:destination="@id/addSensorPrepareToAddFragment" />
+        <action
+            android:id="@+id/action_sensorListFragment_to_sensorDetailsFragment"
+            app:destination="@id/sensorDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSensorPrepareToAddFragment"
+        tools:layout="@layout/fragment_add_sensor_prepare"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors.AddSensorPrepareToAddFragment"
+        android:label="Add A Sensor" >
+        <action
+            android:id="@+id/action_addSensorPrepareToAddFragment_to_addSensorFragment"
+            app:destination="@id/addSensorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSensorFragment"
+        tools:layout="@layout/fragment_add_a_sensor"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors.AddSensorFragment"
+        android:label="Add A Sensor" >
+        <action
+            android:id="@+id/action_addSensorFragment_to_sensorListFragment"
+            app:destination="@id/sensorListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sensorDetailsFragment"
+        tools:layout="@layout/fragment_sensor_details"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors.SensorDetailsFragment"
+        android:label="SensorDetailsFragment" >
+        <action
+            android:id="@+id/action_sensorDetailsFragment_to_editSensorFragment"
+            app:destination="@id/editSensorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSensorFragment"
+        tools:layout="@layout/fragment_edit_a_sensor"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.editSensor.EditSensorFragment"
+        android:label="Edit Sensor" >
+        <action
+            android:id="@+id/action_editSensorFragment_to_sensorListFragment"
+            app:destination="@id/sensorListFragment" />
     </fragment>
 
 </navigation>

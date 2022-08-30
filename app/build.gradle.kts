@@ -100,10 +100,8 @@ dependencies {
     implementation (Libs.NAV_UI_LIB)
     implementation (Libs.VIEW_PAGER_DOTS)
 
-/*    implementation (Libs.EPOXY)
-    implementation(Libs.EPOXY_DB)
-    kapt (Libs.EPOXY_AP)*/
-
+    //Image Picker Library
+    implementation (Libs.IMAGE_PICKER_LIBRARY)
 
 
 }

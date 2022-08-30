@@ -16,7 +16,7 @@ import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.FragmentPagerSOS
 import org.koin.android.ext.android.inject
 
 
-class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBinding>() {
+class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBinding>() {
 
     private  val hubDetailsViewModel: HubDetailsViewModel by inject()
     override fun getViewModel(): HubDetailsViewModel {
@@ -34,7 +34,7 @@ class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScree
             setImageResource(R.drawable.ic_settings)
             visibility = VISIBLE
             setOnClickListener {
-                findNavController().navigate(FragmentHubDetailsDirections.actionFragmentHubDetailsToFragmentHubSettings())
+                findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings())
             }
         }
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
@@ -54,7 +54,7 @@ class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScree
         binding.circularIndicator.setViewPager(binding.hubScreenFragmentViewPager)
 
         binding.layoutManageSensors.setOnClickListener {
-
+            findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToSensorListFragment())
         }
 
     }
