@@ -34,6 +34,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         binding.btnAddHub.setOnClickListener {
             findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentPostAddHub())
         }
+
     }
 
 
