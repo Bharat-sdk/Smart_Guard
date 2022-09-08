@@ -26,7 +26,7 @@ interface HubDao {
 
  //   @Query("UPDATE hub SET hub_name = :name , hub_image = :imageUrl WHERE hub_serial_number = :hub_id")
     @Update(entity = UpdateHubImageName::class)
-    suspend fun addUpdateHub(name:String, imageUrl:String,hub_id:String)
+    suspend fun addUpdateHub(update: UpdateHubImageName)
 
     @Transaction
     @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
