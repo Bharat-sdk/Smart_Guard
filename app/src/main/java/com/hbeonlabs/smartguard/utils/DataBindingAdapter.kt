@@ -13,7 +13,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 @BindingAdapter("bgColor")
-fun ConstraintLayout.setBackgroundColor(color: Int) {
+fun ConstraintLayout.setBgColor(color: Int) {
     this.setBackgroundColor(color)
 }
 

@@ -15,7 +15,7 @@ import com.hbeonlabs.smartguard.utils.AppLists
 import org.koin.android.ext.android.inject
 
 
-class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>() {
+class FragmentOnBoarding:BaseFragment<SplashviewModel,FragmentOnboardingBinding>() {
 
     private  val onBoardingViewModel: SplashviewModel by inject()
     override fun getViewModel(): SplashviewModel {
@@ -61,22 +61,18 @@ class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>(
             }
         })
 
-
         binding.txtNext.setOnClickListener {
             if (  binding.txtNext.text == getString(R.string.get_started) ){
-               findNavController().navigate(R.id.fragmentAddAHub)
+               findNavController().navigate(FragmentOnBoardingDirections.actionFragmentOnBoardingToFragmentSelectAHub())
             }
             else{
                 binding.onBoardingViewPager.setCurrentItem(binding.onBoardingViewPager.currentItem+1,true )
             }
         }
+
         binding.txtBack.setOnClickListener {
-
-                binding.onBoardingViewPager.setCurrentItem(binding.onBoardingViewPager.currentItem-1,true )
-
+            binding.onBoardingViewPager.setCurrentItem(binding.onBoardingViewPager.currentItem-1,true )
         }
-
-
 
     }
 

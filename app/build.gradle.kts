@@ -65,7 +65,7 @@ dependencies {
     implementation (Libs.CONSTRAINT_LAYOUT_LIB)
     implementation(Libs.ROOM_RUN_TIME)
     kapt(Libs.ROOM_COMPILER)
-    implementation( Libs.ROOM_COROUTINE)
+    implementation(Libs.ROOM_KTX)
     testImplementation(Libs.JUNIT_LIB)
     androidTestImplementation(Libs.JUNIT_EXT_LIB)
     androidTestImplementation(Libs.ESPRESSO_CORE)

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.databinding.ItemHubLayoutBinding
-import java.util.*
 
 class HubListAdapter : RecyclerView.Adapter<HubListAdapter.HubViewHolder>() {
 
@@ -25,7 +24,7 @@ class HubListAdapter : RecyclerView.Adapter<HubListAdapter.HubViewHolder>() {
             oldItem: Hub,
             newItem: Hub
         ): Boolean {
-            return oldItem.hub_id == newItem.hub_id
+            return oldItem.hub_serial_number == newItem.hub_serial_number
         }
 
         override fun areContentsTheSame(

@@ -8,9 +8,8 @@ import com.hbeonlabs.smartguard.data.local.models.Sensor
 data class HubWithSensors(
     @Embedded val hub:Hub,
     @Relation (
-        parentColumn = "hub_id",
-        entityColumn = "hub_id"
+        parentColumn = "hub_serial_number",
+        entityColumn = "hub_serial_number"
             )
     val sensor:List<Sensor>
-
 )

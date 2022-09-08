@@ -11,5 +11,5 @@ data class Sensor(
     val sensor_image:String,
     val sensor_type:String,
     val sensor_custom_sms: String,
-    val hub_id: String
+    val hub_serial_number: String
 )

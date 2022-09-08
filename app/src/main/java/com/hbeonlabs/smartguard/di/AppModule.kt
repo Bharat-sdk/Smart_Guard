@@ -1,5 +1,10 @@
 package com.hbeonlabs.smartguard.di
 
+import android.app.Application
+import androidx.room.Room
+import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
+import com.hbeonlabs.smartguard.data.local.room.AppDatabase
+import com.hbeonlabs.smartguard.data.local.room.HubDao
 import com.hbeonlabs.smartguard.ui.activities.MainViewModel
 import com.hbeonlabs.smartguard.ui.fragments.activityHistory.ActivityHistoryViewModel
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubViewModel
@@ -20,7 +25,7 @@ import org.koin.dsl.module
 val appModule = module {
     viewModel { SplashviewModel() }
     viewModel { MainViewModel() }
-    viewModel { AddAHubViewModel() }
+    viewModel { AddAHubViewModel(get()) }
     viewModel { SelectHubViewModel() }
     viewModel { PostAddHubViewModel() }
     viewModel { HubDetailsViewModel() }
@@ -32,9 +37,27 @@ val appModule = module {
     viewModel { HubSettingsViewModel() }
     viewModel { SensorViewModel() }
 
+    fun provideDataBase(application: Application): AppDatabase {
+        return Room.databaseBuilder(application, AppDatabase::class.java, "smart_guard_db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
-    single{
-        androidApplication()
+    fun provideDao(dataBase: AppDatabase): HubDao {
+        return dataBase.getDao()
+    }
+
+
+    single {
+       provideDataBase(androidApplication())
+    }
+
+    single {
+        provideDao(get())
+    }
+
+    single {
+        HubRepositoryImp(get())
     }
 
 
