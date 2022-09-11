@@ -1,6 +1,7 @@
 package com.hbeonlabs.smartguard.utils
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
@@ -18,4 +19,8 @@ fun ConstraintLayout.setBgColor(color: Int) {
 }
 
 
-
+@BindingAdapter("bitmap")
+fun ImageView.setBitmapToImageView(bitmap: Bitmap)
+{
+    this.setImageBitmap(bitmap)
+}

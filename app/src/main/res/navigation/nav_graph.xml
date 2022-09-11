@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_fragmentPostAddHub_to_fragmentSelectAHub"
             app:destination="@id/fragmentSelectAHub" />
+        <argument
+            android:name="hub_serial_no"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragmentHubDetails"

@@ -1,5 +1,11 @@
 package com.hbeonlabs.smartguard.utils
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -45,3 +51,7 @@ fun <T> Fragment.collectLatestLifeCycleFlow(
         }
     }
 }
+
+fun Context.getBitmap(uri: Uri): Bitmap =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) ImageDecoder.decodeBitmap(ImageDecoder.createSource(this.contentResolver, uri))
+    else MediaStore.Images.Media.getBitmap(this.contentResolver, uri)

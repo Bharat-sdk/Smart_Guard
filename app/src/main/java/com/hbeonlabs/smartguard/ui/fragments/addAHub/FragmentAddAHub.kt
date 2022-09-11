@@ -48,7 +48,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
             when(it)
             {
                 AddHubEvents.NavigateToPostHubEvent -> {
-                    findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentPostAddHub())
+                    findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentPostAddHub(binding.edtAddHubSerial.text.toString()))
                 }
                 is AddHubEvents.PhoneValidationErrorEvent -> {
                     makeToast(it.message)

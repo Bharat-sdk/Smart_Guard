@@ -32,14 +32,13 @@ private val hubRepositoryImp: HubRepositoryImp
                 _addHubEvents.emit(AddHubEvents.PhoneValidationErrorEvent("Please Enter Valid Phone Number"))
             }
             else{
-                val hub = Hub(hubSerialNo,"","",hubPhoneNumber, hub_siren = false, hub_arm_state = false)
                 try {
                     if (hubRepositoryImp.checkIfHubAlreadyAdded(hubSerialNo))
                     {
                         _addHubEvents.emit(AddHubEvents.SQLErrorEvent("This Hub is Already Added"))
                     }
                     else{
-                        hubRepositoryImp.addHub(hub)
+                        hubRepositoryImp.addHub(hubSerialNo,hubPhoneNumber)
                         _addHubEvents.emit(AddHubEvents.NavigateToPostHubEvent)
                     }
                 }

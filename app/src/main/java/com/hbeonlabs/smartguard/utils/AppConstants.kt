@@ -14,6 +14,7 @@ import org.koin.java.KoinJavaComponent.inject
 
 object AppConstants {
 
+    const val TAG = "SMART GUARD"
 
 
 

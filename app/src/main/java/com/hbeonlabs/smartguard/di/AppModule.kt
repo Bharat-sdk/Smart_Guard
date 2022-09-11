@@ -26,8 +26,8 @@ val appModule = module {
     viewModel { SplashviewModel() }
     viewModel { MainViewModel() }
     viewModel { AddAHubViewModel(get()) }
-    viewModel { SelectHubViewModel() }
-    viewModel { PostAddHubViewModel() }
+    viewModel { SelectHubViewModel(get()) }
+    viewModel { PostAddHubViewModel(get()) }
     viewModel { HubDetailsViewModel() }
     viewModel { PagerSOSViewModel() }
     viewModel { PagerActivityHistoryViewModel() }
@@ -57,7 +57,7 @@ val appModule = module {
     }
 
     single {
-        HubRepositoryImp(get())
+        HubRepositoryImp(get(),get())
     }
 
 

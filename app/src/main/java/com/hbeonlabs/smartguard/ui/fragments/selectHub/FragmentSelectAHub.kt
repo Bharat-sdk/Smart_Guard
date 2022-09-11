@@ -1,7 +1,9 @@
 package com.hbeonlabs.smartguard.ui.fragments.selectHub
 
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.data.local.models.Hub
@@ -9,12 +11,16 @@ import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.databinding.FragmentHubBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.HubListAdapter
+import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 import org.koin.android.ext.android.inject
 
 
 class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
 
+    lateinit var adapter:HubListAdapter
     private  val selectAHubViewModel: SelectHubViewModel by inject()
     override fun getViewModel(): SelectHubViewModel {
             return selectAHubViewModel
@@ -27,6 +33,7 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
     override fun initView() {
         super.initView()
 
+        observe()
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_baseline_add)
@@ -35,26 +42,24 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
         }}
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
 
-        addDummyData()
-
-    }
-
-    private fun addDummyData(){
-        val list = arrayListOf(
-            Hub("HUB1","1","","987675678",false, hub_arm_state = false),
-            Hub("HUB2","2","","987675678",false, hub_arm_state = true),
-            Hub("HUB3","3","","987675678",false, hub_arm_state = true),
-            Hub("HUB4","4","","987675678",false, hub_arm_state = false),
-        )
-        val adapter = HubListAdapter()
-
-        adapter.differ.submitList(list)
+        binding.rvHub.layoutManager = LinearLayoutManager(requireActivity())
+        adapter = HubListAdapter()
         adapter.setOnItemClickListener {
             findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentHubDetails())
         }
         binding.adapter = adapter
 
+
     }
+
+    private fun observe(){
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            selectAHubViewModel.getHubData().collectLatest {
+                adapter.differ.submitList(it)
+            }
+        }
+    }
+
 
 
 

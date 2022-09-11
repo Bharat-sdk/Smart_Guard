@@ -1,5 +1,6 @@
 package com.hbeonlabs.smartguard.data.local.room
 
+import android.graphics.Bitmap
 import androidx.room.*
 import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.models.UpdateHubImageName
@@ -24,9 +25,8 @@ interface HubDao {
     @Query("SELECT EXISTS(SELECT * FROM hub WHERE hub_serial_number = :hub_serial_no)")
     suspend fun checkIfHubAlreadyPresent(hub_serial_no:String):Boolean
 
- //   @Query("UPDATE hub SET hub_name = :name , hub_image = :imageUrl WHERE hub_serial_number = :hub_id")
-    @Update(entity = UpdateHubImageName::class)
-    suspend fun addUpdateHub(update: UpdateHubImageName)
+    @Query("UPDATE hub SET hub_name = :hub_name , hub_image = :hubImage WHERE hub_serial_number in(:hub_serial_no)")
+    suspend fun addUpdateHub(hub_name:String ,hubImage:Bitmap ,hub_serial_no:String)
 
     @Transaction
     @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
