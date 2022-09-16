@@ -2,13 +2,11 @@ package com.hbeonlabs.smartguard.data.local.repo
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.hbeonlabs.smartguard.R
+import com.hbeonlabs.smartguard.data.local.datastore.SharedPreferences
 import com.hbeonlabs.smartguard.data.local.models.Hub
-import com.hbeonlabs.smartguard.data.local.models.UpdateHubImageName
 import com.hbeonlabs.smartguard.data.local.room.HubDao
 import kotlinx.coroutines.flow.Flow
 
@@ -29,6 +27,8 @@ class HubRepositoryImp constructor(
     override suspend fun addImageAndNameToHub(hub_name:String, hubImage: Bitmap, hub_serial_no: String) {
         dao.addUpdateHub(hub_name,hubImage,hub_serial_no)
     }
+
+
 
 }
 

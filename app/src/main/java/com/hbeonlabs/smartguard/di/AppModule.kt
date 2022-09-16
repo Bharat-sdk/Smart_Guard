@@ -2,6 +2,7 @@ package com.hbeonlabs.smartguard.di
 
 import android.app.Application
 import androidx.room.Room
+import com.hbeonlabs.smartguard.data.local.datastore.SharedPreferences
 import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
 import com.hbeonlabs.smartguard.data.local.room.AppDatabase
 import com.hbeonlabs.smartguard.data.local.room.HubDao
@@ -17,13 +18,13 @@ import com.hbeonlabs.smartguard.ui.fragments.postAddHub.PostAddHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUserViewModel
 import com.hbeonlabs.smartguard.ui.fragments.selectHub.SelectHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
-import com.hbeonlabs.smartguard.ui.fragments.splash.SplashviewModel
+import com.hbeonlabs.smartguard.ui.fragments.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    viewModel { SplashviewModel() }
+    viewModel { SplashViewModel(get()) }
     viewModel { MainViewModel() }
     viewModel { AddAHubViewModel(get()) }
     viewModel { SelectHubViewModel(get()) }
@@ -59,6 +60,12 @@ val appModule = module {
     single {
         HubRepositoryImp(get(),get())
     }
+
+    single {
+        SharedPreferences(androidApplication())
+    }
+
+
 
 
 }

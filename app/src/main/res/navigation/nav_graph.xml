@@ -12,6 +12,9 @@
         android:label="On Boarding" >
         <action
             android:id="@+id/action_fragmentOnBoarding_to_fragmentSelectAHub"
+            app:popUpTo="@id/fragmentOnBoarding"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
             app:destination="@id/fragmentSelectAHub" />
     </fragment>
     <fragment
@@ -21,7 +24,16 @@
         android:label="Splash" >
         <action
             android:id="@+id/action_fragmentSplash_to_fragmentOnBoarding"
+            app:popUpTo="@id/fragmentSplash"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
             app:destination="@id/fragmentOnBoarding" />
+        <action
+            android:id="@+id/action_fragmentSplash_to_fragmentSelectAHub"
+            app:popUpTo="@id/fragmentSplash"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            app:destination="@id/fragmentSelectAHub" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAddAHub"

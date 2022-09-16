@@ -89,7 +89,7 @@ dependencies {
     //Logging
     implementation(Libs.TIMBER_LIB)
     //Memory Leak
-    debugImplementation(Libs.LEAK_CANARY_LIB)
+   // debugImplementation(Libs.LEAK_CANARY_LIB)
     //Multidex
     implementation(Libs.MULTIDEX_LIB)
     // Dp SP Support
@@ -103,6 +103,8 @@ dependencies {
 
     //Image Picker Library
     implementation ("com.github.dhaval2404:imagepicker:2.1")
+
+
 
 
 
