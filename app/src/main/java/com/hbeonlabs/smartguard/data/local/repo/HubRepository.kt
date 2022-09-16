@@ -14,5 +14,9 @@ interface HubRepository {
 
     suspend fun addImageAndNameToHub(hub_name:String, hubImage: Bitmap, hub_serial_no: String)
 
+    suspend fun silenceRingHub(ring:Boolean,hub_serial_no: String)
+
+    suspend fun armDisarmHub(arm_state:Boolean,hub_serial_no: String)
+
 
 }

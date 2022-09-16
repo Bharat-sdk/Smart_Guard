@@ -32,7 +32,7 @@ val appModule = module {
     viewModel { HubDetailsViewModel() }
     viewModel { PagerSOSViewModel() }
     viewModel { PagerActivityHistoryViewModel() }
-    viewModel { PagerSirenArmingViewModel() }
+    viewModel { PagerSirenArmingViewModel(get()) }
     viewModel { ActivityHistoryViewModel() }
     viewModel {SecondaryUserViewModel()}
     viewModel { HubSettingsViewModel() }

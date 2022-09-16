@@ -28,6 +28,13 @@ class HubRepositoryImp constructor(
         dao.addUpdateHub(hub_name,hubImage,hub_serial_no)
     }
 
+    override suspend fun silenceRingHub(ring: Boolean,hub_serial_no: String) {
+        dao.sirenRingHub(ring,hub_serial_no)
+    }
+
+    override suspend fun armDisarmHub(arm_state: Boolean, hub_serial_no: String) {
+        dao.armDisarmHub(arm_state,hub_serial_no)
+    }
 
 
 }
