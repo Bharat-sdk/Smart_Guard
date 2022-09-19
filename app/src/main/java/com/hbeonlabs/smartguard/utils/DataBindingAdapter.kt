@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.google.android.material.imageview.ShapeableImageView
 import java.time.LocalDate
@@ -20,7 +21,7 @@ fun ConstraintLayout.setBgColor(color: Int) {
 
 
 @BindingAdapter("bitmap")
-fun ImageView.setBitmapToImageView(bitmap: Bitmap)
+fun ImageView.setBitmapToImageView(image_uri: String)
 {
-    this.setImageBitmap(bitmap)
+    this.setImageURI(image_uri.toUri())
 }

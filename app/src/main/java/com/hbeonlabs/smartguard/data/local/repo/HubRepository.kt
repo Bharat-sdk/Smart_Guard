@@ -12,7 +12,7 @@ interface HubRepository {
 
     suspend fun checkIfHubAlreadyAdded(hubSerialNo:String):Boolean
 
-    suspend fun addImageAndNameToHub(hub_name:String, hubImage: Bitmap, hub_serial_no: String)
+    suspend fun addImageAndNameToHub(hub_name:String, hubImage: String, hub_serial_no: String)
 
     suspend fun silenceRingHub(ring:Boolean,hub_serial_no: String)
 

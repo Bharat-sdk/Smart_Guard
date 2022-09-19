@@ -16,7 +16,7 @@ class PostAddHubViewModel constructor(
     private val _postAddHubEvents = MutableSharedFlow<AddHubEvents>()
     val postAddHubEvents: SharedFlow<AddHubEvents> = _postAddHubEvents
 
-    fun updateHub( hubName:String, hubImage:Bitmap,hubSerialNo:String)
+    fun updateHub( hubName:String, hubImage:String,hubSerialNo:String)
     {
         viewModelScope.launch {
             if (hubName.isEmpty()){

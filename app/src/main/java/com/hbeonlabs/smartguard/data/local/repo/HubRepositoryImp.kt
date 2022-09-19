@@ -17,14 +17,14 @@ class HubRepositoryImp constructor(
 
     override suspend fun getAllHubs(): Flow<List<Hub>> = dao.getAllHubsList()
     override suspend fun addHub(hubSerialNo:String, hubPhoneNumber:String) {
-        val hub = Hub(hubSerialNo,"", ContextCompat.getDrawable(context, R.drawable.ic_baseline_add)?.toBitmap()!!,hubPhoneNumber, hub_siren = false, hub_arm_state = false)
+        val hub = Hub(hubSerialNo,"", "",hubPhoneNumber, hub_siren = false, hub_arm_state = false)
         dao.addHub(hub)
     }
     override suspend fun checkIfHubAlreadyAdded(hubSerialNo: String): Boolean {
         return dao.checkIfHubAlreadyPresent(hubSerialNo)
     }
 
-    override suspend fun addImageAndNameToHub(hub_name:String, hubImage: Bitmap, hub_serial_no: String) {
+    override suspend fun addImageAndNameToHub(hub_name:String, hubImage: String, hub_serial_no: String) {
         dao.addUpdateHub(hub_name,hubImage,hub_serial_no)
     }
 
