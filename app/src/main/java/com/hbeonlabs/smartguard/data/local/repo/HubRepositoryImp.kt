@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.data.local.datastore.SharedPreferences
+import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.room.HubDao
 import kotlinx.coroutines.flow.Flow
@@ -34,6 +35,18 @@ class HubRepositoryImp constructor(
 
     override suspend fun armDisarmHub(arm_state: Boolean, hub_serial_no: String) {
         dao.armDisarmHub(arm_state,hub_serial_no)
+    }
+
+    override suspend fun addActivityHistory(
+        hub_serial_no: String,
+        message: String,
+        timeStamp: Long
+    ) {
+        dao.addActivityHistory(ActivityHistory(timeStamp,message,hub_serial_no))
+    }
+
+    override suspend fun getHubDetails(hub_serial_no: String): Hub {
+        return dao.getHubFromId(hub_serial_no)
     }
 
 

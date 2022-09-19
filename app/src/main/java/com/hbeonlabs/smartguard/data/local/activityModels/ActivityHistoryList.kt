@@ -1,6 +1,10 @@
 package com.hbeonlabs.smartguard.data.local.activityModels
 
-data class ActivityHistory(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+data class ActivityHistoryList(
     val activity_history_time_stamp: Long,
     val activity_history_message: String,
     val hub_id:String,

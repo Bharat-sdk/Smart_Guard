@@ -10,9 +10,6 @@ import com.hbeonlabs.smartguard.ui.activities.MainViewModel
 import com.hbeonlabs.smartguard.ui.fragments.activityHistory.ActivityHistoryViewModel
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
-import com.hbeonlabs.smartguard.ui.fragments.hubDetails.pagerActivityHistory.PagerActivityHistoryViewModel
-import com.hbeonlabs.smartguard.ui.fragments.hubDetails.armDisarm.PagerSirenArmingViewModel
-import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.PagerSOSViewModel
 import com.hbeonlabs.smartguard.ui.fragments.hubSettings.HubSettingsViewModel
 import com.hbeonlabs.smartguard.ui.fragments.postAddHub.PostAddHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUserViewModel
@@ -29,10 +26,7 @@ val appModule = module {
     viewModel { AddAHubViewModel(get()) }
     viewModel { SelectHubViewModel(get()) }
     viewModel { PostAddHubViewModel(get()) }
-    viewModel { HubDetailsViewModel() }
-    viewModel { PagerSOSViewModel() }
-    viewModel { PagerActivityHistoryViewModel() }
-    viewModel { PagerSirenArmingViewModel(get()) }
+    viewModel { HubDetailsViewModel(get()) }
     viewModel { ActivityHistoryViewModel() }
     viewModel {SecondaryUserViewModel()}
     viewModel { HubSettingsViewModel() }

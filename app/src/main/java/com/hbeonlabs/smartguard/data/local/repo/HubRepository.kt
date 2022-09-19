@@ -18,5 +18,9 @@ interface HubRepository {
 
     suspend fun armDisarmHub(arm_state:Boolean,hub_serial_no: String)
 
+    suspend fun addActivityHistory(hub_serial_no: String, message: String, timeStamp: Long)
+
+    suspend fun getHubDetails(hub_serial_no: String):Hub
+
 
 }

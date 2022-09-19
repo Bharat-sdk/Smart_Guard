@@ -3,6 +3,7 @@ package com.hbeonlabs.smartguard.data.local.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.data.local.models.UpdateHubImageName
@@ -11,6 +12,7 @@ import com.hbeonlabs.smartguard.data.local.models.UpdateHubImageName
     entities = [
         Hub::class,
         Sensor::class,
+        ActivityHistory::class
     ],
     version =  3
 )

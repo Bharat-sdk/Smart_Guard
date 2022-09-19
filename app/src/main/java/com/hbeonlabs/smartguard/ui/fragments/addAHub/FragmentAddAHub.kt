@@ -47,16 +47,16 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         collectLatestLifeCycleFlow(addAHubViewModel.addHubEvents){
             when(it)
             {
-                AddHubEvents.NavigateToPostHubEvent -> {
+                AddAHubEvent.NavigateToPostHubEvent -> {
                     findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentPostAddHub(binding.edtAddHubSerial.text.toString()))
                 }
-                is AddHubEvents.PhoneValidationErrorEvent -> {
+                is AddAHubEvent.PhoneValidationErrorEvent -> {
                     makeToast(it.message)
                 }
-                is AddHubEvents.SerialNumberValidationErrorEvent -> {
+                is AddAHubEvent.SerialNumberValidationErrorEvent -> {
                     makeToast(it.message)
                 }
-                is AddHubEvents.SQLErrorEvent -> {
+                is AddAHubEvent.SQLErrorEvent -> {
                     makeToast(it.message)
                 }
             }

@@ -4,14 +4,15 @@ import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentPagerActivityHistoryBinding
+import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
 
 import org.koin.android.ext.android.inject
 
 
-class FragmentPagerActivityHistory:BaseFragment<PagerActivityHistoryViewModel,FragmentPagerActivityHistoryBinding>() {
+class FragmentPagerActivityHistory:BaseFragment<HubDetailsViewModel,FragmentPagerActivityHistoryBinding>() {
 
-    private  val pagerActivityHistoryViewModel: PagerActivityHistoryViewModel by inject()
-    override fun getViewModel(): PagerActivityHistoryViewModel {
+    private  val pagerActivityHistoryViewModel: HubDetailsViewModel by inject()
+    override fun getViewModel(): HubDetailsViewModel {
             return pagerActivityHistoryViewModel
     }
 

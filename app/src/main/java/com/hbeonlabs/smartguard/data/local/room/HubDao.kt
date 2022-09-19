@@ -1,9 +1,9 @@
 package com.hbeonlabs.smartguard.data.local.room
 
-import android.graphics.Bitmap
 import androidx.room.*
+import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryList
+import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
-import com.hbeonlabs.smartguard.data.local.models.UpdateHubImageName
 import com.hbeonlabs.smartguard.data.local.room.relations.HubWithSensors
 import kotlinx.coroutines.flow.Flow
 
@@ -31,5 +31,15 @@ interface HubDao {
     @Transaction
     @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
     fun getAllSensorUsingHubId(hub_id: String):Flow<List<HubWithSensors>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addActivityHistory(activity:ActivityHistory)
+
+    @Query("SELECT * FROM activityhistory")
+    fun getAllActivities(hub_id: String):Flow<List<ActivityHistory>>
+
+    @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
+    suspend fun getHubFromId(hub_id: String):Hub
+
 
 }
