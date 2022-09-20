@@ -8,5 +8,5 @@ data class ActivityHistory(
     @PrimaryKey
     val activity_history_time_stamp: Long,
     val activity_history_message: String,
-    val hub_id:String,
+    val hub_serial_number:String
 )

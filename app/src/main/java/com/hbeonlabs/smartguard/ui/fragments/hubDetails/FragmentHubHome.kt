@@ -2,8 +2,10 @@ package com.hbeonlabs.smartguard.ui.fragments.hubDetails
 
 import android.view.View
 import android.view.View.VISIBLE
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentHubDetailScreenBinding
@@ -14,11 +16,13 @@ import com.hbeonlabs.smartguard.ui.fragments.hubDetails.armDisarm.FragmentPagerS
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.FragmentPagerSOS
 
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
 class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBinding>() {
 
-    private  val hubDetailsViewModel: HubDetailsViewModel by inject()
+    private  val hubDetailsViewModel by sharedStateViewModel<HubDetailsViewModel>()
+    val args :FragmentHubHomeArgs by navArgs()
     override fun getViewModel(): HubDetailsViewModel {
             return hubDetailsViewModel
     }
@@ -42,6 +46,11 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             setOnClickListener { findNavController().navigate(R.id.fragmentAddAHub) }
             visibility = VISIBLE
         }
+
+        (requireActivity() as MainActivity).binding.toolbarTitle.text = args.hub.hub_name
+        binding.hubData = args.hub
+        hubDetailsViewModel.hub_id = args.hub.hub_serial_number
+
 
         val fragmentList = arrayListOf<Fragment>(
             FragmentPagerSirenArming(),FragmentPagerSOS(),FragmentPagerActivityHistory()

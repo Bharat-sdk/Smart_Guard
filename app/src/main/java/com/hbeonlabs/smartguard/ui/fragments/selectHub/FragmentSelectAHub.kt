@@ -45,7 +45,7 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
         binding.rvHub.layoutManager = LinearLayoutManager(requireActivity())
         adapter = HubListAdapter()
         adapter.setOnItemClickListener {
-            findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentHubDetails())
+            findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentHubDetails(it))
         }
         binding.adapter = adapter
 

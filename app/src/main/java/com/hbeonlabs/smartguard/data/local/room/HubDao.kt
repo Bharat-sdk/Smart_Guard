@@ -35,7 +35,7 @@ interface HubDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addActivityHistory(activity:ActivityHistory)
 
-    @Query("SELECT * FROM activityhistory")
+    @Query("SELECT * FROM activityhistory WHERE hub_serial_number = :hub_id")
     fun getAllActivities(hub_id: String):Flow<List<ActivityHistory>>
 
     @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")

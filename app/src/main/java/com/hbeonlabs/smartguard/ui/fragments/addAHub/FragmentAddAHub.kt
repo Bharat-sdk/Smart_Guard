@@ -44,7 +44,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
     }
 
     private fun observe(){
-        collectLatestLifeCycleFlow(addAHubViewModel.addHubEvents){
+        collectLatestLifeCycleFlow(getViewModel().addHubEvents){
             when(it)
             {
                 AddAHubEvent.NavigateToPostHubEvent -> {

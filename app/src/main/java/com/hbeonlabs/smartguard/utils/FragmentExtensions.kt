@@ -17,19 +17,19 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
 fun Fragment.makeToast(text: String) {
-    Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
+    Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
 }
 
 
 fun Fragment.makeToast(@StringRes res: Int) {
-    Toast.makeText(requireContext(), res, Toast.LENGTH_LONG).show()
+    Toast.makeText(requireContext(), res, Toast.LENGTH_SHORT).show()
 }
 
 fun Fragment.snackBar(text: String) {
     Snackbar.make(
         requireView(),
         text,
-        Snackbar.LENGTH_LONG
+        Snackbar.LENGTH_SHORT
     ).show()
 }
 
@@ -37,7 +37,7 @@ fun Fragment.snackBar(@StringRes res: Int) {
     Snackbar.make(
         requireView(),
         res,
-        Snackbar.LENGTH_LONG
+        Snackbar.LENGTH_SHORT
     ).show()
 }
 

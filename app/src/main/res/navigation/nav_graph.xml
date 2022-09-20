@@ -85,6 +85,9 @@
         <action
             android:id="@+id/action_fragmentHubDetails_to_sensorListFragment"
             app:destination="@id/sensorListFragment" />
+        <argument
+            android:name="hub"
+            app:argType="com.hbeonlabs.smartguard.data.local.models.Hub" />
     </fragment>
     <fragment
         android:id="@+id/fragmentActivityHistory"

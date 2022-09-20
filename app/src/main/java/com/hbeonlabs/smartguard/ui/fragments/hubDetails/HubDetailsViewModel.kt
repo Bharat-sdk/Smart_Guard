@@ -5,17 +5,15 @@ import com.hbeonlabs.smartguard.base.BaseViewModel
 import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.repo.HubRepository
+import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
 
 class HubDetailsViewModel constructor(
-    private val repository: HubRepository
+    private val repository: HubRepositoryImp
 ):BaseViewModel() {
 
     private val _progressIndicator = MutableStateFlow<Int>(0)
@@ -92,6 +90,9 @@ class HubDetailsViewModel constructor(
             }
         }
     }
+
+    suspend fun getActivityHistory() :Flow<List<ActivityHistory>> = repository.getActivityHistory(hub_id)
+
     sealed class HubDetailsEvents{
         class SilenceRingEvent(val message:String):HubDetailsEvents()
         class ArmDisarmEvent(val message: String):HubDetailsEvents()
