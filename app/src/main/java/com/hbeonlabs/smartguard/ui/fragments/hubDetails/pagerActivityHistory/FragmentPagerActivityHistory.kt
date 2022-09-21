@@ -9,6 +9,7 @@ import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryItem
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryList
 import com.hbeonlabs.smartguard.databinding.FragmentPagerActivityHistoryBinding
 import com.hbeonlabs.smartguard.ui.adapters.ActivityHistoryAdapter
+import com.hbeonlabs.smartguard.ui.fragments.hubDetails.FragmentHubHomeDirections
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
 import com.hbeonlabs.smartguard.utils.AppLists
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
@@ -38,7 +39,7 @@ class FragmentPagerActivityHistory:BaseFragment<HubDetailsViewModel,FragmentPage
         observe()
 
         binding.txtSeeFullActivityHistory.setOnClickListener {
-                    findNavController().navigate(FragmentPagerActivityHistoryDirections.actionFragmentPagerActivityHistoryToFragmentActivityHistory(hubDetailsViewModel.hub_id))
+                    findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentActivityHistory(hubDetailsViewModel.hub_id))
         }
     }
 

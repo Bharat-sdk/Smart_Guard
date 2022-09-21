@@ -1,6 +1,8 @@
 package com.hbeonlabs.smartguard.ui.fragments.activityHistory
 
+import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
@@ -8,7 +10,9 @@ import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryDate
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryItem
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryList
 import com.hbeonlabs.smartguard.databinding.FragmentActivityHistoryBinding
+import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.ActivityHistoryAdapter
+import com.hbeonlabs.smartguard.ui.fragments.hubDetails.FragmentHubHomeDirections
 import com.hbeonlabs.smartguard.utils.AppLists
 import kotlinx.coroutines.flow.collectLatest
 
@@ -33,6 +37,13 @@ class FragmentActivityHistory:BaseFragment<ActivityHistoryViewModel,FragmentActi
         super.initView()
 
         activityHistoryViewModel.hub_id = args.hubSerialNo
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
+            visibility = View.INVISIBLE
+
+        }
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
+            visibility = View.INVISIBLE
+        }
 
         observe()
 

@@ -27,7 +27,7 @@ val appModule = module {
     viewModel { SelectHubViewModel(get()) }
     viewModel { PostAddHubViewModel(get()) }
     viewModel { HubDetailsViewModel(get()) }
-    viewModel { ActivityHistoryViewModel() }
+    viewModel { ActivityHistoryViewModel(get()) }
     viewModel { SecondaryUserViewModel() }
     viewModel { HubSettingsViewModel() }
     viewModel { SensorViewModel() }
