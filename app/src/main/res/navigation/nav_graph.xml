@@ -93,7 +93,11 @@
         android:id="@+id/fragmentActivityHistory"
         tools:layout="@layout/fragment_activity_history"
         android:name="com.hbeonlabs.smartguard.ui.fragments.activityHistory.FragmentActivityHistory"
-        android:label="Activity History" />
+        android:label="Activity History" >
+        <argument
+            android:name="hub_serial_no"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/secondaryUsersFragment"
         tools:layout="@layout/fragment_secondary_users"
@@ -155,6 +159,14 @@
         <action
             android:id="@+id/action_editSensorFragment_to_sensorListFragment"
             app:destination="@id/sensorListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPagerActivityHistory"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.hubDetails.pagerActivityHistory.FragmentPagerActivityHistory"
+        android:label="FragmentPagerActivityHistory" >
+        <action
+            android:id="@+id/action_fragmentPagerActivityHistory_to_fragmentActivityHistory"
+            app:destination="@id/fragmentActivityHistory" />
     </fragment>
 
 </navigation>

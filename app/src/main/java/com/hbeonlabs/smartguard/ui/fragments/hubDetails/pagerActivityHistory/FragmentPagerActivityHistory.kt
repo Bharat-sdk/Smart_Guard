@@ -38,7 +38,7 @@ class FragmentPagerActivityHistory:BaseFragment<HubDetailsViewModel,FragmentPage
         observe()
 
         binding.txtSeeFullActivityHistory.setOnClickListener {
-                    findNavController().navigate(R.id.fragmentActivityHistory)
+                    findNavController().navigate(FragmentPagerActivityHistoryDirections.actionFragmentPagerActivityHistoryToFragmentActivityHistory(hubDetailsViewModel.hub_id))
         }
     }
 
