@@ -4,14 +4,20 @@ import androidx.room.*
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryList
 import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
+import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.data.local.room.relations.HubWithSensors
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HubDao {
 
+    // HUB SQL
     @Query("SELECT * FROM hub")
     fun getAllHubsList(): Flow<List<Hub>>
+
+    // get hub details by id
+    @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
+    suspend fun getHubFromId(hub_id: String):Hub
 
     @Query("UPDATE hub SET hub_arm_state = :armDisarmState WHERE hub_serial_number in(:hub_id)")
     suspend fun armDisarmHub(armDisarmState:Boolean,hub_id:String)
@@ -28,18 +34,30 @@ interface HubDao {
     @Query("UPDATE hub SET hub_name = :hub_name , hub_image = :hubImage WHERE hub_serial_number in(:hub_serial_no)")
     suspend fun addUpdateHub(hub_name:String ,hubImage:String ,hub_serial_no:String)
 
-    @Transaction
-    @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
-    fun getAllSensorUsingHubId(hub_id: String):Flow<List<HubWithSensors>>
 
+
+    // ACTIVITY HISTORY SQL
+
+    // Activity History add
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addActivityHistory(activity:ActivityHistory)
 
+    // get activity history by id
     @Query("SELECT * FROM activityhistory WHERE hub_serial_number = :hub_id")
     fun getAllActivities(hub_id: String):Flow<List<ActivityHistory>>
 
-    @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
-    suspend fun getHubFromId(hub_id: String):Hub
+
+    // SENSORS SQL
+
+    // Get all sensors of a single hub
+    @Query("SELECT * FROM sensor WHERE hub_serial_number = :hub_id")
+    fun getAllSensorUsingHubId(hub_id: String):Flow<List<Sensor>>
+
+    // delete sensor
+    @Delete
+    fun deleteSensor(sensor: Sensor):Int
+
+
 
 
 }

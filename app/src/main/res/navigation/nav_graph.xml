@@ -123,15 +123,21 @@
         <action
             android:id="@+id/action_sensorListFragment_to_sensorDetailsFragment"
             app:destination="@id/sensorDetailsFragment" />
+        <argument
+            android:name="hub_serial_number"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addSensorPrepareToAddFragment"
         tools:layout="@layout/fragment_add_sensor_prepare"
         android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors.AddSensorPrepareToAddFragment"
         android:label="Add A Sensor" >
+        <argument
+            android:name="hub_serial_no"
+            app:argType="string" />
         <action
-            android:id="@+id/action_addSensorPrepareToAddFragment_to_addSensorFragment"
-            app:destination="@id/addSensorFragment" />
+            android:id="@+id/action_addSensorPrepareToAddFragment_to_sensorTypeListFragment"
+            app:destination="@id/sensorTypeListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addSensorFragment"
@@ -141,6 +147,9 @@
         <action
             android:id="@+id/action_addSensorFragment_to_sensorListFragment"
             app:destination="@id/sensorListFragment" />
+        <argument
+            android:name="hub_serial_no"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/sensorDetailsFragment"
@@ -167,6 +176,18 @@
         <action
             android:id="@+id/action_fragmentPagerActivityHistory_to_fragmentActivityHistory"
             app:destination="@id/fragmentActivityHistory" />
+    </fragment>
+    <fragment
+        android:id="@+id/sensorTypeListFragment"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors.SensorTypeListFragment"
+        tools:layout="@layout/fragment_sensor_type_list"
+        android:label="ADD A SENSOR" >
+        <action
+            android:id="@+id/action_sensorTypeListFragment_to_addSensorFragment"
+            app:destination="@id/addSensorFragment" />
+        <argument
+            android:name="hub_serial_no"
+            app:argType="string" />
     </fragment>
 
 </navigation>
