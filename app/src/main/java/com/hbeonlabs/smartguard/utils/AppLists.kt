@@ -6,6 +6,7 @@ import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryList
 import com.hbeonlabs.smartguard.data.local.models.OnBoardingData
 import com.hbeonlabs.smartguard.data.local.models.SecondaryUser
+import com.hbeonlabs.smartguard.data.local.models.SensorTypes
 
 class AppLists(
     val context: Context
@@ -34,5 +35,12 @@ class AppLists(
         SecondaryUser(3,"","","",""),
         SecondaryUser(4,"Bharat","1","354855454","1"),
         SecondaryUser(5,"Bharat","1","354855454","1")
+    )
+
+    val sensorTypeLists = arrayListOf(
+        SensorTypes("2455","Sensor1","asdasd"),
+        SensorTypes("2455","Sensor1","asdasd"),
+        SensorTypes("2455","Sensor1","asdasd"),
+        SensorTypes("2455","Sensor1","asdasd")
     )
 }

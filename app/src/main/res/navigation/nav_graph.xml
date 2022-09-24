@@ -150,6 +150,9 @@
         <argument
             android:name="hub_serial_no"
             app:argType="string" />
+        <argument
+            android:name="sensor_type"
+            app:argType="com.hbeonlabs.smartguard.data.local.models.SensorTypes" />
     </fragment>
     <fragment
         android:id="@+id/sensorDetailsFragment"
