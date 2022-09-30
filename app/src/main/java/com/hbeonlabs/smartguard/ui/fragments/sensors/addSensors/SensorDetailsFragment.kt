@@ -7,14 +7,14 @@ import com.hbeonlabs.smartguard.databinding.*
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
 
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
 class SensorDetailsFragment:BaseFragment<SensorViewModel,FragmentSensorDetailsBinding>() {
 
-    private  val activityHistoryViewModel: SensorViewModel by inject()
+    private  val sensorDetailViewModel by sharedStateViewModel<SensorViewModel>()
     override fun getViewModel(): SensorViewModel {
-            return activityHistoryViewModel
+            return sensorDetailViewModel
     }
 
     override fun getLayoutResourceId(): Int {

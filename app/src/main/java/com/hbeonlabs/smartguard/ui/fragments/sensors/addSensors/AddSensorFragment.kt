@@ -1,20 +1,28 @@
 package com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors
 
 import android.view.View
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
+import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
+import com.hbeonlabs.smartguard.utils.makeToast
+import kotlinx.coroutines.flow.collectLatest
 
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
 class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>() {
 
-    private  val activityHistoryViewModel: SensorViewModel by inject()
+    val args : AddSensorFragmentArgs by navArgs()
+
+    private  val addSensorViewModel  by sharedStateViewModel<SensorViewModel>()
     override fun getViewModel(): SensorViewModel {
-            return activityHistoryViewModel
+            return addSensorViewModel
     }
 
     override fun getLayoutResourceId(): Int {
@@ -23,6 +31,7 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
 
     override fun initView() {
         super.initView()
+        observe()
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             setImageResource(R.drawable.ic_baseline_add)
@@ -34,9 +43,30 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
 
 
         binding.btnAddSensor.setOnClickListener {
-
+            val sensorName = binding.edtAddSensorName.text.toString()
+            val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
+            val sensor = Sensor(null,sensorName,args.sensorType.sensor_image,args.sensorType.sensor_model_number,customSmsMessage,addSensorViewModel.hub_serial_no)
+            addSensorViewModel.addSensor(sensor)
         }
 
+    }
+
+
+    private fun observe()
+    {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            addSensorViewModel.mSensorEvents.collectLatest {
+                when (it) {
+                    SensorViewModel.ManageSensorEvents.AddSensorSuccess -> {
+                        findNavController().navigate(AddSensorFragmentDirections.actionAddSensorFragmentToSensorListFragment(addSensorViewModel.hub_serial_no))
+                    }
+                    is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {
+                        makeToast(it.message)
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
 

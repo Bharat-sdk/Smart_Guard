@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.hbeonlabs.smartguard.data.local.datastore.SharedPreferences
 import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
+import com.hbeonlabs.smartguard.data.local.repo.SensorRepositoryImp
 import com.hbeonlabs.smartguard.data.local.room.AppDatabase
 import com.hbeonlabs.smartguard.data.local.room.HubDao
 import com.hbeonlabs.smartguard.ui.activities.MainViewModel
@@ -30,7 +31,7 @@ val appModule = module {
     viewModel { ActivityHistoryViewModel(get()) }
     viewModel { SecondaryUserViewModel() }
     viewModel { HubSettingsViewModel() }
-    viewModel { SensorViewModel() }
+    viewModel { SensorViewModel(get()) }
 
     fun provideDataBase(application: Application): AppDatabase {
         return Room.databaseBuilder(application, AppDatabase::class.java, "smart_guard_db")
@@ -52,7 +53,13 @@ val appModule = module {
     }
 
     single {
+
         HubRepositoryImp(get(),get())
+    }
+
+
+    single {
+        SensorRepositoryImp(get())
     }
 
     single {

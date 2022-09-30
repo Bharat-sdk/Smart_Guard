@@ -57,6 +57,9 @@ interface HubDao {
     @Delete
     fun deleteSensor(sensor: Sensor):Int
 
+    @Insert
+    fun addSensor(sensor: Sensor)
+
 
 
 

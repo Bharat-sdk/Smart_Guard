@@ -63,7 +63,7 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
         binding.circularIndicator.setViewPager(binding.hubScreenFragmentViewPager)
 
         binding.layoutManageSensors.setOnClickListener {
-            findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToSensorListFragment())
+            findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToSensorListFragment(hubDetailsViewModel.hub_id))
         }
 
     }

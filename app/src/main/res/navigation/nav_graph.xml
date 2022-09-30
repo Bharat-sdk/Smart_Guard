@@ -117,6 +117,7 @@
         tools:layout="@layout/fragment_sensor_list"
         android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.SensorListFragment"
         android:label="MANAGE SENSORS" >
+
         <action
             android:id="@+id/action_sensorListFragment_to_addSensorPrepareToAddFragment"
             app:destination="@id/addSensorPrepareToAddFragment" />
@@ -124,17 +125,15 @@
             android:id="@+id/action_sensorListFragment_to_sensorDetailsFragment"
             app:destination="@id/sensorDetailsFragment" />
         <argument
-            android:name="hub_serial_number"
+            android:name="hub_serial_no"
             app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/addSensorPrepareToAddFragment"
         tools:layout="@layout/fragment_add_sensor_prepare"
         android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors.AddSensorPrepareToAddFragment"
         android:label="Add A Sensor" >
-        <argument
-            android:name="hub_serial_no"
-            app:argType="string" />
         <action
             android:id="@+id/action_addSensorPrepareToAddFragment_to_sensorTypeListFragment"
             app:destination="@id/sensorTypeListFragment" />
@@ -148,11 +147,9 @@
             android:id="@+id/action_addSensorFragment_to_sensorListFragment"
             app:destination="@id/sensorListFragment" />
         <argument
-            android:name="hub_serial_no"
-            app:argType="string" />
-        <argument
             android:name="sensor_type"
             app:argType="com.hbeonlabs.smartguard.data.local.models.SensorTypes" />
+
     </fragment>
     <fragment
         android:id="@+id/sensorDetailsFragment"
@@ -188,9 +185,7 @@
         <action
             android:id="@+id/action_sensorTypeListFragment_to_addSensorFragment"
             app:destination="@id/addSensorFragment" />
-        <argument
-            android:name="hub_serial_no"
-            app:argType="string" />
+
     </fragment>
 
 </navigation>

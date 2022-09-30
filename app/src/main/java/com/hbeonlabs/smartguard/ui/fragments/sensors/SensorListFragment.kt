@@ -13,31 +13,32 @@ import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
 class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>() {
     private val args:SensorListFragmentArgs by navArgs()
     lateinit var adapter: SensorListAdapter
 
-    private  val activityHistoryViewModel: SensorViewModel by inject()
+    private  val sensorListViewModel by sharedStateViewModel<SensorViewModel>()
     override fun getViewModel(): SensorViewModel {
-            return activityHistoryViewModel
+            return sensorListViewModel
     }
 
     override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_activity_history
+        return R.layout.fragment_sensor_list
     }
 
     override fun initView() {
         super.initView()
-
+        sensorListViewModel.hub_serial_no =args.hubSerialNo
         observe()
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             setImageResource(R.drawable.ic_baseline_add)
             visibility = View.VISIBLE
             setOnClickListener {
                 // go to add sensor
-                findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToAddSensorPrepareToAddFragment(args.hubSerialNumber))
+                findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToAddSensorPrepareToAddFragment())
             }
         }
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
@@ -60,7 +61,7 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
     private fun observe()
     {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            getViewModel().getHubList(args.hubSerialNumber).collectLatest {
+            getViewModel().getHubList(args.hubSerialNo).collectLatest {
                 adapter.differ.submitList(it)
             }
         }
@@ -75,6 +76,7 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
                     is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {
                         makeToast(it.message)
                     }
+                    else -> {}
                 }
             }
         }

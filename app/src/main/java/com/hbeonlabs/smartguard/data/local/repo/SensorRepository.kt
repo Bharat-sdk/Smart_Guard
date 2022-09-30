@@ -11,4 +11,6 @@ interface SensorRepository {
     suspend fun getAllSensors(hub_serial_no:String): Flow<List<Sensor>>
 
     suspend fun deleteSensor(sensor: Sensor):Int
+
+    suspend fun addSensor(sensor: Sensor)
 }

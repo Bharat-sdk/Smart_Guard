@@ -21,6 +21,10 @@ class SensorRepositoryImp constructor(
       return  dao.deleteSensor(sensor)
     }
 
+    override suspend fun addSensor(sensor: Sensor) {
+        dao.addSensor(sensor)
+    }
+
 
 }
 

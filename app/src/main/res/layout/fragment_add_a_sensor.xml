@@ -48,7 +48,7 @@
     <EditText
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/edt_add_hub_serial"
+        android:id="@+id/edt_add_sensor_name"
         android:hint="@string/_91_xxxx_xx_xxxx"
         app:layout_constraintTop_toBottomOf="@id/tv_serial_no."
         app:layout_constraintStart_toEndOf="@id/guideline_start"
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_sensor_name_desc"
-        app:layout_constraintTop_toBottomOf="@id/edt_add_hub_serial"
+        app:layout_constraintTop_toBottomOf="@id/edt_add_sensor_name"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         android:text="@string/add_sensor_name_desc"
         android:layout_marginTop="@dimen/_20sdp"
@@ -91,7 +91,7 @@
     <EditText
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/edt_add_hub_sim_no"
+        android:id="@+id/edt_add_sensor_custom_sms_message"
         android:hint="Warning! An alarm has been triggered from sensor ID 1A353-53V-VH4G.\n \nPlease return home immediately. You can switch off the alarm from the app."
         app:layout_constraintTop_toBottomOf="@id/tv_sim_no."
         app:layout_constraintStart_toEndOf="@id/guideline_start"
@@ -102,7 +102,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edt_add_hub_sim_no"
+        app:layout_constraintTop_toBottomOf="@id/edt_add_sensor_custom_sms_message"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         android:layout_marginTop="@dimen/_20sdp"
