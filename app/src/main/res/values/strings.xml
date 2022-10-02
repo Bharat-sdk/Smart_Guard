@@ -53,5 +53,8 @@
     <string name="add_sensor_desc_2">Decide what name to assign to this sensor, and what custom SMS you\'d like to receive when this specific sensor is triggered.</string>
     <string name="set_a_custom_name_amp_message"><![CDATA[Set a Custom Name & Message]]></string>
     <string name="add_sensor_name_desc">This custom name will be used to identify the sensor as registered through the app.</string>
+    <string name="warning_an_alarm_has_been_triggered_from_sensor_id_1a353_53v_vh4g_n_nplease_return_home_immediately_you_can_switch_off_the_alarm_from_the_app">Warning! An alarm has been triggered from sensor ID 1A353-53V-VH4G.\n \nPlease return home immediately. You can switch off the alarm from the app.</string>
+    <string name="this_message_will_be_sent_out_to_all_registered_users_when_nthis_sensor_is_triggered_while_the_hub_is_armed">This message will be sent out to all registered users when \nthis sensor is triggered while the Hub is Armed.</string>
+    <string name="custom_sms_message">Custom Sms Message</string>
 
 </resources>

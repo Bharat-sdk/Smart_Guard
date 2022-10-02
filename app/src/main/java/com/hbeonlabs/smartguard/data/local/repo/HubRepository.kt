@@ -25,5 +25,7 @@ interface HubRepository {
 
     suspend fun getActivityHistory(hub_serial_no: String):Flow<List<ActivityHistory>>
 
+    suspend fun getHubFromId(hub_serial_no: String):Hub
+
 
 }

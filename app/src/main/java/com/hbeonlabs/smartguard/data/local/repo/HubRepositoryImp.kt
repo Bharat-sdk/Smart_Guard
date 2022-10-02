@@ -53,6 +53,10 @@ class HubRepositoryImp constructor(
         return dao.getAllActivities(hub_serial_no)
     }
 
+    override suspend fun getHubFromId(hub_serial_no: String): Hub {
+        return dao.getHubFromId(hub_serial_no)
+    }
+
 
 }
 

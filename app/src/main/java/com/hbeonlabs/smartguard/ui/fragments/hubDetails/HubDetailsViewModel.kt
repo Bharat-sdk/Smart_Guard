@@ -6,6 +6,8 @@ import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.repo.HubRepository
 import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
+import com.hbeonlabs.smartguard.ui.fragments.hubSettings.HubSettingEvents
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -93,9 +95,23 @@ class HubDetailsViewModel constructor(
 
     suspend fun getActivityHistory() :Flow<List<ActivityHistory>> = repository.getActivityHistory(hub_id)
 
+    fun getHubFromId(hubId:String)
+    {
+        viewModelScope.launch (Dispatchers.IO){
+            try {
+                _hubEvents.emit(HubDetailsEvents.GetHubDataEvent(repository.getHubFromId(hubId)))
+            }
+            catch (e:Exception)
+            {
+                _hubEvents.emit(HubDetailsEvents.SQLErrorEvent(e.localizedMessage))
+            }
+        }
+    }
+
     sealed class HubDetailsEvents{
         class SilenceRingEvent(val message:String):HubDetailsEvents()
         class ArmDisarmEvent(val message: String):HubDetailsEvents()
         class SQLErrorEvent(val message: String):HubDetailsEvents()
+        class GetHubDataEvent(val hub:Hub):HubDetailsEvents()
     }
 }

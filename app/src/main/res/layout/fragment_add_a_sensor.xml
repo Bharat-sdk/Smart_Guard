@@ -83,16 +83,17 @@
         android:id="@+id/tv_sim_no."
         app:layout_constraintTop_toBottomOf="@id/divider_1"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        android:text="Custom Sms Message"
+        android:text="@string/custom_sms_message"
         android:layout_marginTop="@dimen/_20sdp"
         android:textStyle="bold"
         android:textSize="@dimen/_11ssp"
         />
     <EditText
         android:layout_width="0dp"
+        android:textAlignment="viewStart"
         android:layout_height="wrap_content"
         android:id="@+id/edt_add_sensor_custom_sms_message"
-        android:hint="Warning! An alarm has been triggered from sensor ID 1A353-53V-VH4G.\n \nPlease return home immediately. You can switch off the alarm from the app."
+        android:hint="@string/warning_an_alarm_has_been_triggered_from_sensor_id_1a353_53v_vh4g_n_nplease_return_home_immediately_you_can_switch_off_the_alarm_from_the_app"
         app:layout_constraintTop_toBottomOf="@id/tv_sim_no."
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
@@ -106,7 +107,7 @@
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         android:layout_marginTop="@dimen/_20sdp"
-        android:text="This message will be sent out to all registered users when \nthis sensor is triggered while the Hub is Armed."
+        android:text="@string/this_message_will_be_sent_out_to_all_registered_users_when_nthis_sensor_is_triggered_while_the_hub_is_armed"
         />
 
 

@@ -15,7 +15,6 @@ interface HubDao {
     @Query("SELECT * FROM hub")
     fun getAllHubsList(): Flow<List<Hub>>
 
-    // get hub details by id
     @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id")
     suspend fun getHubFromId(hub_id: String):Hub
 

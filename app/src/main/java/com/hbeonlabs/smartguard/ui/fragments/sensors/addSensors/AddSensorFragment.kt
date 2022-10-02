@@ -45,7 +45,7 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
         binding.btnAddSensor.setOnClickListener {
             val sensorName = binding.edtAddSensorName.text.toString()
             val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
-            val sensor = Sensor(null,sensorName,args.sensorType.sensor_image,args.sensorType.sensor_model_number,customSmsMessage,addSensorViewModel.hub_serial_no)
+            val sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,customSmsMessage,addSensorViewModel.hub_serial_no)
             addSensorViewModel.addSensor(sensor)
         }
 

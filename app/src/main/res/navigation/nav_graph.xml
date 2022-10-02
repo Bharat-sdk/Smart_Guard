@@ -107,10 +107,19 @@
         android:id="@+id/fragmentHubSettings"
         tools:layout="@layout/fragment_hub_settings"
         android:name="com.hbeonlabs.smartguard.ui.fragments.hubSettings.FragmentHubSettings"
-        android:label="FragmentHubSettings" >
+        android:label="Hub Settings" >
         <action
             android:id="@+id/action_fragmentHubSettings_to_secondaryUsersFragment"
             app:destination="@id/secondaryUsersFragment" />
+        <argument
+            android:name="hub_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentHubSettings_to_fragmentHubDetails"
+            app:destination="@id/fragmentHubDetails"
+            app:popUpTo="@id/fragmentHubSettings"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/sensorListFragment"
@@ -145,7 +154,11 @@
         android:label="Add A Sensor" >
         <action
             android:id="@+id/action_addSensorFragment_to_sensorListFragment"
-            app:destination="@id/sensorListFragment" />
+            app:destination="@id/sensorListFragment"
+            app:popUpTo="@id/addSensorPrepareToAddFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
+            />
         <argument
             android:name="sensor_type"
             app:argType="com.hbeonlabs.smartguard.data.local.models.SensorTypes" />

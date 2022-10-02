@@ -29,7 +29,7 @@ private val repo:SensorRepositoryImp
 
     fun deleteSensor(sensor: Sensor)
     {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
 
                 if (repo.deleteSensor(sensor) == 0)

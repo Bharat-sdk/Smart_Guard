@@ -40,6 +40,4 @@ sealed class AddHubEvents{
     object NavigateToHub:AddHubEvents()
     class HubNameValidationErrorEvent(val message:String):AddHubEvents()
     class SQLErrorEvent(val message: String):AddHubEvents()
-
-
 }

@@ -4,6 +4,7 @@ import android.view.View
 import android.view.View.VISIBLE
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
@@ -14,6 +15,8 @@ import com.hbeonlabs.smartguard.ui.adapters.ViewPagerHubFragmentAdapter
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.pagerActivityHistory.FragmentPagerActivityHistory
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.armDisarm.FragmentPagerSirenArming
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.FragmentPagerSOS
+import com.hbeonlabs.smartguard.utils.makeToast
+import kotlinx.coroutines.flow.collectLatest
 
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
@@ -38,7 +41,7 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             setImageResource(R.drawable.ic_settings)
             visibility = VISIBLE
             setOnClickListener {
-                findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings())
+                findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings(hubDetailsViewModel.hub_id))
             }
         }
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
@@ -46,10 +49,10 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             setOnClickListener { findNavController().navigate(R.id.fragmentAddAHub) }
             visibility = VISIBLE
         }
-
-        (requireActivity() as MainActivity).binding.toolbarTitle.text = args.hub.hub_name
         binding.hubData = args.hub
-        hubDetailsViewModel.hub_id = args.hub.hub_serial_number
+
+        observe()
+
 
 
         val fragmentList = arrayListOf<Fragment>(
@@ -66,6 +69,32 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToSensorListFragment(hubDetailsViewModel.hub_id))
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        hubDetailsViewModel.getHubFromId(args.hub.hub_serial_number)
+    }
+
+    fun observe()
+    {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            hubDetailsViewModel.hubEvents.collectLatest {
+                when(it)
+                {
+                    is HubDetailsViewModel.HubDetailsEvents.GetHubDataEvent -> {
+                        (requireActivity() as MainActivity).binding.toolbarTitle.text = it.hub.hub_name
+                        binding.hubData = it.hub
+                        hubDetailsViewModel.hub_id = it.hub.hub_serial_number
+                    }
+                    is HubDetailsViewModel.HubDetailsEvents.SQLErrorEvent -> {
+                        makeToast(it.message)
+                    }
+
+                    else -> {}
+                }
+            }
+        }
     }
 
 

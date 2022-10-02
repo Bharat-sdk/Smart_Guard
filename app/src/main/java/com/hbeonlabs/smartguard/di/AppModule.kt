@@ -30,7 +30,7 @@ val appModule = module {
     viewModel { HubDetailsViewModel(get()) }
     viewModel { ActivityHistoryViewModel(get()) }
     viewModel { SecondaryUserViewModel() }
-    viewModel { HubSettingsViewModel() }
+    viewModel { HubSettingsViewModel(get()) }
     viewModel { SensorViewModel(get()) }
 
     fun provideDataBase(application: Application): AppDatabase {
