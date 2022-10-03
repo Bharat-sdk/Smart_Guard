@@ -78,7 +78,7 @@ observe()
 
 
         binding.descManageSecondaryNum.setOnClickListener {
-            findNavController().navigate(R.id.secondaryUsersFragment)
+            findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToSecondaryUsersFragment(args.hubId))
         }
 
         binding.btnUploadFromGallery.setOnClickListener {

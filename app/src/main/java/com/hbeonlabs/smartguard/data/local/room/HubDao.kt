@@ -4,6 +4,7 @@ import androidx.room.*
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryList
 import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
+import com.hbeonlabs.smartguard.data.local.models.SecondaryUser
 import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.data.local.room.relations.HubWithSensors
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface HubDao {
 
-    // HUB SQL
+    // ================= HUB SQL ============================
     @Query("SELECT * FROM hub")
     fun getAllHubsList(): Flow<List<Hub>>
 
@@ -35,7 +36,7 @@ interface HubDao {
 
 
 
-    // ACTIVITY HISTORY SQL
+    // ================ ACTIVITY HISTORY SQL =========================
 
     // Activity History add
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -46,7 +47,7 @@ interface HubDao {
     fun getAllActivities(hub_id: String):Flow<List<ActivityHistory>>
 
 
-    // SENSORS SQL
+    // ================ SENSORS SQL =====================
 
     // Get all sensors of a single hub
     @Query("SELECT * FROM sensor WHERE hub_serial_number = :hub_id")
@@ -58,6 +59,19 @@ interface HubDao {
 
     @Insert
     fun addSensor(sensor: Sensor)
+
+    // ======= SECONDARY USER SQL ==============
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addSecondaryUser(secondaryUser: SecondaryUser)
+
+    @Query("SELECT * FROM secondaryuser WHERE hub_serial_number = :hubId")
+    fun getSecondaryUsersUsingHub(hubId: String):Flow<List<SecondaryUser>>
+
+
+
+
+
+
 
 
 

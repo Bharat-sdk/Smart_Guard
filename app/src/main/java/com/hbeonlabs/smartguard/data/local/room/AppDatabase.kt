@@ -3,18 +3,16 @@ package com.hbeonlabs.smartguard.data.local.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
-import com.hbeonlabs.smartguard.data.local.models.Hub
-import com.hbeonlabs.smartguard.data.local.models.Sensor
-import com.hbeonlabs.smartguard.data.local.models.UpdateHubImageName
+import com.hbeonlabs.smartguard.data.local.models.*
 
 @Database(
     entities = [
         Hub::class,
         Sensor::class,
-        ActivityHistory::class
+        ActivityHistory::class,
+        SecondaryUser::class
     ],
-    version =  3
+    version =  4
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase :RoomDatabase(){

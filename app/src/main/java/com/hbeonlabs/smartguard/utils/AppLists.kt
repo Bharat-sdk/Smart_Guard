@@ -30,11 +30,11 @@ class AppLists(
     )
 
     val secondaryUserList = arrayListOf(
-        SecondaryUser(1,"","","",""),
-        SecondaryUser(2,"Bharat","1","354855454","1"),
-        SecondaryUser(3,"","","",""),
-        SecondaryUser(4,"Bharat","1","354855454","1"),
-        SecondaryUser(5,"Bharat","1","354855454","1")
+        SecondaryUser(null,"",1,"","",""),
+        SecondaryUser(null,"",2,"","",""),
+        SecondaryUser(null,"",3,"","",""),
+        SecondaryUser(null,"",4,"","",""),
+        SecondaryUser(null,"",5,"","","")
     )
 
     val sensorTypeLists = arrayListOf(
