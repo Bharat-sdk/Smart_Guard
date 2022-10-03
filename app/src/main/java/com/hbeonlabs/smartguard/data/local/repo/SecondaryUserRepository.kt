@@ -7,5 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface SecondaryUserRepository {
     suspend fun getAllSecondaryUserByHub(hub_serial_no:String): Flow<List<SecondaryUser>>
 
+    suspend fun addSecondaryUser(secondaryUser: SecondaryUser)
+
 
 }

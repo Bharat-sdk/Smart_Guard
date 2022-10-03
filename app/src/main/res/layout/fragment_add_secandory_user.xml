@@ -89,7 +89,7 @@
         />
 
     <EditText
-        android:id="@+id/edt_add_hub_name"
+        android:id="@+id/edt_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,9 +105,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edt_add_hub_name"
+        app:layout_constraintTop_toBottomOf="@id/edt_user_name"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="@string/name"
+        android:text="Registered Phone No."
         android:textSize="@dimen/_12ssp"
         android:layout_marginStart="@dimen/_16sdp"
         />
@@ -118,7 +118,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_edit_number"
-        android:hint="@string/hub_name_here"
+        android:hint="+91 xxxx xx xxxx"
+        android:maxEms="10"
         android:textSize="@dimen/_12ssp"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp"

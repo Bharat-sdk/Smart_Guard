@@ -34,7 +34,7 @@ val appModule = module {
     viewModel { SecondaryUserViewModel(get()) }
     viewModel { HubSettingsViewModel(get()) }
     viewModel { SensorViewModel(get()) }
-    viewModel { AddSecondaryUserViewModel()}
+    viewModel { AddSecondaryUserViewModel(get())}
 
     fun provideDataBase(application: Application): AppDatabase {
         return Room.databaseBuilder(application, AppDatabase::class.java, "smart_guard_db")
