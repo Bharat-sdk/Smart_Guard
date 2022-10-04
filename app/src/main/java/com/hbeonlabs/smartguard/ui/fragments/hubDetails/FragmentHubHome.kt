@@ -41,7 +41,7 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             setImageResource(R.drawable.ic_settings)
             visibility = VISIBLE
             setOnClickListener {
-                findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings(hubDetailsViewModel.hub_id))
+                findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings(args.hub.hub_serial_number))
             }
         }
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {

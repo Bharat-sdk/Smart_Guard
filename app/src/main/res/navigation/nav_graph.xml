@@ -104,7 +104,8 @@
         android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUsersFragment"
         android:label="Secondary Numbers" >
         <argument android:name="hub_id"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="HUB" />
         <action
             android:id="@+id/action_secondaryUsersFragment_to_addSecondaryUserFragment"
             app:destination="@id/addSecondaryUserFragment" />
@@ -216,7 +217,14 @@
             app:argType="integer" />
         <argument
             android:name="hub_id"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="HUB" />
+        <action
+            android:id="@+id/action_addSecondaryUserFragment_to_secondaryUsersFragment"
+            app:destination="@id/secondaryUsersFragment"
+            app:popUpTo="@id/addSecondaryUserFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

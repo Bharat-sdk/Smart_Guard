@@ -64,8 +64,12 @@ class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAd
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = View.INVISIBLE
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
+        secondaryUserViewModel.hub_id = args.hubId
+        secondaryUserViewModel.slot = args.slot
 
         observe()
+
+
 
         binding.btnUploadFromGallery.setOnClickListener {
             ImagePicker.with(this)
@@ -86,15 +90,8 @@ class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAd
         }
 
         binding.btnConfirmNumber.setOnClickListener {
-            val secondaryUser = SecondaryUser(
-                null,
-                        binding.edtUserName.text.toString(),
-                        args.slot,
-                        imageUri.toString(),
-                        binding.edtUserNumber.text.toString(),
-                        args.hubId)
 
-            secondaryUserViewModel.addSecondaryUser(secondaryUser)
+            secondaryUserViewModel.addSecondaryUser( binding.edtUserName.text.toString(),imageUri,  binding.edtUserNumber.text.toString())
         }
 
 
@@ -106,7 +103,7 @@ class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAd
             secondaryUserViewModel.addSecondaryUserEvents.collectLatest {
                 when (it) {
                     AddSecondaryUserEvents.AddUserSuccessEvent -> {
-                        findNavController().navigate(R.id.secondaryUsersFragment)
+                        findNavController().navigate(AddSecondaryUserFragmentDirections.actionAddSecondaryUserFragmentToSecondaryUsersFragment(secondaryUserViewModel.hub_id))
                     }
                     is AddSecondaryUserEvents.SQLErrorEvent -> {
                         makeToast(it.message)

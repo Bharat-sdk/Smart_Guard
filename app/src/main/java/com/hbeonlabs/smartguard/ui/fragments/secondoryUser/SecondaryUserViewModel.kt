@@ -20,6 +20,8 @@ class SecondaryUserViewModel  @Inject constructor(
     private val _secondaryUserEvents = MutableSharedFlow<SecondaryUserEvents>()
     val secondaryUserEvents: SharedFlow<SecondaryUserEvents> = _secondaryUserEvents
 
+    var hubId = ""
+
     suspend fun getSecondaryUsersUsingHub(hubId:String):Flow<List<SecondaryUser>> = repo.getAllSecondaryUserByHub(hubId)
 
 
