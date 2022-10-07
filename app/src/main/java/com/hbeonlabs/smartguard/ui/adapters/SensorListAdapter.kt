@@ -87,6 +87,10 @@ class SensorListAdapter(val context:Context) : RecyclerView.Adapter<SensorListAd
                 })
                 popupMenu.show()
         }
+
+        holder.itemView.setOnClickListener {
+            onSensorClickListener?.let { it(data,position) }
+        }
     }
 
 
@@ -102,5 +106,10 @@ class SensorListAdapter(val context:Context) : RecyclerView.Adapter<SensorListAd
         onDeleteUserClickListener = listener
     }
 
+    private var onSensorClickListener: ((Sensor,Int) -> Unit)? = null
+
+    fun setSensorUserClickListener(listener: (Sensor,Int) -> Unit) {
+        onSensorClickListener = listener
+    }
 
 }

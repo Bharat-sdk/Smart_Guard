@@ -174,11 +174,14 @@
     <fragment
         android:id="@+id/sensorDetailsFragment"
         tools:layout="@layout/fragment_sensor_details"
-        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors.SensorDetailsFragment"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.sensors.sensor_details.SensorDetailsFragment"
         android:label="SensorDetailsFragment" >
         <action
             android:id="@+id/action_sensorDetailsFragment_to_editSensorFragment"
             app:destination="@id/editSensorFragment" />
+        <argument
+            android:name="sensor"
+            app:argType="com.hbeonlabs.smartguard.data.local.models.Sensor" />
     </fragment>
     <fragment
         android:id="@+id/editSensorFragment"

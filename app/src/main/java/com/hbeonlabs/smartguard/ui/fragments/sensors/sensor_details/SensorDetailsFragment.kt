@@ -1,16 +1,22 @@
-package com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors
+package com.hbeonlabs.smartguard.ui.fragments.sensors.sensor_details
 
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
-import com.hbeonlabs.smartguard.databinding.*
+import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
+import com.hbeonlabs.smartguard.databinding.FragmentSensorDetailsBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
 
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
-class SensorDetailsFragment:BaseFragment<SensorViewModel,FragmentSensorDetailsBinding>() {
+
+class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetailsBinding>() {
+
+    val args:SensorDetailsFragmentArgs by navArgs()
 
     private  val sensorDetailViewModel by sharedStateViewModel<SensorViewModel>()
     override fun getViewModel(): SensorViewModel {
@@ -24,7 +30,7 @@ class SensorDetailsFragment:BaseFragment<SensorViewModel,FragmentSensorDetailsBi
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
             setImageResource(R.drawable.ic_baseline_edit_24)
             visibility = View.VISIBLE
             setOnClickListener {
@@ -39,6 +45,10 @@ class SensorDetailsFragment:BaseFragment<SensorViewModel,FragmentSensorDetailsBi
 
             }
         }
+
+        binding.sensorData = args.sensor
+
+
 
 
 

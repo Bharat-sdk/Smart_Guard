@@ -2,8 +2,8 @@
 <layout>
     <data>
         <variable
-            name="hubData"
-            type="com.hbeonlabs.smartguard.data.local.models.Hub" />
+            name="sensor_data"
+            type="com.hbeonlabs.smartguard.data.local.models.Sensor" />
        </data>
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,6 +22,7 @@
             android:layout_height="@dimen/_180sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintTop_toTopOf="parent"
             android:src="@color/black"
             />
@@ -34,19 +35,19 @@
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@id/iv_detail_hub_image"
-            android:src="@{hubData.hub_arm_state ? @drawable/ic_lock_close : @drawable/ic_lock_open}"
+            android:src="@{sensor_data.sensor_arm_state ? @drawable/ic_lock_close : @drawable/ic_lock_open}"
             />
 
         <TextView
             android:id="@+id/tv_item_armed_unarmed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{hubData.hub_arm_state ? @string/armed : @string/disarmed}"
+            android:text="@{sensor_data.sensor_arm_state ? @string/armed : @string/disarmed}"
             app:layout_constraintTop_toTopOf="@id/iv_item_armed_unarmed"
             app:layout_constraintBottom_toBottomOf="@id/iv_item_armed_unarmed"
             app:layout_constraintEnd_toStartOf="@id/iv_item_armed_unarmed"
             android:textSize="@dimen/_14ssp"
-            android:textColor="@{hubData.hub_arm_state ? @color/armed : @color/un_armed}"
+            android:textColor="@{sensor_data.sensor_arm_state ? @color/armed : @color/un_armed}"
             />
 
 
@@ -140,7 +141,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_sensor_model"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_sensor_model"
-            android:text="Sensor Slot"
+            android:text="@{sensor_data.sensor_type}"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginEnd="@dimen/_20sdp"
@@ -173,7 +174,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_custom_mgs"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="Sensor Slot"
+            android:text="@{sensor_data.sensor_custom_sms}"
             android:textColor="@color/black"
             android:textSize="17sp"
             android:layout_marginTop="10dp"

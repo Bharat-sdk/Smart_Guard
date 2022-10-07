@@ -56,6 +56,10 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
 
         }
 
+        adapter.setSensorUserClickListener { sensor, position ->
+            findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToSensorDetailsFragment(sensor))
+        }
+
     }
 
     private fun observe()
