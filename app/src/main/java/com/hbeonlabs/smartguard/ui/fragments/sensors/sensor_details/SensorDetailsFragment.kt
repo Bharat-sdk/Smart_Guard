@@ -1,6 +1,7 @@
 package com.hbeonlabs.smartguard.ui.fragments.sensors.sensor_details
 
 import android.view.View
+import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
@@ -47,6 +48,13 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
         }
 
         binding.sensorData = args.sensor
+        if (args.sensor.sensor_image.isEmpty()) {
+            binding.ivDetailHubImage.setImageResource(R.drawable.default_sensor_image)
+
+        }
+        else{
+            binding.ivDetailHubImage.setImageURI(args.sensor.sensor_image.toUri())
+        }
 
 
 
