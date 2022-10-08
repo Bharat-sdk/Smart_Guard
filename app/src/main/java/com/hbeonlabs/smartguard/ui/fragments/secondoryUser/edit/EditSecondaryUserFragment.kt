@@ -1,4 +1,4 @@
-package com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add
+package com.hbeonlabs.smartguard.ui.fragments.secondoryUser.edit
 
 import android.app.Activity
 import android.os.Environment
@@ -14,6 +14,8 @@ import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddSecandoryUserBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserEvents
+import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserViewModel
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -21,9 +23,9 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 
-class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAddSecandoryUserBinding>() {
+class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAddSecandoryUserBinding>() {
     var imageUri = "".toUri()
-    private val args:AddSecondaryUserFragmentArgs by navArgs()
+   // private val args:AddSecondaryUserFragmentArgs by navArgs()
 
 
     private val startImagePickerResult =
@@ -60,8 +62,8 @@ class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAd
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = View.INVISIBLE
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
-        secondaryUserViewModel.hub_id = args.hubId
-        secondaryUserViewModel.slot = args.slot
+   /*     secondaryUserViewModel.hub_id = args.hubId
+        secondaryUserViewModel.slot = args.slot*/
 
         observe()
 
@@ -99,7 +101,7 @@ class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAd
             secondaryUserViewModel.addSecondaryUserEvents.collectLatest {
                 when (it) {
                     AddSecondaryUserEvents.AddUserSuccessEvent -> {
-                        findNavController().navigate(AddSecondaryUserFragmentDirections.actionAddSecondaryUserFragmentToSecondaryUsersFragment(secondaryUserViewModel.hub_id))
+                      //  findNavController().navigate(AddSecondaryUserFragmentDirections.actionAddSecondaryUserFragmentToSecondaryUsersFragment(secondaryUserViewModel.hub_id))
                     }
                     is AddSecondaryUserEvents.SQLErrorEvent -> {
                         makeToast(it.message)

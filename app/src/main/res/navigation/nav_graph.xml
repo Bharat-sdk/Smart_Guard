@@ -191,6 +191,9 @@
         <action
             android:id="@+id/action_editSensorFragment_to_sensorListFragment"
             app:destination="@id/sensorListFragment" />
+        <argument
+            android:name="sensor"
+            app:argType="com.hbeonlabs.smartguard.data.local.models.Sensor" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPagerActivityHistory"
@@ -213,7 +216,7 @@
     <fragment
         android:id="@+id/addSecondaryUserFragment"
         tools:layout="@layout/fragment_add_secandory_user"
-        android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserFragment"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.edit.EditSecondaryUserFragment"
         android:label="AddSecondaryUserFragment" >
         <argument
             android:name="slot"

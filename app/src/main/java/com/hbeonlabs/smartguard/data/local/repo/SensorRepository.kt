@@ -13,4 +13,6 @@ interface SensorRepository {
     suspend fun deleteSensor(sensor: Sensor):Int
 
     suspend fun addSensor(sensor: Sensor)
+
+    suspend fun editSensor(sensor: Sensor):Int
 }
