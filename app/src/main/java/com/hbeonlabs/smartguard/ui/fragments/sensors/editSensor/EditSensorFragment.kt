@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.hbeonlabs.smartguard.R
@@ -15,6 +16,7 @@ import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.databinding.FragmentEditASensorBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
+import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 
 import org.koin.android.ext.android.inject
 
@@ -65,6 +67,7 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
             visibility = View.INVISIBLE
         }
 
+        observe()
 
         binding.btnEditSensor.setOnClickListener {
             val sensorName = binding.edtAddHubSerial.text.toString()
@@ -100,6 +103,19 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
                 }
         }
 
+    }
+
+    private fun observe(){
+        collectLatestLifeCycleFlow(sensorViewModel.mSensorEvents){
+            when(it)
+            {
+                SensorViewModel.ManageSensorEvents.EditSensorSuccess -> {
+                    findNavController().navigate(EditSensorFragmentDirections.actionEditSensorFragmentToSensorListFragment(args.sensor.hub_serial_number))
+                }
+                is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> TODO()
+                else -> {}
+            }
+        }
     }
 
 
