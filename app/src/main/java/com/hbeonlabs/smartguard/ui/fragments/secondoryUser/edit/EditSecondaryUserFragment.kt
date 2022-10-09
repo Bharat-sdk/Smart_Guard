@@ -25,7 +25,6 @@ import org.koin.android.ext.android.inject
 
 class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAddSecandoryUserBinding>() {
     var imageUri = "".toUri()
-   // private val args:AddSecondaryUserFragmentArgs by navArgs()
 
 
     private val startImagePickerResult =

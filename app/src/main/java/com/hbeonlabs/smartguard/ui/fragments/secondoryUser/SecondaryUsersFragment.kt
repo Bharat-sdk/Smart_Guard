@@ -46,6 +46,8 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
         }
         adapter.setEditUserClickListener { secondaryUser, i ->
 
+            findNavController().navigate(SecondaryUsersFragmentDirections.actionSecondaryUsersFragmentToEditSecondaryUserFragment())
+
         }
         adapter.setDeleteUserClickListener { secondaryUser, i ->
 

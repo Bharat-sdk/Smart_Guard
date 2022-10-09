@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_secondaryUsersFragment_to_addSecondaryUserFragment"
             app:destination="@id/addSecondaryUserFragment" />
+        <action
+            android:id="@+id/action_secondaryUsersFragment_to_editSecondaryUserFragment"
+            app:destination="@id/editSecondaryUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentHubSettings"
@@ -143,6 +146,9 @@
         <argument
             android:name="hub_serial_no"
             app:argType="string" />
+        <action
+            android:id="@+id/action_sensorListFragment_to_editSensorFragment"
+            app:destination="@id/editSensorFragment" />
 
     </fragment>
     <fragment
@@ -194,9 +200,6 @@
         <argument
             android:name="sensor"
             app:argType="com.hbeonlabs.smartguard.data.local.models.Sensor" />
-        <action
-            android:id="@+id/action_editSensorFragment_to_sensorListFragment2"
-            app:destination="@id/sensorListFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPagerActivityHistory"
@@ -219,7 +222,7 @@
     <fragment
         android:id="@+id/addSecondaryUserFragment"
         tools:layout="@layout/fragment_add_secandory_user"
-        android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.edit.EditSecondaryUserFragment"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserFragment"
         android:label="Add Secondary Number" >
         <argument
             android:name="slot"
@@ -235,5 +238,10 @@
             app:launchSingleTop="true"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/editSecondaryUserFragment"
+        tools:layout="@layout/fragment_add_secandory_user"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.edit.EditSecondaryUserFragment"
+        android:label="Edit Secondary Number" />
 
 </navigation>

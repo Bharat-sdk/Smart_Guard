@@ -54,7 +54,7 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
     }
 
     override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_add_a_sensor
+        return R.layout.fragment_edit_a_sensor
     }
 
     override fun initView() {
@@ -67,10 +67,21 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
             visibility = View.INVISIBLE
         }
 
+        val sensor = args.sensor
+
+        binding.edtSensorName.setText(sensor.sensor_name)
+        binding.edtEditSensorCustomMessage.setText(sensor.sensor_custom_sms)
+        if (sensor.sensor_image.isBlank())
+        {
+            binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
+        }
+        else{
+            binding.imgEditHubImage.setImageURI(sensor.sensor_image.toUri())
+        }
         observe()
 
         binding.btnEditSensor.setOnClickListener {
-            val sensorName = binding.edtAddHubSerial.text.toString()
+            val sensorName = binding.edtSensorName.text.toString()
             val customMessage = binding.edtEditSensorCustomMessage.text.toString()
             val sensor = Sensor(args.sensor.sensor_id,
                                 sensorName,

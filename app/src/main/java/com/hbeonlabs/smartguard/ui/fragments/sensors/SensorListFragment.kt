@@ -54,6 +54,8 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
 
         adapter.setEditUserClickListener{ sensor, i ->
 
+            findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToEditSensorFragment(sensor))
+
         }
 
         adapter.setSensorUserClickListener { sensor, position ->
