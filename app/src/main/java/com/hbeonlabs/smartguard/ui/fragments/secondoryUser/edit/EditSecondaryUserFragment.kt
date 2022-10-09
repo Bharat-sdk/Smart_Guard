@@ -25,6 +25,7 @@ import org.koin.android.ext.android.inject
 
 class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAddSecandoryUserBinding>() {
     var imageUri = "".toUri()
+    private val args:EditSecondaryUserFragmentArgs by navArgs()
 
 
     private val startImagePickerResult =
@@ -61,10 +62,16 @@ class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentA
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = View.INVISIBLE
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
-   /*     secondaryUserViewModel.hub_id = args.hubId
-        secondaryUserViewModel.slot = args.slot*/
+       secondaryUserViewModel.hub_id = args.secondaryUser.hub_serial_number
+        secondaryUserViewModel.slot = args.secondaryUser.slot
 
         observe()
+
+        val user = args.secondaryUser
+        binding.edtUserName.setText(user.user_name)
+        binding.edtUserNumber.setText(user.user_phone_number)
+        imageUri  =user.user_pic.toUri()
+        binding.imgEditHubImage.setImageURI(user.user_pic.toUri())
 
 
 
@@ -87,8 +94,7 @@ class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentA
         }
 
         binding.btnConfirmNumber.setOnClickListener {
-
-            secondaryUserViewModel.addSecondaryUser( binding.edtUserName.text.toString(),imageUri,  binding.edtUserNumber.text.toString())
+           secondaryUserViewModel.editSecondaryUser( binding.edtUserName.text.toString(),imageUri,  binding.edtUserNumber.text.toString())
         }
 
 
@@ -99,8 +105,9 @@ class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentA
         viewLifecycleOwner.lifecycleScope.launch {
             secondaryUserViewModel.addSecondaryUserEvents.collectLatest {
                 when (it) {
-                    AddSecondaryUserEvents.AddUserSuccessEvent -> {
-                      //  findNavController().navigate(AddSecondaryUserFragmentDirections.actionAddSecondaryUserFragmentToSecondaryUsersFragment(secondaryUserViewModel.hub_id))
+                    AddSecondaryUserEvents.EditUserSuccessEvent -> {
+                        makeToast("User details updated successfully")
+                        findNavController().navigate(EditSecondaryUserFragmentDirections.actionEditSecondaryUserFragmentToSecondaryUsersFragment(getViewModel().hub_id))
                     }
                     is AddSecondaryUserEvents.SQLErrorEvent -> {
                         makeToast(it.message)

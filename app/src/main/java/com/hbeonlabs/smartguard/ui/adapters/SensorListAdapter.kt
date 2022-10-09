@@ -96,19 +96,19 @@ class SensorListAdapter(val context:Context) : RecyclerView.Adapter<SensorListAd
 
     private var onEditUserClickListener: ((Sensor,Int) -> Unit)? = null
 
-    fun setEditUserClickListener(listener: (Sensor,Int) -> Unit) {
+    fun setEditSensorClickListener(listener: (Sensor, Int) -> Unit) {
         onEditUserClickListener = listener
     }
 
     private var onDeleteUserClickListener: ((Sensor,Int) -> Unit)? = null
 
-    fun setDeleteUserClickListener(listener: (Sensor,Int) -> Unit) {
+    fun setDeleteSensorClickListener(listener: (Sensor, Int) -> Unit) {
         onDeleteUserClickListener = listener
     }
 
     private var onSensorClickListener: ((Sensor,Int) -> Unit)? = null
 
-    fun setSensorUserClickListener(listener: (Sensor,Int) -> Unit) {
+    fun setSensorClickListener(listener: (Sensor, Int) -> Unit) {
         onSensorClickListener = listener
     }
 

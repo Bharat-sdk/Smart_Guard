@@ -49,9 +49,36 @@ class AddSecondaryUserViewModel @Inject constructor(
         }
     }
 
+    fun editSecondaryUser(name:String,imageUri:Uri,number:String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            val secondaryUser = SecondaryUser(
+                null,
+                name,
+                slot,
+                imageUri.toString(),
+                number,
+                hub_id)
+            if (secondaryUser.user_name.isBlank() || secondaryUser.user_pic.isBlank() || secondaryUser.user_phone_number.isBlank())
+            {
+                _addSecondaryUserEvents.emit(AddSecondaryUserEvents.SQLErrorEvent("Please Fill All the Fields"))
+            }
+            try
+            {
+                repo.editSecondaryUser(secondaryUser )
+                _addSecondaryUserEvents.emit(AddSecondaryUserEvents.EditUserSuccessEvent)
+            }
+            catch (e: Exception) {
+                _addSecondaryUserEvents.emit(AddSecondaryUserEvents.SQLErrorEvent(e.localizedMessage))
+            }
+        }
+    }
+
 }
 
 sealed class AddSecondaryUserEvents{
     class SQLErrorEvent(val message: String):AddSecondaryUserEvents()
     object AddUserSuccessEvent:AddSecondaryUserEvents()
+    object EditUserSuccessEvent:AddSecondaryUserEvents()
 }

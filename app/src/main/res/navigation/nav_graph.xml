@@ -242,6 +242,13 @@
         android:id="@+id/editSecondaryUserFragment"
         tools:layout="@layout/fragment_add_secandory_user"
         android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.edit.EditSecondaryUserFragment"
-        android:label="Edit Secondary Number" />
+        android:label="Edit Secondary Number" >
+        <argument
+            android:name="secondary_user"
+            app:argType="com.hbeonlabs.smartguard.data.local.models.SecondaryUser" />
+        <action
+            android:id="@+id/action_editSecondaryUserFragment_to_secondaryUsersFragment"
+            app:destination="@id/secondaryUsersFragment" />
+    </fragment>
 
 </navigation>

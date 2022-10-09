@@ -9,5 +9,7 @@ interface SecondaryUserRepository {
 
     suspend fun addSecondaryUser(secondaryUser: SecondaryUser)
 
+    suspend fun editSecondaryUser(secondaryUser: SecondaryUser):Int
+
 
 }

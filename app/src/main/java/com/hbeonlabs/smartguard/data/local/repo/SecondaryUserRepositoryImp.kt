@@ -23,6 +23,10 @@ class SecondaryUserRepositoryImp constructor(
         dao.addSecondaryUser(secondaryUser)
     }
 
+    override suspend fun editSecondaryUser(secondaryUser: SecondaryUser): Int {
+        return dao.updateSecondaryUsers(secondaryUser)
+    }
+
 
 }
 
