@@ -102,7 +102,7 @@ dependencies {
     implementation (Libs.VIEW_PAGER_DOTS)
 
     //Image Picker Library
-    implementation ("com.github.dhaval2404:imagepicker:2.1")
+    implementation (Libs.IMAGE_PICKER_LIBRARY)
 
 
 
