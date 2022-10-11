@@ -70,6 +70,7 @@ interface HubDao {
     @Query("SELECT * FROM secondaryuser WHERE hub_serial_number = :hubId")
     fun getSecondaryUsersUsingHub(hubId: String):Flow<List<SecondaryUser>>
 
+
     @Update
     fun updateSecondaryUsers(secondaryUsers: SecondaryUser):Int
 
