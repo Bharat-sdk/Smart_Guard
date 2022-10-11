@@ -132,6 +132,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/edt_add_hub_serial"
+        android:maxLines="1"
         android:hint="@string/_91_xxxx_xx_xxxx"
         app:layout_constraintTop_toBottomOf="@id/tv_serial_no."
         app:layout_constraintStart_toEndOf="@id/guideline_start"
@@ -152,6 +153,7 @@
     <EditText
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:id="@+id/edt_add_hub_sim_no"
         android:hint="@string/_91_xxxx_xx_xxxx"
         app:layout_constraintTop_toBottomOf="@id/tv_sim_no."

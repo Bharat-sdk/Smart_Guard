@@ -22,6 +22,11 @@ class PostAddHubViewModel constructor(
             if (hubName.isEmpty()){
                 _postAddHubEvents.emit(AddHubEvents.HubNameValidationErrorEvent("Please Enter A Name For The Hub"))
             }
+            else if (hubImage.isNullOrEmpty())
+            {
+                _postAddHubEvents.emit(AddHubEvents.HubNameValidationErrorEvent("Please Select A Image For The Hub"))
+
+            }
             else{
                 try {
                         hubRepositoryImp.addImageAndNameToHub(hubName,hubImage,hubSerialNo)
