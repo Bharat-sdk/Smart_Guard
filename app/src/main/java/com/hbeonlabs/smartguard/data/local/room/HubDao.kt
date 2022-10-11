@@ -63,7 +63,7 @@ interface HubDao {
     @Update
     fun editSensor(sensor: Sensor):Int
 
-    // ======= SECONDARY USER SQL ==============
+    // =============== SECONDARY USER SQL ==============
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addSecondaryUser(secondaryUser: SecondaryUser)
 
