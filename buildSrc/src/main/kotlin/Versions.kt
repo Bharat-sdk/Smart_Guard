@@ -19,10 +19,7 @@ object Versions {
     const val JUNIT = "4.13.2"
     const val JUNIT_TEXT_EXT = "1.1.3"
     const val COMPILE_SDK = 31
-    const val MIN_Sdk = 21
-    const val TARGET_SDK = 32
-    const val VERSION_CODE = 1
-    const val VERSION_NAME = "1.0"
+
     const val ESPRESSO_CORE = "3.4.0"
 
     const val DP = "1.0.6"
@@ -37,4 +34,21 @@ object Versions {
 
 
 
+}
+object  PluginId{
+    const val androidLibrary ="com.android.application"
+    const val kotlinAndroid = "org.jetbrains.kotlin.android"
+    const val kotlinKapt = "kotlin-kapt"
+    const val googleServices="com.google.gms.google-services"
+    const val parcelable="kotlin-parcelize"
+}
+object AndroidSdk{
+    const val MIN_Sdk = 21
+    const val TARGET_SDK = 32
+    const val VERSION_CODE = 1
+    const val VERSION_NAME = "1.0"
+
+    const val buildVersion="31"
+
+    const val versionName ="1.0.1"
 }

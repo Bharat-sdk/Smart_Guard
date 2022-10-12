@@ -5,10 +5,12 @@ import org.gradle.kotlin.dsl.getByType
 
 internal fun Project.initPlugins()
 {
-    plugins.apply("kotlin-android")
-    plugins.apply("kotlin-parcelize")
-    plugins.apply("kotlin-kapt")
-    plugins.apply("org.jetbrains.kotlin.android")
+    plugins.apply(PluginId.androidLibrary)
+    plugins.apply(PluginId.kotlinAndroid)
+    plugins.apply(PluginId.kotlinKapt)
+    plugins.apply(PluginId.parcelable)
+    plugins.apply(PluginId.googleServices)
+
 }
 
 internal fun Project.configureJetPackNavigation()
@@ -49,7 +51,7 @@ internal fun Project.configureCommonDependencies()
     }
 }
 
-internal fun Project.tesingDepencies()
+internal fun Project.testingDependencies()
 {
     extensions.getByType<BaseExtension>().run{
         dependencies{

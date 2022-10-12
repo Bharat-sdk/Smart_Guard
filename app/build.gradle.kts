@@ -20,10 +20,10 @@ android {
 
     defaultConfig {
         applicationId ="com.hbeonlabs.smartguard"
-        minSdk=Versions.MIN_Sdk
-        targetSdk=Versions.TARGET_SDK
-        versionCode =Versions.VERSION_CODE
-        versionName =Versions.VERSION_NAME
+        minSdk=AndroidSdk.MIN_Sdk
+        targetSdk=AndroidSdk.TARGET_SDK
+        versionCode =AndroidSdk.VERSION_CODE
+        versionName =AndroidSdk.VERSION_NAME
 
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
