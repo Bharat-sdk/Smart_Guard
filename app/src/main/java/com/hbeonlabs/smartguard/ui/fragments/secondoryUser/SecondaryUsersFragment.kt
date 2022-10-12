@@ -13,6 +13,8 @@ import com.hbeonlabs.smartguard.databinding.FragmentSecondaryUsersBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.SecondaryUserAdapter
 import com.hbeonlabs.smartguard.utils.AppLists
+import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
+import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -50,7 +52,7 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
 
         }
         adapter.setDeleteUserClickListener { secondaryUser, i ->
-
+            secondaryUserViewModel.deleteSecondaryUser(secondaryUser)
         }
 
         
@@ -74,6 +76,19 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
                 adapter.differ.submitList(null)
                 adapter.differ.submitList(newList)
 
+            }
+        }
+
+        collectLatestLifeCycleFlow(secondaryUserViewModel.secondaryUserEvents)
+        {
+            when(it)
+            {
+                SecondaryUserEvents.DeleteSecondaryUserSuccessEvent -> {
+                    makeToast("Deleted Secondary User Successfully")
+                }
+                is SecondaryUserEvents.SQLErrorEvent -> {
+                    makeToast(it.message)
+                }
             }
         }
     }

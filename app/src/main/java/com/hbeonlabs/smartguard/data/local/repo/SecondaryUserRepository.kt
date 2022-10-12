@@ -11,5 +11,8 @@ interface SecondaryUserRepository {
 
     suspend fun editSecondaryUser(secondaryUser: SecondaryUser):Int
 
+    suspend fun deleteSecondaryUser(secondaryUser: SecondaryUser)
+
+
 
 }

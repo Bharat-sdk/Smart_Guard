@@ -27,6 +27,10 @@ class SecondaryUserRepositoryImp constructor(
         return dao.updateSecondaryUsers(secondaryUser.user_name,secondaryUser.user_pic,secondaryUser.hub_serial_number,secondaryUser.user_phone_number)
     }
 
+    override suspend fun deleteSecondaryUser(secondaryUser: SecondaryUser) {
+        dao.deleteSecondaryUser(secondaryUser)
+    }
+
 
 }
 

@@ -74,6 +74,8 @@ interface HubDao {
     @Query("UPDATE secondaryuser SET user_name = :name , user_pic = :image , hub_serial_number =:hub_serial_no , user_phone_number =:number WHERE hub_serial_number in(:hub_serial_no)")
     fun updateSecondaryUsers(name:String,image:String,hub_serial_no:String,number:String):Int
 
+    @Delete
+    fun deleteSecondaryUser(secondaryUser: SecondaryUser)
 
 
 
