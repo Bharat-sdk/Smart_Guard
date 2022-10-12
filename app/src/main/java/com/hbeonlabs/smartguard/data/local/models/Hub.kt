@@ -15,5 +15,6 @@ data class Hub
    val hub_phone_number : String,
    val hub_siren : Boolean,
    val hub_arm_state : Boolean,
+   val hub_registered_on:String
 
    ):Serializable

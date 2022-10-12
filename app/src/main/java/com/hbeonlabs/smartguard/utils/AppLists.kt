@@ -38,9 +38,15 @@ class AppLists(
     )
 
     val sensorTypeLists = arrayListOf(
-        SensorTypes("2455","Sensor1","asdasd"),
-        SensorTypes("2455","Sensor1","asdasd"),
-        SensorTypes("2455","Sensor1","asdasd"),
-        SensorTypes("2455","Sensor1","asdasd")
+        SensorTypes("7485","DOOR SENSOR","asdasd"),
+        SensorTypes("4786","SMOKE SENSOR","asdasd"),
+        SensorTypes("2455","WATER OVERFLOW SENSOR","asdasd"),
+        SensorTypes("4428","LPG GAS LEAKAGE SENSOR","asdasd"),
+        SensorTypes("8956","MOTION SENSOR","asdasd"),
+        SensorTypes("2345","BEAM SENSOR","asdasd"),
+        SensorTypes("8455","GLASS BREAK SENSOR","asdasd"),
+        SensorTypes("8921","SHUTTER SENSOR","asdasd")
+
     )
+
 }

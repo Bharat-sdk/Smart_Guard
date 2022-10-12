@@ -2,8 +2,8 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="hub"
-            type="com.hbeonlabs.smartguard.data.local.models.Hub" />
+            name="hub_phone_number"
+            type="String" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -86,9 +86,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_edit_hub_image"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="@{hub.hub_phone_number}"
+        android:text="@{hub_phone_number}"
         android:textColor="@color/black"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_17ssp"
         android:textStyle="bold"
         />
 
@@ -100,7 +100,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_edit_hub_number"
         android:layout_marginTop="@dimen/_6sdp"
-        android:text="Registerod On 02/205/2011"
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
         />

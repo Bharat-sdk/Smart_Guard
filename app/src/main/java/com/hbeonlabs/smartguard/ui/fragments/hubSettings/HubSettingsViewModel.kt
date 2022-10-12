@@ -5,6 +5,7 @@ import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
 import com.hbeonlabs.smartguard.ui.fragments.postAddHub.AddHubEvents
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -17,18 +18,7 @@ class HubSettingsViewModel @Inject constructor(
     private val _hubSettingsEvents = MutableSharedFlow<HubSettingEvents>()
     val hubSettingsEvents: SharedFlow<HubSettingEvents> = _hubSettingsEvents
 
-    fun getHubFromId(hubId:String)
-    {
-        viewModelScope.launch (Dispatchers.IO){
-           try {
-               _hubSettingsEvents.emit(HubSettingEvents.GetHubDataEvent(hubRepository.getHubFromId(hubId)))
-           }
-           catch (e:Exception)
-           {
-               _hubSettingsEvents.emit(HubSettingEvents.SQLErrorEvent(e.localizedMessage))
-           }
-        }
-    }
+    suspend fun getHubFromId(hubId:String) : Flow<Hub> = hubRepository.getHubFromId(hubId)
 
     fun updateHubName(hubName:String,hubImage:String,hub_id:String)
     {
@@ -59,7 +49,6 @@ class HubSettingsViewModel @Inject constructor(
 }
 
 sealed class HubSettingEvents{
-    class GetHubDataEvent(val hub:Hub):HubSettingEvents()
     class SQLErrorEvent(val message: String):HubSettingEvents()
     object UpdateHubSuccessEvent:HubSettingEvents()
 }

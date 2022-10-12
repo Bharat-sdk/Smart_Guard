@@ -95,18 +95,9 @@ class HubDetailsViewModel constructor(
 
     suspend fun getActivityHistory() :Flow<List<ActivityHistory>> = repository.getActivityHistory(hub_id)
 
-    fun getHubFromId(hubId:String)
-    {
-        viewModelScope.launch (Dispatchers.IO){
-            try {
-                _hubEvents.emit(HubDetailsEvents.GetHubDataEvent(repository.getHubFromId(hubId)))
-            }
-            catch (e:Exception)
-            {
-                _hubEvents.emit(HubDetailsEvents.SQLErrorEvent(e.localizedMessage))
-            }
-        }
-    }
+    suspend fun getHubFromId(hubId:String):Flow<Hub> = repository.getHubFromId(hubId)
+
+
 
     sealed class HubDetailsEvents{
         class SilenceRingEvent(val message:String):HubDetailsEvents()

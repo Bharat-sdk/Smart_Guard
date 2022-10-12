@@ -15,6 +15,7 @@ import com.hbeonlabs.smartguard.ui.adapters.ViewPagerHubFragmentAdapter
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.pagerActivityHistory.FragmentPagerActivityHistory
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.armDisarm.FragmentPagerSirenArming
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.FragmentPagerSOS
+import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 
@@ -71,10 +72,6 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        hubDetailsViewModel.getHubFromId(args.hub.hub_serial_number)
-    }
 
     fun observe()
     {
@@ -82,11 +79,6 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             hubDetailsViewModel.hubEvents.collectLatest {
                 when(it)
                 {
-                    is HubDetailsViewModel.HubDetailsEvents.GetHubDataEvent -> {
-                        (requireActivity() as MainActivity).binding.toolbarTitle.text = it.hub.hub_name
-                        binding.hubData = it.hub
-                        hubDetailsViewModel.hub_id = it.hub.hub_serial_number
-                    }
                     is HubDetailsViewModel.HubDetailsEvents.SQLErrorEvent -> {
                         makeToast(it.message)
                     }
@@ -95,9 +87,19 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
                 }
             }
         }
+
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            hubDetailsViewModel.getHubFromId(args.hub.hub_serial_number).collectLatest { hub->
+                (requireActivity() as MainActivity).binding.toolbarTitle.text = hub.hub_name
+                binding.hubData = hub
+                hubDetailsViewModel.hub_id = hub.hub_serial_number
+            }
+        }
+
+        }
     }
 
 
 
 
-}

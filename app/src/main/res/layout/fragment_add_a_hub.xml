@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_top"
@@ -138,6 +138,7 @@
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         android:textSize="@dimen/_12ssp"
+        android:inputType="number"
         />
 
     <TextView
@@ -150,18 +151,20 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:textSize="@dimen/_11ssp"
         />
+
+
     <EditText
+        android:id="@+id/edt_add_hub_sim_no"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:id="@+id/edt_add_hub_sim_no"
         android:hint="@string/_91_xxxx_xx_xxxx"
-        app:layout_constraintTop_toBottomOf="@id/tv_sim_no."
-        app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        android:maxLines="1"
+        android:inputType="number"
         android:textSize="@dimen/_12ssp"
-        />
-
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/tv_sim_no." />
 
     <Button
         android:id="@+id/btn_add_hub"

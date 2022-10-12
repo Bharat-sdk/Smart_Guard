@@ -9,10 +9,12 @@ import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.databinding.FragmentSensorDetailsBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
+import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
+import com.hbeonlabs.smartguard.utils.makeToast
 
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
-
+import java.text.SimpleDateFormat
 
 
 class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetailsBinding>() {
@@ -30,12 +32,13 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
 
     override fun initView() {
         super.initView()
+        observe()
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
             setImageResource(R.drawable.ic_baseline_edit_24)
             visibility = View.VISIBLE
             setOnClickListener {
-                // navigate to edit sensor
+                // navigate to edit sensor 
             }
         }
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
@@ -43,11 +46,15 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
             visibility = View.VISIBLE
             setOnClickListener {
                 // remove sensor
-
+                sensorDetailViewModel.deleteSensor(args.sensor)
             }
         }
 
         binding.sensorData = args.sensor
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+        val registeredOn = formatter.format(args.sensor.sensor_registered_on.toLong())
+
+        binding.sensorRegisteredOn.text = registeredOn
         if (args.sensor.sensor_image.isEmpty()) {
             binding.ivDetailHubImage.setImageResource(R.drawable.default_sensor_image)
 
@@ -60,6 +67,24 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
 
 
 
+    }
+
+    fun observe()
+    {
+        collectLatestLifeCycleFlow(sensorDetailViewModel.mSensorEvents)
+        {
+            when(it)
+            {
+                SensorViewModel.ManageSensorEvents.DeleteSensorSuccess -> {
+                    makeToast("Sensor Removed Successfully")
+                }
+
+                is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {
+                    makeToast(it.message)
+                }
+                else -> {}
+            }
+        }
     }
 
 

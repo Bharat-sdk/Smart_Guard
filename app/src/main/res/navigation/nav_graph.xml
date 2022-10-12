@@ -67,6 +67,12 @@
         <argument
             android:name="hub_serial_no"
             app:argType="string" />
+        <argument
+            android:name="registered_on"
+            app:argType="string" />
+        <argument
+            android:name="hub_phone_number"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragmentHubDetails"

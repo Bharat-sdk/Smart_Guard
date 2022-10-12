@@ -73,8 +73,8 @@ val args:FragmentHubSettingsArgs by navArgs()
         }
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
-observe()
-        hubSettingsViewModel.getHubFromId(args.hubId)
+
+        observe()
 
 
         binding.descManageSecondaryNum.setOnClickListener {
@@ -103,23 +103,11 @@ observe()
 
     }
 
-    fun observe()
+    private fun observe()
     {
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             hubSettingsViewModel.hubSettingsEvents.collectLatest {
                 when (it) {
-                    is HubSettingEvents.GetHubDataEvent -> {
-                        hub = it.hub
-                        binding.edtAddHubName.setText(it.hub.hub_name)
-                        if (it.hub.hub_image.isEmpty())
-                        {
-                            binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
-                        }
-                        else{
-                            imageUri = it.hub.hub_image.toUri()
-                            binding.imgEditHubImage.setImageURI(it.hub.hub_image.toUri())
-                        }
-                    }
                     is HubSettingEvents.SQLErrorEvent -> {
                         makeToast(it.message)
                     }
@@ -127,6 +115,22 @@ observe()
                         hubSettingsViewModel.getHubFromId(args.hubId)
                         findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(hub))
                     }
+                }
+            }
+        }
+
+
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            hubSettingsViewModel.getHubFromId(args.hubId).collectLatest {hub->
+
+                binding.edtAddHubName.setText(hub.hub_name)
+                if (hub.hub_image.isEmpty())
+                {
+                    binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
+                }
+                else{
+                    imageUri = hub.hub_image.toUri()
+                    binding.imgEditHubImage.setImageURI(hub.hub_image.toUri())
                 }
             }
         }

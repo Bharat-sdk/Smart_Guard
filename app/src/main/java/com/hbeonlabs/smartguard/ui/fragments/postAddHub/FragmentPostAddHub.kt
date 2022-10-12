@@ -38,7 +38,7 @@ class FragmentPostAddHub:BaseFragment<PostAddHubViewModel,FragmentAddHubPostVeri
 
     val args: FragmentPostAddHubArgs by navArgs()
     private  val postAddHubViewModel: PostAddHubViewModel by inject()
-    lateinit var img_url:String
+     var img_url:String =""
 
     private val startImagePickerResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -75,9 +75,13 @@ class FragmentPostAddHub:BaseFragment<PostAddHubViewModel,FragmentAddHubPostVeri
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
         observe()
 
+        binding.tvEditRegisteredOn.text = "Registered On ${args.registeredOn}"
+        binding.hubPhoneNumber = args.hubPhoneNumber
+
         binding.btnContinueToAddSensors.setOnClickListener {
             findNavController().navigate(FragmentPostAddHubDirections.actionFragmentPostAddHubToFragmentSelectAHub())
         }
+
 
         binding.btnUploadFromGallery.setOnClickListener {
             ImagePicker.with(this)
@@ -96,6 +100,8 @@ class FragmentPostAddHub:BaseFragment<PostAddHubViewModel,FragmentAddHubPostVeri
                     startImagePickerResult.launch(it)
                 }
         }
+
+
 
         binding.btnContinueToAddSensors.setOnClickListener {
 

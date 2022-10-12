@@ -10,6 +10,9 @@ import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.makeToast
 
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.logging.SimpleFormatter
 
 
 class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
@@ -48,7 +51,10 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
             when(it)
             {
                 AddAHubEvent.NavigateToPostHubEvent -> {
-                    findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentPostAddHub(binding.edtAddHubSerial.text.toString()))
+                    val registeredOn = Calendar.getInstance().timeInMillis
+                    val formatter = SimpleDateFormat("dd/MM/yyyy")
+                    val date = formatter.format(registeredOn)
+                    findNavController().navigate(FragmentAddAHubDirections.actionFragmentAddAHubToFragmentPostAddHub(binding.edtAddHubSerial.text.toString(),date,binding.edtAddHubSimNo.text.toString()))
                 }
                 is AddAHubEvent.PhoneValidationErrorEvent -> {
                     makeToast(it.message)
