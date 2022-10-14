@@ -12,10 +12,15 @@
         android:label="On Boarding" >
         <action
             android:id="@+id/action_fragmentOnBoarding_to_fragmentSelectAHub"
-            app:popUpTo="@id/fragmentOnBoarding"
+            app:destination="@id/fragmentSelectAHub"
+
             app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            app:destination="@id/fragmentSelectAHub" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/fragmentOnBoarding"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSplash"
@@ -30,10 +35,14 @@
             app:destination="@id/fragmentOnBoarding" />
         <action
             android:id="@+id/action_fragmentSplash_to_fragmentSelectAHub"
-            app:popUpTo="@id/fragmentSplash"
+            app:destination="@id/fragmentSelectAHub"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            app:destination="@id/fragmentSelectAHub" />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/fragmentSplash"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAddAHub"
@@ -42,7 +51,11 @@
         android:label="Add A Hub" >
         <action
             android:id="@+id/action_fragmentAddAHub_to_fragmentPostAddHub"
-            app:destination="@id/fragmentPostAddHub" />
+            app:destination="@id/fragmentPostAddHub"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSelectAHub"
@@ -51,10 +64,18 @@
         android:label="Select Your Hub" >
         <action
             android:id="@+id/action_fragmentSelectAHub_to_fragmentAddAHub"
-            app:destination="@id/fragmentAddAHub" />
+            app:destination="@id/fragmentAddAHub"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fragmentSelectAHub_to_fragmentHubDetails"
-            app:destination="@id/fragmentHubDetails" />
+            app:destination="@id/fragmentHubDetails"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPostAddHub"
@@ -63,7 +84,14 @@
         android:label="Add A Hub" >
         <action
             android:id="@+id/action_fragmentPostAddHub_to_fragmentSelectAHub"
-            app:destination="@id/fragmentSelectAHub" />
+            app:destination="@id/fragmentSelectAHub"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/fragmentAddAHub"
+            app:popUpToInclusive="true" />
         <argument
             android:name="hub_serial_no"
             app:argType="string" />
@@ -84,13 +112,25 @@
             app:argType="com.hbeonlabs.smartguard.data.local.models.Hub" />-->
         <action
             android:id="@+id/action_fragmentHubDetails_to_fragmentActivityHistory"
-            app:destination="@id/fragmentActivityHistory" />
+            app:destination="@id/fragmentActivityHistory"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fragmentHubDetails_to_fragmentHubSettings"
-            app:destination="@id/fragmentHubSettings" />
+            app:destination="@id/fragmentHubSettings"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fragmentHubDetails_to_sensorListFragment"
-            app:destination="@id/sensorListFragment" />
+            app:destination="@id/sensorListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="hub"
             app:argType="com.hbeonlabs.smartguard.data.local.models.Hub" />
@@ -113,11 +153,19 @@
             app:argType="string"
             android:defaultValue="HUB" />
         <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             android:id="@+id/action_secondaryUsersFragment_to_addSecondaryUserFragment"
             app:destination="@id/addSecondaryUserFragment" />
         <action
             android:id="@+id/action_secondaryUsersFragment_to_editSecondaryUserFragment"
-            app:destination="@id/editSecondaryUserFragment" />
+            app:destination="@id/editSecondaryUserFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/fragmentHubSettings"
@@ -126,16 +174,24 @@
         android:label="Hub Settings" >
         <action
             android:id="@+id/action_fragmentHubSettings_to_secondaryUsersFragment"
-            app:destination="@id/secondaryUsersFragment" />
+            app:destination="@id/secondaryUsersFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="hub_id"
             app:argType="string" />
         <action
             android:id="@+id/action_fragmentHubSettings_to_fragmentHubDetails"
             app:destination="@id/fragmentHubDetails"
-            app:popUpTo="@id/fragmentHubSettings"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
             app:launchSingleTop="true"
-            app:popUpToInclusive="true"/>
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/fragmentHubSettings"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/sensorListFragment"
@@ -145,16 +201,28 @@
 
         <action
             android:id="@+id/action_sensorListFragment_to_addSensorPrepareToAddFragment"
-            app:destination="@id/addSensorPrepareToAddFragment" />
+            app:destination="@id/addSensorPrepareToAddFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_sensorListFragment_to_sensorDetailsFragment"
-            app:destination="@id/sensorDetailsFragment" />
+            app:destination="@id/sensorDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="hub_serial_no"
             app:argType="string" />
         <action
             android:id="@+id/action_sensorListFragment_to_editSensorFragment"
-            app:destination="@id/editSensorFragment" />
+            app:destination="@id/editSensorFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
     <fragment
@@ -164,7 +232,11 @@
         android:label="Add A Sensor" >
         <action
             android:id="@+id/action_addSensorPrepareToAddFragment_to_sensorTypeListFragment"
-            app:destination="@id/sensorTypeListFragment" />
+            app:destination="@id/sensorTypeListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/addSensorFragment"
@@ -174,10 +246,13 @@
         <action
             android:id="@+id/action_addSensorFragment_to_sensorListFragment"
             app:destination="@id/sensorListFragment"
-            app:popUpTo="@id/addSensorPrepareToAddFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
             app:launchSingleTop="true"
-            app:popUpToInclusive="true"
-            />
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/addSensorPrepareToAddFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="sensor_type"
             app:argType="com.hbeonlabs.smartguard.data.local.models.SensorTypes" />
@@ -190,7 +265,11 @@
         android:label="SensorDetailsFragment" >
         <action
             android:id="@+id/action_sensorDetailsFragment_to_editSensorFragment"
-            app:destination="@id/editSensorFragment" />
+            app:destination="@id/editSensorFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <argument
             android:name="sensor"
             app:argType="com.hbeonlabs.smartguard.data.local.models.Sensor" />
@@ -213,7 +292,11 @@
         android:label="FragmentPagerActivityHistory" >
         <action
             android:id="@+id/action_fragmentPagerActivityHistory_to_fragmentActivityHistory"
-            app:destination="@id/fragmentActivityHistory" />
+            app:destination="@id/fragmentActivityHistory"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/sensorTypeListFragment"
@@ -222,7 +305,11 @@
         android:label="ADD A SENSOR" >
         <action
             android:id="@+id/action_sensorTypeListFragment_to_addSensorFragment"
-            app:destination="@id/addSensorFragment" />
+            app:destination="@id/addSensorFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
 
     </fragment>
     <fragment
