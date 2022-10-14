@@ -51,6 +51,7 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
         }
 
         binding.sensorData = args.sensor
+        (requireActivity() as MainActivity).binding.toolbarTitle.text = args.sensor.sensor_name
         val formatter = SimpleDateFormat("dd/MM/yyyy")
         val registeredOn = formatter.format(args.sensor.sensor_registered_on.toLong())
 
