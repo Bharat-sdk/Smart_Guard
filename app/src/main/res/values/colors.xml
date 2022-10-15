@@ -13,5 +13,7 @@
     <color name="on_boarding_purple">#A411CD</color>
     <color name="armed">#53CD11</color>
     <color name="un_armed">#5A5A5A</color>
+    <color name="red">#C31515</color>
+    <color name="grey">#A3A1A1</color>
 
 </resources>
