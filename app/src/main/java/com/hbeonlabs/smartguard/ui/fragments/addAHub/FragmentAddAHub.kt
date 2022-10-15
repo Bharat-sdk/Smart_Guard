@@ -7,6 +7,7 @@ import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
+import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
 
 import org.koin.android.ext.android.inject
@@ -42,6 +43,10 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
             val hubSerialNo = binding.edtAddHubSerial.text.toString()
             val hubSimNo = binding.edtAddHubSimNo.text.toString()
             addAHubViewModel.addHub(hubSerialNo,hubSimNo)
+        }
+
+        binding.clAddAHub.setOnClickListener {
+            requireContext().hideKeyboard(it)
         }
 
     }

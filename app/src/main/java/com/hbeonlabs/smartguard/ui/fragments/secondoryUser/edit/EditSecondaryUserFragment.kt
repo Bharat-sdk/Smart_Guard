@@ -16,6 +16,7 @@ import com.hbeonlabs.smartguard.databinding.FragmentAddSecandoryUserBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserEvents
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserViewModel
+import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -93,6 +94,9 @@ class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentA
                 }
         }
 
+        binding.addSecondaryNumber.setOnClickListener {
+            requireContext().hideKeyboard(it)
+        }
         binding.btnConfirmNumber.setOnClickListener {
            secondaryUserViewModel.editSecondaryUser( binding.edtUserName.text.toString(),imageUri,  binding.edtUserNumber.text.toString())
         }
