@@ -15,7 +15,6 @@ private val hubRepositoryImp: HubRepositoryImp
 
     fun addHub(hubSerialNo:String, hubPhoneNumber:String)
     {
-
         viewModelScope.launch {
             if (hubSerialNo.isEmpty()){
                 _addHubEvents.emit(AddAHubEvent.SerialNumberValidationErrorEvent("Please Enter Hub Serial Number"))
