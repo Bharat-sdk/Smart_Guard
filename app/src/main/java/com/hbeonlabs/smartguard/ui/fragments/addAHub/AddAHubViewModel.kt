@@ -30,7 +30,7 @@ private val hubRepositoryImp: HubRepositoryImp
             }
             else{
                 try {
-                    if (hubRepositoryImp.checkIfHubAlreadyAdded(hubSerialNo))
+                    if (hubRepositoryImp.checkIfHubAlreadyAdded(hubSerialNo) || hubRepositoryImp.checkIfHubNumberAlreadyAdded(hubPhoneNumber))
                     {
                         _addHubEvents.emit(AddAHubEvent.SQLErrorEvent("This Hub is Already Added"))
                     }

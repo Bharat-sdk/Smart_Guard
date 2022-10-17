@@ -31,6 +31,9 @@ interface HubDao {
     @Query("SELECT EXISTS(SELECT * FROM hub WHERE hub_serial_number = :hub_serial_no)")
     suspend fun checkIfHubAlreadyPresent(hub_serial_no:String):Boolean
 
+    @Query("SELECT EXISTS(SELECT * FROM hub WHERE hub_phone_number = :hub_phone_no)")
+    suspend fun checkIfHubPhoneNumberAlreadyPresent(hub_phone_no:String):Boolean
+
     @Query("UPDATE hub SET hub_name = :hub_name , hub_image = :hubImage WHERE hub_serial_number in(:hub_serial_no)")
     suspend fun addUpdateHub(hub_name:String ,hubImage:String ,hub_serial_no:String)
 
