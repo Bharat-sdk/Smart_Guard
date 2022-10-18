@@ -26,7 +26,7 @@ import org.koin.android.ext.android.inject
 class FragmentHubSettings:BaseFragment<HubSettingsViewModel,FragmentHubSettingsBinding>() {
 val args:FragmentHubSettingsArgs by navArgs()
     var imageUri = "".toUri()
-    lateinit var hub:Hub
+    lateinit var _hub:Hub
 
 
     private val startImagePickerResult =
@@ -113,7 +113,7 @@ val args:FragmentHubSettingsArgs by navArgs()
                     }
                     HubSettingEvents.UpdateHubSuccessEvent -> {
                         hubSettingsViewModel.getHubFromId(args.hubId)
-                        findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(hub))
+                        findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(_hub))
                     }
                 }
             }
@@ -122,7 +122,7 @@ val args:FragmentHubSettingsArgs by navArgs()
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             hubSettingsViewModel.getHubFromId(args.hubId).collectLatest {hub->
-
+                _hub = hub
                 binding.edtAddHubName.setText(hub.hub_name)
                 if (hub.hub_image.isEmpty())
                 {
