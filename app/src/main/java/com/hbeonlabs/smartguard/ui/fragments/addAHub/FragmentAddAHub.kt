@@ -1,6 +1,11 @@
 package com.hbeonlabs.smartguard.ui.fragments.addAHub
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
@@ -9,16 +14,22 @@ import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
-
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.logging.SimpleFormatter
 
 
 class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
 
     private  val addAHubViewModel: AddAHubViewModel by inject()
+    val requestMultiplePermissions = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        permissions.entries.forEach {
+           // Log.d("DEBUG", "${it.key} = ${it.value}")
+        }
+    }
+
     override fun getViewModel(): AddAHubViewModel {
             return addAHubViewModel
     }
@@ -30,7 +41,13 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
     override fun initView() {
         super.initView()
         observe()
-
+        requestMultiplePermissions.launch(
+            arrayOf(
+                Manifest.permission.READ_SMS,
+                Manifest.permission.SEND_SMS
+            )
+        )
+        //requestReadAndSendSmsPermission()
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_baseline_help)
@@ -73,6 +90,37 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
             }
         }
     }
+
+/*
+    fun isSmsPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_SMS
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    */
+/**
+     * Request runtime SMS permission
+     *//*
+
+    private fun requestReadAndSendSmsPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                Manifest.permission.READ_SMS
+            )
+        ) {
+            // You may display a non-blocking explanation here, read more in the documentation:
+            // https://developer.android.com/training/permissions/requesting.html
+        }
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.READ_SMS),
+            100
+        )
+    }
+*/
+
 
 
 

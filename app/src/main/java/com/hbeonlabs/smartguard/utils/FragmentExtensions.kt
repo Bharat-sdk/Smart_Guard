@@ -7,6 +7,7 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.telephony.SmsManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -65,4 +66,26 @@ fun Context.hideKeyboard(view:View)
     val inputMethodManager =
         this.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+
+fun Fragment.sendSMS(phoneNumber:String,message:String)
+{
+    try {
+        val smsManager: SmsManager
+        if (Build.VERSION.SDK_INT>=23) {
+            smsManager = this.requireActivity().getSystemService(SmsManager::class.java)
+        }
+        else{
+            smsManager = SmsManager.getDefault()
+        }
+
+        smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+
+        Toast.makeText(this.requireContext(), "Message Sent", Toast.LENGTH_LONG).show()
+
+    } catch (e: Exception) {
+        Toast.makeText(this.requireContext(), "Please enter all the data.."+e.message.toString(), Toast.LENGTH_LONG)
+            .show()
+    }
 }

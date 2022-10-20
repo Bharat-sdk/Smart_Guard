@@ -162,6 +162,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/_91_xxxx_xx_xxxx"
         android:maxLines="1"
+        android:maxLength="10"
         android:inputType="number"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
