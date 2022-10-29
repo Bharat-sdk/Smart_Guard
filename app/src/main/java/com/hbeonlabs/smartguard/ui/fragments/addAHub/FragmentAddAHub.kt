@@ -1,8 +1,14 @@
 package com.hbeonlabs.smartguard.ui.fragments.addAHub
 
 import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -14,6 +20,7 @@ import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.sendSMS
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,6 +36,14 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
            // Log.d("DEBUG", "${it.key} = ${it.value}")
         }
     }
+    val broadCastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(contxt: Context?, intent: Intent?) {
+
+            when (intent?.action) {
+                "SMS_SENT" -> makeToast("SMS SENT")
+            }
+        }
+    }
 
     override fun getViewModel(): AddAHubViewModel {
             return addAHubViewModel
@@ -40,6 +55,9 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
 
     override fun initView() {
         super.initView()
+        val filter = IntentFilter()
+        filter.addAction("SMS_SENT")
+        requireContext().registerReceiver(broadCastReceiver,filter)
         observe()
         requestMultiplePermissions.launch(
             arrayOf(
@@ -59,7 +77,12 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         binding.btnAddHub.setOnClickListener {
             val hubSerialNo = binding.edtAddHubSerial.text.toString()
             val hubSimNo = binding.edtAddHubSimNo.text.toString()
-            addAHubViewModel.addHub(hubSerialNo,hubSimNo)
+            val deliveryIntent = Intent(requireContext(),broadCastReceiver.javaClass)
+                deliveryIntent.action = "SMS_SENT"
+            //========= Here In Delivery we have to pass the intent ==========
+            sendSMS(hubSimNo,"$hubSerialNo R",deliveryIntent)
+
+           // addAHubViewModel.addHub(hubSerialNo,hubSimNo)
         }
 
         binding.clAddAHub.setOnClickListener {
@@ -91,6 +114,11 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         }
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        requireContext().unregisterReceiver(broadCastReceiver)
+    }
 /*
     fun isSmsPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(

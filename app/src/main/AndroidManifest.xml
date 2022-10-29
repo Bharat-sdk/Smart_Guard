@@ -35,12 +35,15 @@
 
         <receiver android:name=".utils.SmsBroadcastReceiver"
             android:permission="android.permission.BROADCAST_SMS"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.provider.Telephony.SMS_DELIVER" />
             </intent-filter>
         </receiver>
+
+
     </application>
 
 </manifest>

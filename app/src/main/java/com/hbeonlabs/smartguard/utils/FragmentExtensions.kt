@@ -1,7 +1,9 @@
 package com.hbeonlabs.smartguard.utils
 
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -69,7 +71,7 @@ fun Context.hideKeyboard(view:View)
 }
 
 
-fun Fragment.sendSMS(phoneNumber:String,message:String)
+fun Fragment.sendSMS(phoneNumber:String,message:String,DELIVERY:Intent?)
 {
     try {
         val smsManager: SmsManager
@@ -79,8 +81,13 @@ fun Fragment.sendSMS(phoneNumber:String,message:String)
         else{
             smsManager = SmsManager.getDefault()
         }
-
-        smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+       /* val intent = Intent()
+        val sentIntent = PendingIntent.getBroadcast(activity, 0, intent,
+            PendingIntent.FLAG_ONE_SHOT)*/
+        val intent2 = Intent(DELIVERY)
+        val deliveryIntent = PendingIntent.getBroadcast(activity, 0, intent2,
+            PendingIntent.FLAG_ONE_SHOT)
+        smsManager.sendTextMessage(phoneNumber, null, message, null, deliveryIntent)
 
         Toast.makeText(this.requireContext(), "Message Sent", Toast.LENGTH_LONG).show()
 

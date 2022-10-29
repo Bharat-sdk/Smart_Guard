@@ -10,8 +10,8 @@ import android.util.Log
 
 
 class SmsBroadcastReceiver(
-/*    private val serviceProviderNumber: String,
-    private val serviceProviderSmsCondition: String*/
+    private val serviceProviderNumber: String,
+
 ) :
     BroadcastReceiver() {
     private var listener: Listener? = null
@@ -23,14 +23,11 @@ class SmsBroadcastReceiver(
                 smsSender = smsMessage.displayOriginatingAddress
                 smsBody += smsMessage.messageBody
             }
-           /* if (smsSender == serviceProviderNumber && smsBody.startsWith(
-                    serviceProviderSmsCondition
-                )
-            ) {*/
+            if (smsSender == serviceProviderNumber) {
                 if (listener != null) {
                     listener!!.onTextReceived(smsBody,smsSender)
                 }
-         //   }
+            }
         }
     }
 
