@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.telephony.SmsManager
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -71,7 +72,7 @@ fun Context.hideKeyboard(view:View)
 }
 
 
-fun Fragment.sendSMS(phoneNumber:String,message:String,DELIVERY:Intent?)
+fun Fragment.sendSMS(phoneNumber:String,message:String,SENT:PendingIntent?,DELIVERY:PendingIntent?)
 {
     try {
         val smsManager: SmsManager
@@ -81,18 +82,14 @@ fun Fragment.sendSMS(phoneNumber:String,message:String,DELIVERY:Intent?)
         else{
             smsManager = SmsManager.getDefault()
         }
-       /* val intent = Intent()
-        val sentIntent = PendingIntent.getBroadcast(activity, 0, intent,
-            PendingIntent.FLAG_ONE_SHOT)*/
-        val intent2 = Intent(DELIVERY)
-        val deliveryIntent = PendingIntent.getBroadcast(activity, 0, intent2,
-            PendingIntent.FLAG_ONE_SHOT)
-        smsManager.sendTextMessage(phoneNumber, null, message, null, deliveryIntent)
+
+        smsManager.sendTextMessage(phoneNumber, null, message, SENT, DELIVERY)
 
         Toast.makeText(this.requireContext(), "Message Sent", Toast.LENGTH_LONG).show()
 
     } catch (e: Exception) {
-        Toast.makeText(this.requireContext(), "Please enter all the data.."+e.message.toString(), Toast.LENGTH_LONG)
+        Toast.makeText(this.requireContext(), e.message.toString(), Toast.LENGTH_LONG)
             .show()
+        Log.d("TAG", "sendSMS: "+e.localizedMessage)
     }
 }

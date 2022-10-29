@@ -1,11 +1,15 @@
 package com.hbeonlabs.smartguard.ui.fragments.addAHub
 
 import android.Manifest
+import android.app.Activity
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -77,10 +81,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         binding.btnAddHub.setOnClickListener {
             val hubSerialNo = binding.edtAddHubSerial.text.toString()
             val hubSimNo = binding.edtAddHubSimNo.text.toString()
-            val deliveryIntent = Intent(requireContext(),broadCastReceiver.javaClass)
-                deliveryIntent.action = "SMS_SENT"
-            //========= Here In Delivery we have to pass the intent ==========
-            sendSMS(hubSimNo,"$hubSerialNo R",deliveryIntent)
+
 
            // addAHubViewModel.addHub(hubSerialNo,hubSimNo)
         }
@@ -119,36 +120,78 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         super.onDestroy()
         requireContext().unregisterReceiver(broadCastReceiver)
     }
-/*
-    fun isSmsPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.READ_SMS
-        ) == PackageManager.PERMISSION_GRANTED
-    }
 
-    */
-/**
-     * Request runtime SMS permission
-     *//*
+    //sent sms
+    private fun sendSMS2(phoneNumber:String,  message:String) {
+        val SENT = "SMS_SENT"
+        val  DELIVERED = "SMS_DELIVERED"
 
-    private fun requestReadAndSendSmsPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                Manifest.permission.READ_SMS
-            )
-        ) {
-            // You may display a non-blocking explanation here, read more in the documentation:
-            // https://developer.android.com/training/permissions/requesting.html
+        val sentPI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.getBroadcast(requireContext(), 0, Intent(SENT),PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getBroadcast(requireContext(), 0, Intent(SENT),0)
         }
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.READ_SMS),
-            100
-        )
-    }
-*/
+        val deliveredPI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.getBroadcast(requireContext(), 0,  Intent(DELIVERED), PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getBroadcast(requireContext(), 0,  Intent(DELIVERED), 0)
+        }
 
+        requireActivity().registerReceiver(object: BroadcastReceiver(){
+            override fun onReceive(context: Context?, intent: Intent?) {
+
+                when(resultCode)
+                {
+                    Activity.RESULT_OK->
+                        Toast.makeText(requireContext(), "SMS sent",
+                            Toast.LENGTH_SHORT).show()
+                    SmsManager.RESULT_ERROR_GENERIC_FAILURE->
+
+                        Toast.makeText(requireContext(), "Generic failure",
+                            Toast.LENGTH_SHORT).show()
+                    SmsManager.RESULT_ERROR_NO_SERVICE->
+
+                        Toast.makeText(requireContext(), "No service",
+                            Toast.LENGTH_SHORT).show()
+                    SmsManager.RESULT_ERROR_NULL_PDU->
+
+                        Toast.makeText(requireContext(), "Null PDU",
+                            Toast.LENGTH_SHORT).show()
+
+
+                    SmsManager.RESULT_ERROR_RADIO_OFF->
+
+                        Toast.makeText(requireContext(), "Radio off",
+                            Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
+        }, IntentFilter(SENT))
+
+
+        requireActivity().registerReceiver(object: BroadcastReceiver(){
+            override fun onReceive(context: Context?, intent: Intent?) {
+
+                when(resultCode)
+                {
+                    Activity.RESULT_OK->
+                        Toast.makeText(requireContext(), "SMS delivered",
+                            Toast.LENGTH_SHORT).show()
+                    Activity.RESULT_CANCELED->
+
+                        Toast.makeText(requireContext(), "SMS not delivered",
+                            Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+
+        }, IntentFilter(SENT))
+
+        sendSMS(phoneNumber,"$message R",sentPI,deliveredPI)
+
+    }
 
 
 
