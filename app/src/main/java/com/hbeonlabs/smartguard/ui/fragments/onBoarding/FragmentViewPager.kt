@@ -10,6 +10,7 @@ import com.hbeonlabs.smartguard.data.local.models.OnBoardingData
 import com.hbeonlabs.smartguard.databinding.FragmentOnboardingBinding
 import com.hbeonlabs.smartguard.ui.adapters.ViewPagerAdapter
 import com.hbeonlabs.smartguard.ui.fragments.splash.SplashviewModel
+import com.hbeonlabs.smartguard.utils.AppLists
 
 import org.koin.android.ext.android.inject
 
@@ -28,13 +29,7 @@ class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>(
     override fun initView() {
         super.initView()
 
-        val fragmentList = arrayListOf<OnBoardingData>(
-            OnBoardingData("Welcome to your SmartGuard Hub!","The SmartGuard suite is controlled from the central 'Hub. Be sure to use an active SIM card to communicate with the Hub!", ContextCompat.getDrawable(requireContext(),R.drawable.ic_navigate_back)!!,ContextCompat.getColor(requireContext(),R.color.on_boarding_blue)),
-            OnBoardingData("Get Started by adding devices here","Adding a new device to expand your home security is as easy as 3 taps!",ContextCompat.getDrawable(requireContext(),R.drawable.ic_navigate_back)!!,ContextCompat.getColor(requireContext(),R.color.on_boarding_green)),
-            OnBoardingData("Add others to your hubs easily","Have the smart guard hub automatically notify other people when any sensor is triggered!", ContextCompat.getDrawable(requireContext(),R.drawable.ic_navigate_back)!!,ContextCompat.getColor(requireContext(),R.color.on_boarding_orange)),
-            OnBoardingData("Get help whenever you need it whenever you need it","Help is available at every single step, just tap the 'Help' icon on the top right to get quick answers!", ContextCompat.getDrawable(requireContext(),R.drawable.ic_navigate_back)!!,ContextCompat.getColor(requireContext(),R.color.purple_200)),
-
-            )
+        val fragmentList = AppLists(requireContext()).fragmentList
 
         val adapter = ViewPagerAdapter(fragmentList)
         binding.onBoardingViewPager.adapter = adapter
@@ -42,48 +37,33 @@ class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>(
         binding.circularIndicator.setViewPager(binding.onBoardingViewPager)
 
         binding.onBoardingViewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-
-            }
-
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                var visibility = View.GONE
+                var text = getString(R.string.next)
                 when(position)
                 {
                     0 ->{
-                        binding.onBoardingBack.visibility = View.GONE
-                        binding.txtNext.text = "Next"
+                        visibility = View.GONE
+                        text = getString(R.string.next)
                     }
-                    1 ->{
-                        binding.onBoardingBack.visibility = View.VISIBLE
-                        binding.txtNext.text = "Next"
-                    }
-                    2 ->{
-                        binding.onBoardingBack.visibility = View.VISIBLE
-                        binding.txtNext.text ="Next"
+                    1,2 ->{
+                        visibility = View.VISIBLE
+                        text = getString(R.string.next)
                     }
                     3 ->{
-                        binding.onBoardingBack.visibility = View.VISIBLE
-                        binding.txtNext.text = "Get Started"
+                        visibility= View.VISIBLE
+                        text = getString(R.string.get_started)
                     }
                 }
+                binding.onBoardingBack.visibility = visibility
+                binding.txtNext.text = text
             }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
-            }
-
-
         })
 
 
         binding.txtNext.setOnClickListener {
-            if (  binding.txtNext.text == "Get Started" ){
+            if (  binding.txtNext.text == getString(R.string.get_started) ){
                findNavController().navigate(R.id.fragmentAddAHub)
             }
             else{

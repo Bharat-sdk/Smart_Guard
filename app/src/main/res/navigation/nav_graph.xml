@@ -26,18 +26,51 @@
     <fragment
         android:id="@+id/fragmentAddAHub"
         android:name="com.hbeonlabs.smartguard.ui.fragments.addAHub.FragmentAddAHub"
-        android:label="FragmentAddAHub" >
+        android:label="Add A Hub" >
         <action
-            android:id="@+id/action_fragmentAddAHub_to_fragmentSelectAHub"
-            app:destination="@id/fragmentSelectAHub" />
+            android:id="@+id/action_fragmentAddAHub_to_fragmentPostAddHub"
+            app:destination="@id/fragmentPostAddHub" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSelectAHub"
         android:name="com.hbeonlabs.smartguard.ui.fragments.selectHub.FragmentSelectAHub"
-        android:label="FragmentSelectAHub" >
+        android:label="Select Your Hub" >
         <action
             android:id="@+id/action_fragmentSelectAHub_to_fragmentAddAHub"
             app:destination="@id/fragmentAddAHub" />
+        <action
+            android:id="@+id/action_fragmentSelectAHub_to_fragmentHubDetails"
+            app:destination="@id/fragmentHubDetails" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentPostAddHub"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.postAddHub.FragmentPostAddHub"
+        android:label="Add A Hub" >
+        <action
+            android:id="@+id/action_fragmentPostAddHub_to_fragmentSelectAHub"
+            app:destination="@id/fragmentSelectAHub" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHubDetails"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.hubDetails.FragmentHubDetails"
+        android:label="FragmentHubDetails" >
+<!--        <argument
+            android:name="hub_data"
+            app:argType="com.hbeonlabs.smartguard.data.local.models.Hub" />-->
+        <action
+            android:id="@+id/action_fragmentHubDetails_to_fragmentActivityHistory"
+            app:destination="@id/fragmentActivityHistory" />
+        <action
+            android:id="@+id/action_fragmentHubDetails_to_secondaryUsersFragment"
+            app:destination="@id/secondaryUsersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentActivityHistory"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.activityHistory.FragmentActivityHistory"
+        android:label="Activity History" />
+    <fragment
+        android:id="@+id/secondaryUsersFragment"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUsersFragment"
+        android:label="SecondaryUsersFragment" />
 
 </navigation>

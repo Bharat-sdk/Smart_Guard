@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <variable
+        name="number"
+        type="String" />
+</data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/txt_are_u_sure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/are_you_sure"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        />
+
+    <TextView
+        android:id="@+id/verify_dialog_format_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/desc_format_hub1"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_are_u_sure"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        />
+
+    <TextView
+        android:id="@+id/verify_dialog_format_text2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/desc_hub_format2"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verify_dialog_format_text"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verify_dialog_format_text2"
+        android:layout_marginTop="@dimen/_10sdp"
+        />
+
+
+    <TextView
+        android:id="@+id/txt_format"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yes_i_m_sure"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@color/purple_700"
+        />
+
+    <TextView
+        android:id="@+id/txt_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_go_back"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintEnd_toStartOf="@id/txt_format"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@color/black"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

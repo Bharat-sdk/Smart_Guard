@@ -46,7 +46,7 @@ abstract class BaseFragment<T : BaseViewModel, V : ViewBinding> : Fragment() {
         Snackbar.make(
             requireView(),
             text,
-            Snackbar.LENGTH_LONG
+            Snackbar.LENGTH_SHORT
         ).show()
     }
 
@@ -54,7 +54,7 @@ abstract class BaseFragment<T : BaseViewModel, V : ViewBinding> : Fragment() {
         Snackbar.make(
             requireView(),
             res,
-            Snackbar.LENGTH_LONG
+            Snackbar.LENGTH_SHORT
         ).show()
     }
 

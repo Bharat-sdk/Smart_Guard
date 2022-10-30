@@ -3,6 +3,9 @@ package com.hbeonlabs.smartguard.ui.activities
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseActivity
 import com.hbeonlabs.smartguard.databinding.ActivityMainBinding
@@ -25,10 +28,12 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        val navHostFrag = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navController = navHostFrag.navController
+        navController.setGraph(R.navigation.nav_graph, intent.extras)
 
+        setupActionBarWithNavController(navController)
         hideShowToolbar()
-
-
     }
 
 
@@ -50,6 +55,10 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
                 }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
 

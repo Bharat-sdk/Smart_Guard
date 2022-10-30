@@ -30,5 +30,8 @@ object Versions {
     const val NAVIGATION = "2.5.1"
 
     const val VIEW_PAGER_DOTS = "2.1.6"
+    const val EPOXY_VERSION = "5.0.0"
+
+
 
 }

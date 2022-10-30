@@ -15,5 +15,33 @@
     <string name="armed">ARMED</string>
     <string name="disarmed">DISARMED</string>
     <string name="tap_to_select_a_hub">Tap to select a Hub</string>
+    <string name="name">Name</string>
+    <string name="hub_name_here">Eg. Home,Office</string>
+    <string name="continue_to_add_sensors">CONTINUE TO ADD SENSORS</string>
+    <string name="add_hub_name_desc">This is a short name you can assign to this specific Hub to let you know where this device is currently locate.</string>
+    <string name="manual_siren_control">Manual Siren Control</string>
+    <string name="silence">Silence</string>
+    <string name="ring">Ring</string>
+    <string name="device_arming">Device Arming</string>
+    <string name="arm">Arm</string>
+    <string name="disarm">Disarm</string>
+    <string name="press_and_hold_2s_to_send_an_sos">Press and Hold 2s to send an SOS</string>
+    <string name="activity_history">Activity History</string>
+    <string name="are_you_sure">ARE YOU SURE?</string>
+    <string name="desc_format_hub1">This cannot be undone. Once the device has been formatted, all connected sensors will be disconnected.</string>
+    <string name="yes_i_m_sure">YES, I\'M SURE</string>
+    <string name="no_go_back">NO, GO BACK</string>
+    <string name="desc_hub_format2">This can take up to few minutes. You\'ll be notified via SMS once the device has been formatted.</string>
+    <string name="formatting">FORMATTING</string>
+    <string name="get_started">Get Started</string>
+    <string name="on_boarding_title1">Welcome to your SmartGuard Hub!</string>
+    <string name="onboard_title_1">Welcome to your SmartGuard Hub!</string>
+    <string name="onboard_title_2">Get Started by adding devices here</string>
+    <string name="onboard_title_3">Add others to your hubs easily</string>
+    <string name="onboard_title_4">Get help whenever you need it whenever you need it</string>
+    <string name="onboard_desc_1">The SmartGuard suite is controlled from the central \'Hub. Be sure to use an active SIM card to communicate with the Hub!</string>
+    <string name="onboard_desc_2">Adding a new device to expand your home security is as easy as 3 taps!</string>
+    <string name="onboard_desc_4">Help is available at every single step, just tap the \'Help\' icon on the top right to get quick answers!</string>
+    <string name="onboard_desc_3">Have the smart guard hub automatically notify other people when any sensor is triggered!</string>
 
 </resources>

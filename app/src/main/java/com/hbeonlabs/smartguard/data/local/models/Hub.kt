@@ -1,5 +1,7 @@
 package com.hbeonlabs.smartguard.data.local.models
 
+import java.io.Serializable
+
 data class Hub
     (
    val hub_name :String,
@@ -12,4 +14,4 @@ data class Hub
 /*   val  hub_activity_history: List<ActivityHistory>,
    val   hub_secondary_users : List<User>,*/
 
-)
+):Serializable

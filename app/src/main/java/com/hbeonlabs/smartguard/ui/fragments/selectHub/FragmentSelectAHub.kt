@@ -27,11 +27,11 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_baseline_add)
-        (requireActivity() as MainActivity).binding.toolbarIconStart.visibility = View.GONE
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.setOnClickListener {
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
+            setImageResource(R.drawable.ic_baseline_add)
+            setOnClickListener {
             findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentAddAHub())
-        }
+        }}
 
         addDummyData()
 
@@ -48,7 +48,7 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
 
         adapter.differ.submitList(list)
         adapter.setOnItemClickListener {
-
+            findNavController().navigate(FragmentSelectAHubDirections.actionFragmentSelectAHubToFragmentHubDetails())
         }
         binding.adapter = adapter
 

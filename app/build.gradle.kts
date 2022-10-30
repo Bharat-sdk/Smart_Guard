@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.fir.resolve.transformers.resolveToPackageOrClass
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,6 +8,11 @@ plugins {
     id("com.google.firebase.crashlytics")
     id ("androidx.navigation.safeargs.kotlin")
 
+
+}
+
+kapt{
+    correctErrorTypes = true
 }
 
 android {
@@ -34,6 +41,8 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -90,6 +99,11 @@ dependencies {
     implementation (Libs.NAV_FRAGMENT_LIB)
     implementation (Libs.NAV_UI_LIB)
     implementation (Libs.VIEW_PAGER_DOTS)
+
+/*    implementation (Libs.EPOXY)
+    implementation(Libs.EPOXY_DB)
+    kapt (Libs.EPOXY_AP)*/
+
 
 
 }
