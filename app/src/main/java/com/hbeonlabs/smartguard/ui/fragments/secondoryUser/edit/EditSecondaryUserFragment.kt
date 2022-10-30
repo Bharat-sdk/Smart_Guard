@@ -18,6 +18,7 @@ import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserE
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserViewModel
 import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.snackBar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

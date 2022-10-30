@@ -26,9 +26,8 @@ class FragmentSelectAHub:BaseFragment<SelectHubViewModel,FragmentHubBinding>() {
             return selectAHubViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_hub
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_hub
+
 
     override fun initView() {
         super.initView()

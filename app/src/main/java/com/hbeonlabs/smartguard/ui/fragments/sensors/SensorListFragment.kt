@@ -24,9 +24,8 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
             return sensorListViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_sensor_list
-    }
+    override fun getLayoutResourceId()=R.layout.fragment_sensor_list
+
 
     override fun initView() {
         super.initView()
@@ -47,17 +46,17 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
 
         adapter = SensorListAdapter(requireContext())
         binding.adapter = adapter
-        adapter.setDeleteSensorClickListener { sensor, i ->
+        adapter.setDeleteSensorClickListener { sensor, _ ->
             getViewModel().deleteSensor(sensor)
         }
 
-        adapter.setEditSensorClickListener{ sensor, i ->
+        adapter.setEditSensorClickListener{ sensor, _ ->
 
             findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToEditSensorFragment(sensor))
 
         }
 
-        adapter.setSensorClickListener { sensor, position ->
+        adapter.setSensorClickListener { sensor, _ ->
             findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToSensorDetailsFragment(sensor))
         }
 

@@ -20,9 +20,7 @@ class FragmentOnBoarding:BaseFragment<SplashViewModel,FragmentOnboardingBinding>
             return onBoardingViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_onboarding
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_onboarding
 
     override fun initView() {
         super.initView()

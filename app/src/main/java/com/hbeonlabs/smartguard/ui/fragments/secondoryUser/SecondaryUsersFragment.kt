@@ -29,9 +29,8 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
             return secondaryUserViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_secondary_users
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_secondary_users
+
 
     override fun initView() {
         super.initView()
@@ -42,16 +41,16 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
         secondaryUserViewModel.hubId = args.hubId
 
         adapter = SecondaryUserAdapter(requireContext())
-        adapter.setAddUserClickListener { secondaryUser, i ->
+        adapter.setAddUserClickListener { _, i ->
             // add user to the hub and slot given
             findNavController().navigate(SecondaryUsersFragmentDirections.actionSecondaryUsersFragmentToAddSecondaryUserFragment(i,secondaryUserViewModel.hubId))
         }
-        adapter.setEditUserClickListener { secondaryUser, i ->
+        adapter.setEditUserClickListener { secondaryUser, _ ->
 
             findNavController().navigate(SecondaryUsersFragmentDirections.actionSecondaryUsersFragmentToEditSecondaryUserFragment(secondaryUser))
 
         }
-        adapter.setDeleteUserClickListener { secondaryUser, i ->
+        adapter.setDeleteUserClickListener { secondaryUser, _ ->
             secondaryUserViewModel.deleteSecondaryUser(secondaryUser)
         }
 

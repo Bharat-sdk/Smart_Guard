@@ -26,9 +26,8 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
             return sensorDetailViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_sensor_details
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_sensor_details
+
 
     override fun initView() {
         super.initView()

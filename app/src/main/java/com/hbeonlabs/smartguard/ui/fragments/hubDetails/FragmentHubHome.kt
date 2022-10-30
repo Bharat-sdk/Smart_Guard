@@ -31,9 +31,8 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             return hubDetailsViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_hub_detail_screen
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_hub_detail_screen
+
 
     override fun initView() {
         super.initView()

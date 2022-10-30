@@ -19,9 +19,8 @@ class SplashFragment:BaseFragment<SplashViewModel, FragmentSplashBinding>() {
             return splashViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_splash
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_splash
+
 
     override fun initView() {
         super.initView()

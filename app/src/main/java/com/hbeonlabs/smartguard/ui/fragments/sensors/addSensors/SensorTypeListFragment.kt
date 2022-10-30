@@ -28,9 +28,8 @@ class SensorTypeListFragment:BaseFragment<SensorViewModel,FragmentSensorTypeList
             return sensorViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_sensor_type_list
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_sensor_type_list
+
 
     override fun initView() {
         super.initView()
@@ -51,7 +50,7 @@ class SensorTypeListFragment:BaseFragment<SensorViewModel,FragmentSensorTypeList
         val appLists = AppLists(requireContext())
 
         adapter.differ.submitList(appLists.sensorTypeLists)
-        adapter.setClickListener { sensorTypes, i ->
+        adapter.setClickListener { sensorTypes, _ ->
            sensorViewModel.navigateToSensorFragment(sensorTypes)
         }
 
