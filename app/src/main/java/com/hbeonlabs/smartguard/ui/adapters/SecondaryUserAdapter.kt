@@ -95,10 +95,9 @@ class SecondaryUserAdapter(val context:Context) : RecyclerView.Adapter<Secondary
                     true
                 })
                 popupMenu.show()
-
             }
             else{
-                // Navigate to Add Sensors Fragment
+                // Navigate to Add Secondary Fragment
                 onAddUserClickListener?.let { it(data,position) }
             }
         }

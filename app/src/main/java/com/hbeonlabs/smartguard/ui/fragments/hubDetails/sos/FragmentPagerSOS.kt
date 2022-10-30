@@ -7,14 +7,16 @@ import androidx.lifecycle.lifecycleScope
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentPagerSosBinding
+import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 @SuppressLint("ClickableViewAccessibility")
-class FragmentPagerSOS:BaseFragment<PagerSOSViewModel,FragmentPagerSosBinding>() {
+class FragmentPagerSOS:BaseFragment<HubDetailsViewModel,FragmentPagerSosBinding>() {
 
-    private  val pagerSOSViewModel: PagerSOSViewModel by inject()
-    override fun getViewModel(): PagerSOSViewModel {
-            return pagerSOSViewModel
+    private  val hubDetailsViewModel by sharedStateViewModel<HubDetailsViewModel>()
+    override fun getViewModel(): HubDetailsViewModel {
+            return hubDetailsViewModel
     }
 
     override fun getLayoutResourceId(): Int {

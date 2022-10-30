@@ -1,17 +1,19 @@
 package com.hbeonlabs.smartguard.data.local.models
 
+import android.graphics.Bitmap
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity(tableName = "hub")
 data class Hub
     (
+   @PrimaryKey
+   val hub_serial_number:String,
    val hub_name :String,
-   val hub_id:String,
    val hub_image:String,
-//   val  hub_sensors_list : List<Sensor>,
-   val  hub_phone_number : String,
+   val hub_phone_number : String,
    val hub_siren : Boolean,
-   val  hub_arm_state : Boolean,
-/*   val  hub_activity_history: List<ActivityHistory>,
-   val   hub_secondary_users : List<User>,*/
+   val hub_arm_state : Boolean,
 
-):Serializable
+   ):Serializable

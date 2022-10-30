@@ -7,5 +7,5 @@ data class SecondaryUser(
     val user_name: String,
     val user_pic:String,
     val user_phone_number: String,
-    val hub_id: String
+    val hub_serial_number: String
     )

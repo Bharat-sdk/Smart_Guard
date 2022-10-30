@@ -10,6 +10,7 @@ object Libs
    const val ROOM_RUN_TIME="androidx.room:room-runtime:${Versions.ROOM}"
    const val ROOM_COMPILER="androidx.room:room-compiler:${Versions.ROOM}"
    const val ROOM_KTX="androidx.room:room-ktx:${Versions.ROOM}"
+   const val ROOM_COROUTINE = "androidx.room:room-coroutines:${Versions.ROOM}"
 
    //Life Cycle
    const val VIEW_MODEL= "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFE_CYCLE}"
@@ -45,9 +46,8 @@ object Libs
 
    const val VIEW_PAGER_DOTS = "me.relex:circleindicator:${Versions.VIEW_PAGER_DOTS}"
 
-   const val EPOXY = "com.airbnb.android:epoxy:${Versions.EPOXY_VERSION}"
-   const val EPOXY_AP = "com.airbnb.android:epoxy-processor:${Versions.EPOXY_VERSION}"
-   const val EPOXY_DB = "com.airbnb.android:epoxy-databinding:${Versions.EPOXY_VERSION}"
+   const val IMAGE_PICKER_LIBRARY = "com.github.dhaval2404:imagepicker:2.1"
+
 
 
 

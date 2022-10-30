@@ -1,24 +1,22 @@
 package com.hbeonlabs.smartguard.ui.fragments.onBoarding
 
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
-import com.hbeonlabs.smartguard.data.local.models.OnBoardingData
 import com.hbeonlabs.smartguard.databinding.FragmentOnboardingBinding
 import com.hbeonlabs.smartguard.ui.adapters.ViewPagerAdapter
-import com.hbeonlabs.smartguard.ui.fragments.splash.SplashviewModel
+import com.hbeonlabs.smartguard.ui.fragments.splash.SplashViewModel
 import com.hbeonlabs.smartguard.utils.AppLists
 
 import org.koin.android.ext.android.inject
 
 
-class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>() {
+class FragmentOnBoarding:BaseFragment<SplashViewModel,FragmentOnboardingBinding>() {
 
-    private  val onBoardingViewModel: SplashviewModel by inject()
-    override fun getViewModel(): SplashviewModel {
+    private  val onBoardingViewModel: SplashViewModel by inject()
+    override fun getViewModel(): SplashViewModel {
             return onBoardingViewModel
     }
 
@@ -61,22 +59,19 @@ class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>(
             }
         })
 
-
         binding.txtNext.setOnClickListener {
             if (  binding.txtNext.text == getString(R.string.get_started) ){
-               findNavController().navigate(R.id.fragmentAddAHub)
+                onBoardingViewModel.changeIsFirstLoggedIn()
+               findNavController().navigate(FragmentOnBoardingDirections.actionFragmentOnBoardingToFragmentSelectAHub())
             }
             else{
                 binding.onBoardingViewPager.setCurrentItem(binding.onBoardingViewPager.currentItem+1,true )
             }
         }
+
         binding.txtBack.setOnClickListener {
-
-                binding.onBoardingViewPager.setCurrentItem(binding.onBoardingViewPager.currentItem-1,true )
-
+            binding.onBoardingViewPager.setCurrentItem(binding.onBoardingViewPager.currentItem-1,true )
         }
-
-
 
     }
 

@@ -65,6 +65,7 @@ dependencies {
     implementation (Libs.CONSTRAINT_LAYOUT_LIB)
     implementation(Libs.ROOM_RUN_TIME)
     kapt(Libs.ROOM_COMPILER)
+    implementation(Libs.ROOM_KTX)
     testImplementation(Libs.JUNIT_LIB)
     androidTestImplementation(Libs.JUNIT_EXT_LIB)
     androidTestImplementation(Libs.ESPRESSO_CORE)
@@ -88,7 +89,7 @@ dependencies {
     //Logging
     implementation(Libs.TIMBER_LIB)
     //Memory Leak
-    debugImplementation(Libs.LEAK_CANARY_LIB)
+   // debugImplementation(Libs.LEAK_CANARY_LIB)
     //Multidex
     implementation(Libs.MULTIDEX_LIB)
     // Dp SP Support
@@ -100,9 +101,10 @@ dependencies {
     implementation (Libs.NAV_UI_LIB)
     implementation (Libs.VIEW_PAGER_DOTS)
 
-/*    implementation (Libs.EPOXY)
-    implementation(Libs.EPOXY_DB)
-    kapt (Libs.EPOXY_AP)*/
+    //Image Picker Library
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+
+
 
 
 

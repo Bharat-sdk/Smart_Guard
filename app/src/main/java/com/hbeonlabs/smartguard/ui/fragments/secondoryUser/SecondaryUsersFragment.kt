@@ -40,6 +40,8 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
         
         adapter.differ.submitList(AppLists(requireContext()).secondaryUserList)
         binding.adapter = adapter
+
+
     }
 
 

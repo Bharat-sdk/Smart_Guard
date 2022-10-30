@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="hubData"
+            type="com.hbeonlabs.smartguard.data.local.models.Hub" />
+       </data>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageView
+            android:id="@+id/iv_detail_hub_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@color/black"
+            />
+
+        <ImageView
+            android:id="@+id/iv_item_armed_unarmed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/iv_detail_hub_image"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_detail_hub_image"
+            android:src="@{hubData.hub_arm_state ? @drawable/ic_lock_close : @drawable/ic_lock_open}"
+            />
+
+        <TextView
+            android:id="@+id/tv_item_armed_unarmed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{hubData.hub_arm_state ? @string/armed : @string/disarmed}"
+            app:layout_constraintTop_toTopOf="@id/iv_item_armed_unarmed"
+            app:layout_constraintBottom_toBottomOf="@id/iv_item_armed_unarmed"
+            app:layout_constraintEnd_toStartOf="@id/iv_item_armed_unarmed"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@{hubData.hub_arm_state ? @color/armed : @color/un_armed}"
+            />
+
+
+        <!--sensor slot-->
+      <TextView
+          android:id="@+id/tv_sensor_slot"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/iv_detail_hub_image"
+          app:layout_constraintStart_toStartOf="parent"
+          android:text="Sensor Slot"
+          android:layout_marginStart="@dimen/_20sdp"
+          android:layout_marginTop="20dp"
+          />
+        <TextView
+            android:id="@+id/sensor_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tv_sensor_slot"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sensor_slot"
+            android:text="Sensor Slot"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_sensor_slot"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+
+        <!--sensor registered on -->
+
+        <TextView
+            android:id="@+id/tv_sensor_registered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Sensor Registered On"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/sensor_registered_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tv_sensor_registered"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sensor_registered"
+            android:text="Sensor Slot"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/sensor_registered_on"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+
+        <!--sensor model-->
+
+        <TextView
+            android:id="@+id/tv_sensor_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Sensor Model"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/sensor_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tv_sensor_model"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sensor_model"
+            android:text="Sensor Slot"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_sensor_model"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+        <!--Custom Message-->
+        <TextView
+            android:id="@+id/tv_custom_mgs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Custom Message"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/sensor_custom_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_custom_mgs"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Sensor Slot"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/_20sdp"
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/sensor_custom_message"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+
+<!--        Control With Master Remote-->
+        <TextView
+            android:id="@+id/tv_master_remote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider4"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Control with Master Remote"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/sensor_control_master"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_master_remote"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Sensor Slot"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintEnd_toStartOf="@id/switch_master"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_master"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/sensor_control_master"
+            app:layout_constraintBottom_toBottomOf="@id/sensor_control_master"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_20sdp"
+            />
+
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/sensor_control_master"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+        <!--Permanently arm sensor-->
+
+        <TextView
+            android:id="@+id/tv_sensor_arm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Permanently Arm This Sensor?"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/sensor_arm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_sensor_arm"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Sensor Slot"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintEnd_toStartOf="@id/switch_arm"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_arm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/sensor_arm"
+            app:layout_constraintBottom_toBottomOf="@id/sensor_arm"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_20sdp"
+            />
+
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/sensor_arm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

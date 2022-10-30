@@ -3,7 +3,7 @@ package com.hbeonlabs.smartguard.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistory
+import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryList
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryDate
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryItem
 import com.hbeonlabs.smartguard.databinding.ItemActivityHistoryBinding
@@ -31,7 +31,7 @@ class ActivityHistoryAdapter(
                 item = items[position] as ActivityHistoryDate,
             )
             ActivityHistoryItem.TYPE_ACTIVITY_HISTORY -> (holder as GeneralViewHolder).bind(
-                item = items[position] as ActivityHistory
+                item = items[position] as ActivityHistoryList
             )
         }
     }
@@ -60,7 +60,7 @@ class ActivityHistoryAdapter(
     }
 
     inner class GeneralViewHolder(val binding: ItemActivityHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ActivityHistory) {
+        fun bind(item: ActivityHistoryList) {
             binding.txtActivity.text = item.activity_history_message
             val formatter = SimpleDateFormat(" HH:mm")
 
