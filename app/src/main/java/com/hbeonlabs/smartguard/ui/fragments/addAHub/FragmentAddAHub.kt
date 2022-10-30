@@ -126,6 +126,9 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>(),
         {
             getViewModel().addHub(hubSerialNo,hubSimNo)
         }
+        else{
+            makeToast(text.toString())
+        }
     }
 
 
