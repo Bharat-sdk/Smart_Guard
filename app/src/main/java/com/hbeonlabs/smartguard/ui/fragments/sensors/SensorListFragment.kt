@@ -9,6 +9,7 @@ import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentSensorListBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.SensorListAdapter
+import com.hbeonlabs.smartguard.utils.AppConstants
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 
@@ -75,7 +76,7 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
                 when(it)
                 {
                     SensorViewModel.ManageSensorEvents.DeleteSensorSuccess -> {
-                        makeToast("Sensor Removed Successfully")
+                        makeToast(AppConstants.DELETE_SENSOR_SUCCESSFULLY)
                     }
                     is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {
                         makeToast(it.message)

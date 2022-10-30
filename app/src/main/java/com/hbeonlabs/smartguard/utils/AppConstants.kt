@@ -2,6 +2,13 @@ package com.hbeonlabs.smartguard.utils
 
 object AppConstants {
 
+    //Secondry User Adapter
+
+   const val DELETE_SENSOR_SUCCESSFULLY="Sensor Removed Successfully"
+    const val DELETE_SECONDARY_USER_SUCCESSFULLY="Deleted Secondary User Successfully"
+    const val EMPTY_SLOT="EMPTY SLOT"
+    const val TAP_TO_REGISTER="Tap to register a new user"
+
     const val DONE="Done"
     const val TAG = "SMART GUARD"
     const val TASK_CANCELLED="Task Cancelled"
@@ -20,6 +27,11 @@ object AppConstants {
     const val HUB_SIREN_IS_ENABLED ="Hub siren is Enabled"
     const val SIREN_DISABLED= "Siren Disabled"
     const val HUB_SIREN_DISABLED="Hub siren is Disabled"
+    const val EVENTS=" events"
+    //DATE FORMATS
+    const val HOUR_MIN=" HH:mm"
+    const val DATE_MONTH_YEAR= "dd-MMM,yyyy"
+    const val TODAY="Today"
 
 
 

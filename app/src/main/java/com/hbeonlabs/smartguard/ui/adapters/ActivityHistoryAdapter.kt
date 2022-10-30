@@ -8,6 +8,7 @@ import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryDate
 import com.hbeonlabs.smartguard.data.local.activityModels.ActivityHistoryItem
 import com.hbeonlabs.smartguard.databinding.ItemActivityHistoryBinding
 import com.hbeonlabs.smartguard.databinding.ItemActivityHistoryDateBinding
+import com.hbeonlabs.smartguard.utils.AppConstants
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,7 +48,7 @@ class ActivityHistoryAdapter(
     inner class DateViewHolder(val binding: ItemActivityHistoryDateBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ActivityHistoryDate) {
             val cal = Calendar.getInstance().timeInMillis
-            val formatter = SimpleDateFormat("dd-MMM,yyyy")
+            val formatter = SimpleDateFormat(AppConstants.DATE_MONTH_YEAR)
             if (formatter.format(cal) == item.activity_history_time_stamp)
             {
                 binding.txtDate.text = "Today"
@@ -55,14 +56,14 @@ class ActivityHistoryAdapter(
             else{
                 binding.txtDate.text = item.activity_history_time_stamp
             }
-            binding.txtListSize.text = item.size + " events"
+            binding.txtListSize.text = item.size + AppConstants.EVENTS
         }
     }
 
     inner class GeneralViewHolder(val binding: ItemActivityHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ActivityHistoryList) {
             binding.txtActivity.text = item.activity_history_message
-            val formatter = SimpleDateFormat(" HH:mm")
+            val formatter = SimpleDateFormat(AppConstants.HOUR_MIN)
 
                 binding.txtTime.text = formatter.format(item.activity_history_time_stamp)
         }

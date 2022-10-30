@@ -14,6 +14,7 @@ import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.models.SecondaryUser
 import com.hbeonlabs.smartguard.databinding.ItemHubLayoutBinding
 import com.hbeonlabs.smartguard.databinding.ItemSecandoryNumberBinding
+import com.hbeonlabs.smartguard.utils.AppConstants
 
 class SecondaryUserAdapter(val context:Context) : RecyclerView.Adapter<SecondaryUserAdapter.SecondaryUserViewHolder>() {
 
@@ -28,8 +29,8 @@ class SecondaryUserAdapter(val context:Context) : RecyclerView.Adapter<Secondary
                 binding.ibIconEnd.setImageResource(R.drawable.ic_three_dots)
             }
             else{
-                binding.txtName.text = "EMPTY SLOT"
-                binding.txtNumber.text = "Tap to register a new user"
+                binding.txtName.text = AppConstants.EMPTY_SLOT
+                binding.txtNumber.text = AppConstants.TAP_TO_REGISTER
             }
         }
 
