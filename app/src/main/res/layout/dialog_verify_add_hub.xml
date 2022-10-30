@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <variable
+        name="number"
+        type="String" />
+</data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/verifying"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/verify_dialog_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{number}"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="@dimen/_12ssp"
+        />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_horizontal_dialog_verify_hub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_14sdp"
+        />
+
+    <ImageView
+        android:id="@+id/img_done_dialog_verify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_desc_verify_add_hub_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This might take a few minutes\n Please don't leave the app"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        />
+</LinearLayout>
+
+</layout>
