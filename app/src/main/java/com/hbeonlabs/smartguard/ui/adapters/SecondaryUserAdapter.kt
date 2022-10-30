@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,7 @@ class SecondaryUserAdapter(val context:Context) : RecyclerView.Adapter<Secondary
             {
                 binding.txtName.text = data.user_name
                 binding.txtNumber.text = data.user_phone_number
+                binding.ivPic.setImageURI(data.user_pic.toUri())
                 binding.ibIconEnd.setImageResource(R.drawable.ic_three_dots)
             }
             else{

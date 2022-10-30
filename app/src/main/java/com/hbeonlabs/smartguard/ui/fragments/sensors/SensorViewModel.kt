@@ -29,7 +29,7 @@ private val repo:SensorRepositoryImp
 
     fun deleteSensor(sensor: Sensor)
     {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
 
                 if (repo.deleteSensor(sensor) == 0)
@@ -69,6 +69,29 @@ private val repo:SensorRepositoryImp
         }
     }
 
+    fun editSensor(sensor: Sensor){
+        viewModelScope.launch(Dispatchers.IO){
+            if (sensor.sensor_name.isBlank() || sensor.sensor_custom_sms.isBlank())
+            {
+                _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent("Please Fill All The Fields"))
+            }
+            else{
+                try {
+                    repo.editSensor(sensor)
+                    _mSensorEvents.emit(ManageSensorEvents.EditSensorSuccess)
+                }
+                catch (e:SQLException)
+                {
+                    _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent(e.message.toString()))
+                }
+            }
+
+
+        }
+    }
+
+
+
     fun navigateToSensorFragment(sensorTypes: SensorTypes)
     {
         viewModelScope.launch {
@@ -82,6 +105,7 @@ private val repo:SensorRepositoryImp
     sealed class ManageSensorEvents{
         object DeleteSensorSuccess:ManageSensorEvents()
         object AddSensorSuccess:ManageSensorEvents()
+        object EditSensorSuccess:ManageSensorEvents()
         class SQLErrorEvent(val message: String):ManageSensorEvents()
         class NavigateToAddSensorFragment(val sensorTypes: SensorTypes):ManageSensorEvents()
     }

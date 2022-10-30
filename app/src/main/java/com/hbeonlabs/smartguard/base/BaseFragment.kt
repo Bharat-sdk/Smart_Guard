@@ -14,7 +14,7 @@ abstract class BaseFragment<T : BaseViewModel, V : ViewBinding> : Fragment() {
     private lateinit var viewModel: T
 
     private lateinit var _viewBinding: V
-    protected val binding get() = _viewBinding!!
+    protected val binding get() = _viewBinding
 
 
     override fun onCreateView(

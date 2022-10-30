@@ -1,4 +1,4 @@
-package com.hbeonlabs.smartguard.ui.fragments.hubSettings
+package com.hbeonlabs.smartguard.ui.fragments.secondoryUser.edit
 
 import android.app.Activity
 import android.os.Environment
@@ -12,10 +12,10 @@ import androidx.navigation.fragment.navArgs
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
-import com.hbeonlabs.smartguard.data.local.models.Hub
-import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
-import com.hbeonlabs.smartguard.databinding.FragmentHubSettingsBinding
+import com.hbeonlabs.smartguard.databinding.FragmentAddSecandoryUserBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserEvents
+import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserViewModel
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,10 +23,9 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 
-class FragmentHubSettings:BaseFragment<HubSettingsViewModel,FragmentHubSettingsBinding>() {
-val args:FragmentHubSettingsArgs by navArgs()
+class EditSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAddSecandoryUserBinding>() {
     var imageUri = "".toUri()
-    lateinit var hub:Hub
+    private val args:EditSecondaryUserFragmentArgs by navArgs()
 
 
     private val startImagePickerResult =
@@ -36,8 +35,8 @@ val args:FragmentHubSettingsArgs by navArgs()
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val fileUri = data?.data!!
-                    imageUri = fileUri
 
+                    imageUri = fileUri
                     binding.imgEditHubImage.setImageURI(fileUri)
                 }
                 ImagePicker.RESULT_ERROR -> {
@@ -49,37 +48,32 @@ val args:FragmentHubSettingsArgs by navArgs()
             }
         }
 
-
-    private  val hubSettingsViewModel: HubSettingsViewModel by inject()
-    override fun getViewModel(): HubSettingsViewModel {
-            return hubSettingsViewModel
+    private  val secondaryUserViewModel: AddSecondaryUserViewModel by inject()
+    override fun getViewModel(): AddSecondaryUserViewModel {
+            return secondaryUserViewModel
     }
 
     override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_hub_settings
+        return R.layout.fragment_add_secandory_user
     }
 
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
-            visibility = View.VISIBLE
-            setImageResource(R.drawable.ic_baseline_check_24)
-            // Edit Hub Functionality
-            setOnClickListener {
-                val name = binding.edtAddHubName.text.toString()
-                hubSettingsViewModel.updateHubName(name,imageUri.toString(),args.hubId)
-            }
-        }
-
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = View.INVISIBLE
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
+       secondaryUserViewModel.hub_id = args.secondaryUser.hub_serial_number
+        secondaryUserViewModel.slot = args.secondaryUser.slot
 
         observe()
 
+        val user = args.secondaryUser
+        binding.edtUserName.setText(user.user_name)
+        binding.edtUserNumber.setText(user.user_phone_number)
+        imageUri  =user.user_pic.toUri()
+        binding.imgEditHubImage.setImageURI(user.user_pic.toUri())
 
-        binding.descManageSecondaryNum.setOnClickListener {
-            findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToSecondaryUsersFragment(args.hubId))
-        }
+
 
         binding.btnUploadFromGallery.setOnClickListener {
             ImagePicker.with(this)
@@ -99,38 +93,25 @@ val args:FragmentHubSettingsArgs by navArgs()
                 }
         }
 
+        binding.btnConfirmNumber.setOnClickListener {
+           secondaryUserViewModel.editSecondaryUser( binding.edtUserName.text.toString(),imageUri,  binding.edtUserNumber.text.toString())
+        }
 
 
     }
 
-    private fun observe()
+    fun observe()
     {
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            hubSettingsViewModel.hubSettingsEvents.collectLatest {
+        viewLifecycleOwner.lifecycleScope.launch {
+            secondaryUserViewModel.addSecondaryUserEvents.collectLatest {
                 when (it) {
-                    is HubSettingEvents.SQLErrorEvent -> {
+                    AddSecondaryUserEvents.EditUserSuccessEvent -> {
+                        makeToast("User details updated successfully")
+                        findNavController().navigate(EditSecondaryUserFragmentDirections.actionEditSecondaryUserFragmentToSecondaryUsersFragment(getViewModel().hub_id))
+                    }
+                    is AddSecondaryUserEvents.SQLErrorEvent -> {
                         makeToast(it.message)
                     }
-                    HubSettingEvents.UpdateHubSuccessEvent -> {
-                        hubSettingsViewModel.getHubFromId(args.hubId)
-                        findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(hub))
-                    }
-                }
-            }
-        }
-
-
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            hubSettingsViewModel.getHubFromId(args.hubId).collectLatest {hub->
-
-                binding.edtAddHubName.setText(hub.hub_name)
-                if (hub.hub_image.isEmpty())
-                {
-                    binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
-                }
-                else{
-                    imageUri = hub.hub_image.toUri()
-                    binding.imgEditHubImage.setImageURI(hub.hub_image.toUri())
                 }
             }
         }

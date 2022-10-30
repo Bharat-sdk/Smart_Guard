@@ -30,17 +30,23 @@ class AppLists(
     )
 
     val secondaryUserList = arrayListOf(
-        SecondaryUser(1,"","","",""),
-        SecondaryUser(2,"Bharat","1","354855454","1"),
-        SecondaryUser(3,"","","",""),
-        SecondaryUser(4,"Bharat","1","354855454","1"),
-        SecondaryUser(5,"Bharat","1","354855454","1")
+        SecondaryUser(null,"",1,"","",""),
+        SecondaryUser(null,"",2,"","",""),
+        SecondaryUser(null,"",3,"","",""),
+        SecondaryUser(null,"",4,"","",""),
+        SecondaryUser(null,"",5,"","","")
     )
 
     val sensorTypeLists = arrayListOf(
-        SensorTypes("2455","Sensor1","asdasd"),
-        SensorTypes("2455","Sensor1","asdasd"),
-        SensorTypes("2455","Sensor1","asdasd"),
-        SensorTypes("2455","Sensor1","asdasd")
+        SensorTypes("7485","DOOR SENSOR","asdasd"),
+        SensorTypes("4786","SMOKE SENSOR","asdasd"),
+        SensorTypes("2455","WATER OVERFLOW SENSOR","asdasd"),
+        SensorTypes("4428","LPG GAS LEAKAGE SENSOR","asdasd"),
+        SensorTypes("8956","MOTION SENSOR","asdasd"),
+        SensorTypes("2345","BEAM SENSOR","asdasd"),
+        SensorTypes("8455","GLASS BREAK SENSOR","asdasd"),
+        SensorTypes("8921","SHUTTER SENSOR","asdasd")
+
     )
+
 }

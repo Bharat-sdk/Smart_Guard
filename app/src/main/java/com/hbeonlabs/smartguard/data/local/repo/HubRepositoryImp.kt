@@ -10,6 +10,7 @@ import com.hbeonlabs.smartguard.data.local.models.ActivityHistory
 import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.room.HubDao
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 
 class HubRepositoryImp constructor(
     private val dao: HubDao,
@@ -18,7 +19,8 @@ class HubRepositoryImp constructor(
 
     override suspend fun getAllHubs(): Flow<List<Hub>> = dao.getAllHubsList()
     override suspend fun addHub(hubSerialNo:String, hubPhoneNumber:String) {
-        val hub = Hub(hubSerialNo,"", "",hubPhoneNumber, hub_siren = false, hub_arm_state = false)
+        val currentDate = Calendar.getInstance().timeInMillis
+        val hub = Hub(hubSerialNo,"", "",hubPhoneNumber, hub_siren = false, hub_arm_state = false,currentDate.toString())
         dao.addHub(hub)
     }
     override suspend fun checkIfHubAlreadyAdded(hubSerialNo: String): Boolean {
@@ -45,13 +47,19 @@ class HubRepositoryImp constructor(
         dao.addActivityHistory(ActivityHistory(timeStamp,message,hub_serial_no))
     }
 
-    override suspend fun getHubDetails(hub_serial_no: String): Hub {
+    override suspend fun getHubDetails(hub_serial_no: String): Flow<Hub> {
         return dao.getHubFromId(hub_serial_no)
     }
 
     override suspend fun getActivityHistory(hub_serial_no: String): Flow<List<ActivityHistory>> {
         return dao.getAllActivities(hub_serial_no)
     }
+
+    override suspend fun getHubFromId(hub_serial_no: String): Flow<Hub> {
+        return dao.getHubFromId(hub_serial_no)
+    }
+
+
 
 
 }

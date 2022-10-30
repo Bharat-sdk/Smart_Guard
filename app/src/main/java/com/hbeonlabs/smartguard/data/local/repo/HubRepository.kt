@@ -21,9 +21,11 @@ interface HubRepository {
 
     suspend fun addActivityHistory(hub_serial_no: String, message: String, timeStamp: Long)
 
-    suspend fun getHubDetails(hub_serial_no: String):Hub
+    suspend fun getHubDetails(hub_serial_no: String): Flow<Hub>
 
     suspend fun getActivityHistory(hub_serial_no: String):Flow<List<ActivityHistory>>
+
+    suspend fun getHubFromId(hub_serial_no: String): Flow<Hub>
 
 
 }

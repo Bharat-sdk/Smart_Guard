@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.hbeonlabs.smartguard.data.local.datastore.SharedPreferences
 import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
+import com.hbeonlabs.smartguard.data.local.repo.SecondaryUserRepositoryImp
 import com.hbeonlabs.smartguard.data.local.repo.SensorRepositoryImp
 import com.hbeonlabs.smartguard.data.local.room.AppDatabase
 import com.hbeonlabs.smartguard.data.local.room.HubDao
@@ -14,6 +15,7 @@ import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
 import com.hbeonlabs.smartguard.ui.fragments.hubSettings.HubSettingsViewModel
 import com.hbeonlabs.smartguard.ui.fragments.postAddHub.PostAddHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUserViewModel
+import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.add.AddSecondaryUserViewModel
 import com.hbeonlabs.smartguard.ui.fragments.selectHub.SelectHubViewModel
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
 import com.hbeonlabs.smartguard.ui.fragments.splash.SplashViewModel
@@ -29,9 +31,10 @@ val appModule = module {
     viewModel { PostAddHubViewModel(get()) }
     viewModel { HubDetailsViewModel(get()) }
     viewModel { ActivityHistoryViewModel(get()) }
-    viewModel { SecondaryUserViewModel() }
-    viewModel { HubSettingsViewModel() }
+    viewModel { SecondaryUserViewModel(get()) }
+    viewModel { HubSettingsViewModel(get()) }
     viewModel { SensorViewModel(get()) }
+    viewModel { AddSecondaryUserViewModel(get())}
 
     fun provideDataBase(application: Application): AppDatabase {
         return Room.databaseBuilder(application, AppDatabase::class.java, "smart_guard_db")
@@ -60,6 +63,10 @@ val appModule = module {
 
     single {
         SensorRepositoryImp(get())
+    }
+
+    single {
+        SecondaryUserRepositoryImp(get())
     }
 
     single {

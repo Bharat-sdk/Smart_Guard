@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,13 @@ class SensorListAdapter(val context:Context) : RecyclerView.Adapter<SensorListAd
         fun bind(data: Sensor) {
                 binding.txtSensorName.text = data.sensor_name
                 binding.ibIconSensorMenu.setImageResource(R.drawable.ic_three_dots)
+            if (data.sensor_image == "")
+            {
+                binding.ivSensorPic.setImageResource(R.drawable.default_sensor_image)
+            }
+            else{
+                binding.ivSensorPic.setImageURI(data.sensor_image.toUri())
+            }
         }
 
     }
@@ -79,20 +87,29 @@ class SensorListAdapter(val context:Context) : RecyclerView.Adapter<SensorListAd
                 })
                 popupMenu.show()
         }
+
+        holder.itemView.setOnClickListener {
+            onSensorClickListener?.let { it(data,position) }
+        }
     }
 
 
     private var onEditUserClickListener: ((Sensor,Int) -> Unit)? = null
 
-    fun setEditUserClickListener(listener: (Sensor,Int) -> Unit) {
+    fun setEditSensorClickListener(listener: (Sensor, Int) -> Unit) {
         onEditUserClickListener = listener
     }
 
     private var onDeleteUserClickListener: ((Sensor,Int) -> Unit)? = null
 
-    fun setDeleteUserClickListener(listener: (Sensor,Int) -> Unit) {
+    fun setDeleteSensorClickListener(listener: (Sensor, Int) -> Unit) {
         onDeleteUserClickListener = listener
     }
 
+    private var onSensorClickListener: ((Sensor,Int) -> Unit)? = null
+
+    fun setSensorClickListener(listener: (Sensor, Int) -> Unit) {
+        onSensorClickListener = listener
+    }
 
 }

@@ -14,6 +14,7 @@ import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
+import java.util.*
 
 
 class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>() {
@@ -45,7 +46,8 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
         binding.btnAddSensor.setOnClickListener {
             val sensorName = binding.edtAddSensorName.text.toString()
             val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
-            val sensor = Sensor(null,sensorName,args.sensorType.sensor_image,args.sensorType.sensor_model_number,customSmsMessage,addSensorViewModel.hub_serial_no)
+            val curTimeStamp = Calendar.getInstance().timeInMillis
+            val sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,false,customSmsMessage,curTimeStamp.toString(),addSensorViewModel.hub_serial_no)
             addSensorViewModel.addSensor(sensor)
         }
 

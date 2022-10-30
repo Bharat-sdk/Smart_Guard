@@ -12,7 +12,6 @@ import com.hbeonlabs.smartguard.ui.adapters.SensorListAdapter
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
@@ -48,12 +47,18 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
 
         adapter = SensorListAdapter(requireContext())
         binding.adapter = adapter
-        adapter.setDeleteUserClickListener { sensor, i ->
+        adapter.setDeleteSensorClickListener { sensor, i ->
             getViewModel().deleteSensor(sensor)
         }
 
-        adapter.setEditUserClickListener{ sensor, i ->
+        adapter.setEditSensorClickListener{ sensor, i ->
 
+            findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToEditSensorFragment(sensor))
+
+        }
+
+        adapter.setSensorClickListener { sensor, position ->
+            findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToSensorDetailsFragment(sensor))
         }
 
     }

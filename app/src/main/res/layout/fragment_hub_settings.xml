@@ -115,6 +115,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_edit_name"
+
         android:hint="@string/hub_name_here"
         android:textSize="@dimen/_12ssp"
         android:layout_marginStart="@dimen/_15sdp"
