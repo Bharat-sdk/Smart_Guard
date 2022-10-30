@@ -22,10 +22,7 @@ import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddHubPostVerificationBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
-import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
-import com.hbeonlabs.smartguard.utils.getBitmap
-import com.hbeonlabs.smartguard.utils.makeToast
-import com.hbeonlabs.smartguard.utils.sdk29andUp
+import com.hbeonlabs.smartguard.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -77,6 +74,9 @@ class FragmentPostAddHub:BaseFragment<PostAddHubViewModel,FragmentAddHubPostVeri
 
         binding.tvEditRegisteredOn.text = "Registered On ${args.registeredOn}"
         binding.hubPhoneNumber = args.hubPhoneNumber
+        binding.clPostAddAHub.setOnClickListener {
+            requireContext().hideKeyboard(it)
+        }
 
         binding.btnContinueToAddSensors.setOnClickListener {
             findNavController().navigate(FragmentPostAddHubDirections.actionFragmentPostAddHubToFragmentSelectAHub())

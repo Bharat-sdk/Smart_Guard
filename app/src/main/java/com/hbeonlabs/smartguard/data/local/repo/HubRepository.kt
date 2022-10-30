@@ -27,5 +27,5 @@ interface HubRepository {
 
     suspend fun getHubFromId(hub_serial_no: String): Flow<Hub>
 
-
+    suspend fun checkIfHubNumberAlreadyAdded(hub_phone_number:String):Boolean
 }

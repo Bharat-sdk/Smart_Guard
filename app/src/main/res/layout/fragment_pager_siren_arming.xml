@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#45F1EAEA"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+  >
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,19 +35,23 @@
         app:cardElevation="@dimen/_3sdp"
         >
         <LinearLayout
+            android:id="@+id/ll_hub_silence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_silence"
+            android:background="@drawable/bg_grey_unselected"
+
 
             >
             <ImageView
+                android:id="@+id/img_silence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:src="@drawable/ic_silence"/>
             <TextView
+                android:id="@+id/txt_silence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/silence"
@@ -71,25 +75,28 @@
         app:cardElevation="@dimen/_3sdp"
         >
         <LinearLayout
+            android:id="@+id/ll_hub_ring"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_red"
+            android:background="@drawable/bg_grey_unselected"
             >
             <ImageView
+                android:id="@+id/img_ring"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:src="@drawable/ic_ring"/>
+                android:src="@drawable/ic_ring"
+                app:tint="@color/grey" />
             <TextView
+                android:id="@+id/text_ring"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ring"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_5sdp"
-
-                android:textColor="#D72222"
+                android:textColor="@color/grey"
                 android:layout_marginBottom="@dimen/_10sdp"
                 />
         </LinearLayout>
@@ -128,23 +135,25 @@
         android:layout_marginBottom="@dimen/_10sdp"
         >
         <LinearLayout
+            android:id="@+id/ll_hub_disarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_silence"
+            android:background="@drawable/bg_grey_unselected"
             >
             <ImageView
+                android:id="@+id/img_disarm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:src="@drawable/ic_lock_open"/>
             <TextView
+                android:id="@+id/txt_disarm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/disarm"
                 android:layout_marginTop="@dimen/_5sdp"
-
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_10sdp"
                 />
@@ -164,24 +173,31 @@
         app:cardElevation="@dimen/_3sdp"
         >
         <LinearLayout
+            android:id="@+id/ll_hub_arm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/bg_arm"
+            android:background="@drawable/bg_grey_unselected"
             >
             <ImageView
+                android:id="@+id/img_arm"
                 android:layout_width="wrap_content"
+                app:tint="@color/grey"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:src="@drawable/ic_lock_close"/>
+                android:src="@drawable/ic_lock_close"
+                 />
             <TextView
+                android:id="@+id/txt_arm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
+
+                app:tint="@color/grey"
                 android:text="@string/arm"
                 android:layout_gravity="center"
-                android:textColor="@color/on_boarding_green"
+                android:textColor="@color/grey"
                 android:layout_marginBottom="@dimen/_10sdp"
                 />
         </LinearLayout>

@@ -17,6 +17,7 @@ import com.hbeonlabs.smartguard.databinding.FragmentEditASensorBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
+import com.hbeonlabs.smartguard.utils.hideKeyboard
 
 import org.koin.android.ext.android.inject
 
@@ -80,6 +81,9 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
         }
         observe()
 
+        binding.clEditSensor.setOnClickListener {
+            requireContext().hideKeyboard(it)
+        }
         binding.btnEditSensor.setOnClickListener {
             val sensorName = binding.edtSensorName.text.toString()
             val customMessage = binding.edtEditSensorCustomMessage.text.toString()

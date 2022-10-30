@@ -14,6 +14,7 @@ import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddSecandoryUserBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -67,7 +68,9 @@ class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAd
         observe()
 
 
-
+        binding.addSecondaryNumber.setOnClickListener {
+            requireContext().hideKeyboard(it)
+        }
         binding.btnUploadFromGallery.setOnClickListener {
             ImagePicker.with(this)
                 .galleryOnly()

@@ -59,7 +59,9 @@ class HubRepositoryImp constructor(
         return dao.getHubFromId(hub_serial_no)
     }
 
-
+    override suspend fun checkIfHubNumberAlreadyAdded(hub_phone_number: String): Boolean {
+       return dao.checkIfHubPhoneNumberAlreadyPresent(hub_phone_number)
+    }
 
 
 }

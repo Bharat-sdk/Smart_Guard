@@ -13,9 +13,9 @@ private val hubRepositoryImp: HubRepositoryImp
     private val _addHubEvents = MutableSharedFlow<AddAHubEvent>()
     val addHubEvents: SharedFlow<AddAHubEvent> = _addHubEvents
 
+
     fun addHub(hubSerialNo:String, hubPhoneNumber:String)
     {
-
         viewModelScope.launch {
             if (hubSerialNo.isEmpty()){
                 _addHubEvents.emit(AddAHubEvent.SerialNumberValidationErrorEvent("Please Enter Hub Serial Number"))
@@ -30,7 +30,7 @@ private val hubRepositoryImp: HubRepositoryImp
             }
             else{
                 try {
-                    if (hubRepositoryImp.checkIfHubAlreadyAdded(hubSerialNo))
+                    if (hubRepositoryImp.checkIfHubAlreadyAdded(hubSerialNo) || hubRepositoryImp.checkIfHubNumberAlreadyAdded(hubPhoneNumber))
                     {
                         _addHubEvents.emit(AddAHubEvent.SQLErrorEvent("This Hub is Already Added"))
                     }

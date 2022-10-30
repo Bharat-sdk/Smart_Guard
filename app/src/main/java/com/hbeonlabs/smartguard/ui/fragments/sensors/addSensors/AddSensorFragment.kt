@@ -10,6 +10,7 @@ import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
+import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 
@@ -42,6 +43,9 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
             visibility = View.INVISIBLE
         }
 
+        binding.clAddASensor.setOnClickListener {
+            requireContext().hideKeyboard(it)
+        }
 
         binding.btnAddSensor.setOnClickListener {
             val sensorName = binding.edtAddSensorName.text.toString()

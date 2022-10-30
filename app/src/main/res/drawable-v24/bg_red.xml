@@ -5,7 +5,7 @@
         android:top="@dimen/_3sdp"
         android:bottom="@dimen/_3sdp">
 <shape android:shape="rectangle" >
-<stroke android:width="2dp" android:color="#C31515" />
+<stroke android:width="2dp" android:color="@color/red" />
 </shape>
     </item>
 </layer-list>
