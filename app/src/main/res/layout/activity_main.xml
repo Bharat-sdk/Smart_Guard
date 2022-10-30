@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.MainActivity">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,6 +24,7 @@
                 android:src="@drawable/ic_arrow_back"
                 />
             <TextView
+                android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TITLE"
@@ -43,7 +44,7 @@
                 />
 
 
-    </Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <fragment
         android:id="@+id/navHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

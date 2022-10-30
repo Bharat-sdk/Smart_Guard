@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_logo"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/_100sdp"
-        android:text="SMARTGUARD"
+        android:text="@string/smartguard"
         android:textColor="@color/on_boarding_blue"
         android:textSize="@dimen/_22ssp"
         android:textStyle="bold"

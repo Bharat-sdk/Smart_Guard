@@ -2,6 +2,7 @@ package com.hbeonlabs.smartguard.ui.fragments.onBoarding
 
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
@@ -83,7 +84,7 @@ class FragmentViewPager:BaseFragment<SplashviewModel,FragmentOnboardingBinding>(
 
         binding.txtNext.setOnClickListener {
             if (  binding.txtNext.text == "Get Started" ){
-                snackBar("Last")
+               findNavController().navigate(R.id.fragmentAddAHub)
             }
             else{
                 binding.onBoardingViewPager.setCurrentItem(binding.onBoardingViewPager.currentItem+1,true )
