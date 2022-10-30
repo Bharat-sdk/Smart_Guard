@@ -7,15 +7,16 @@ import android.os.Build
 import android.provider.Telephony
 import android.telephony.SmsMessage
 import android.util.Log
+import timber.log.Timber
 
 
 class SmsBroadcastReceiver(
-    private val serviceProviderNumber: String,
+   // private val serviceProviderNumber: String,
 
-) :
-    BroadcastReceiver() {
+) : BroadcastReceiver() {
     private var listener: Listener? = null
     override fun onReceive(context: Context?, intent: Intent) {
+        Log.d(TAG, "onReceive: ")
         if (intent.action == Telephony.Sms.Intents.SMS_RECEIVED_ACTION) {
             var smsSender = ""
             var smsBody = ""
@@ -23,10 +24,12 @@ class SmsBroadcastReceiver(
                 smsSender = smsMessage.displayOriginatingAddress
                 smsBody += smsMessage.messageBody
             }
-            if (smsSender == serviceProviderNumber) {
-                if (listener != null) {
-                    listener!!.onTextReceived(smsBody,smsSender)
-                }
+            Timber.tag(TAG).d("onReceive: "+ smsBody+smsSender)
+            /*  if (smsSender == serviceProviderNumber) {
+
+            }*/
+            if (listener != null) {
+                listener!!.onTextReceived(smsBody, smsSender)
             }
         }
     }
@@ -40,6 +43,6 @@ class SmsBroadcastReceiver(
     }
 
     companion object {
-        private const val TAG = "SmsBroadcastReceiver"
+        private const val TAG = "TAG"
     }
 }
