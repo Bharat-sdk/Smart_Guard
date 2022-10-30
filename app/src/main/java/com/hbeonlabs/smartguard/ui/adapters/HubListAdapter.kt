@@ -11,6 +11,8 @@ import java.util.*
 
 class HubListAdapter : RecyclerView.Adapter<HubListAdapter.HubViewHolder>() {
 
+    
+
     inner class HubViewHolder(val binding: ItemHubLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Hub) {

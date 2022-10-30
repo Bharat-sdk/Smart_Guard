@@ -30,12 +30,18 @@ class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScree
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.setImageResource(R.drawable.ic_settings)
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = VISIBLE
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
+            setImageResource(R.drawable.ic_settings)
+            visibility = VISIBLE
+            setOnClickListener {
+                findNavController().navigate(FragmentHubDetailsDirections.actionFragmentHubDetailsToFragmentHubSettings())
+            }
+        }
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
             setImageResource(R.drawable.ic_baseline_add)
             setOnClickListener { findNavController().navigate(R.id.fragmentAddAHub) }
-            visibility = VISIBLE}
+            visibility = VISIBLE
+        }
 
         val fragmentList = arrayListOf<Fragment>(
             FragmentPagerSirenArming(),FragmentPagerSOS(),FragmentPagerActivityHistory()
@@ -48,7 +54,7 @@ class FragmentHubDetails:BaseFragment<HubDetailsViewModel,FragmentHubDetailScree
         binding.circularIndicator.setViewPager(binding.hubScreenFragmentViewPager)
 
         binding.layoutManageSensors.setOnClickListener {
-            findNavController().navigate(FragmentHubDetailsDirections.actionFragmentHubDetailsToSecondaryUsersFragment())
+
         }
 
     }

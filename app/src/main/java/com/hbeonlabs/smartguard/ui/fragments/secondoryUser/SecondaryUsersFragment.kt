@@ -1,6 +1,7 @@
 package com.hbeonlabs.smartguard.ui.fragments.secondoryUser
 
 import android.view.View
+import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
@@ -27,10 +28,16 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
     override fun initView() {
         super.initView()
 
-        (requireActivity() as MainActivity).binding.toolbarIconEnd2.setImageResource(R.drawable.ic_baseline_help)
+        (requireActivity() as MainActivity).binding.toolbarIconEnd.visibility = View.INVISIBLE
+        (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
 
 
-        val adapter = SecondaryUserAdapter()
+        val adapter = SecondaryUserAdapter(requireContext())
+        adapter.setAddUserClickListener { secondaryUser, i ->  } 
+        adapter.setEditUserClickListener { secondaryUser, i ->  }
+        adapter.setDeleteUserClickListener { secondaryUser, i ->  }
+
+        
         adapter.differ.submitList(AppLists(requireContext()).secondaryUserList)
         binding.adapter = adapter
     }

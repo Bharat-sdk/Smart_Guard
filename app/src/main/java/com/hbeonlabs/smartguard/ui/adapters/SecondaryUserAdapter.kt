@@ -1,7 +1,10 @@
 package com.hbeonlabs.smartguard.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,19 +14,20 @@ import com.hbeonlabs.smartguard.data.local.models.SecondaryUser
 import com.hbeonlabs.smartguard.databinding.ItemHubLayoutBinding
 import com.hbeonlabs.smartguard.databinding.ItemSecandoryNumberBinding
 
-class SecondaryUserAdapter : RecyclerView.Adapter<SecondaryUserAdapter.SecondaryUserViewHolder>() {
+class SecondaryUserAdapter(val context:Context) : RecyclerView.Adapter<SecondaryUserAdapter.SecondaryUserViewHolder>() {
 
     inner class SecondaryUserViewHolder(val binding: ItemSecandoryNumberBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SecondaryUser) {
-            if (data.user_name.isNotEmpty())
+            if (data.user_name.isNotEmpty() || data.user_name.isNotBlank())
             {
-                binding.data = (data)
+                binding.txtName.text = data.user_name
+                binding.txtNumber.text = data.user_phone_number
+                binding.ibIconEnd.setImageResource(R.drawable.ic_three_dots)
             }
             else{
                 binding.txtName.text = "EMPTY SLOT"
                 binding.txtNumber.text = "Tap to register a new user"
-                binding.ibIconEnd.setImageResource(R.drawable.ic_three_dots)
             }
         }
 
@@ -70,15 +74,54 @@ class SecondaryUserAdapter : RecyclerView.Adapter<SecondaryUserAdapter.Secondary
         }
 
         holder.binding.ibIconEnd.setOnClickListener {
-            onClickListener?.let { it(data,position) }
+            if (data.user_name.isNotBlank() || data.user_phone_number.isNotBlank())
+            {
+                // Add Popup Menu
+                val popupMenu = PopupMenu(context,holder.binding.ibIconEnd)
+                popupMenu.setForceShowIcon(true)
+                popupMenu.menuInflater.inflate(R.menu.popup_menu_secandory_user,popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                    when(item.itemId) {
+                        R.id.popup_menu_edit ->{
+                            // Edit Secondary User
+                            onEditUserClickListener?.let { it(data,position) }
+
+                        }
+                        R.id.popup_menu_delete -> {
+                            // Delete Secondary User
+                            onDeleteUserClickListener?.let { it(data,position) }
+                        }
+                    }
+                    true
+                })
+                popupMenu.show()
+
+            }
+            else{
+                // Navigate to Add Sensors Fragment
+                onAddUserClickListener?.let { it(data,position) }
+            }
         }
 
     }
 
-    private var onClickListener: ((SecondaryUser,Int) -> Unit)? = null
+    private var onAddUserClickListener: ((SecondaryUser,Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (SecondaryUser,Int) -> Unit) {
-        onClickListener = listener
+    fun setAddUserClickListener(listener: (SecondaryUser,Int) -> Unit) {
+        onAddUserClickListener = listener
+    }
+
+
+    private var onEditUserClickListener: ((SecondaryUser,Int) -> Unit)? = null
+
+    fun setEditUserClickListener(listener: (SecondaryUser,Int) -> Unit) {
+        onEditUserClickListener = listener
+    }
+
+    private var onDeleteUserClickListener: ((SecondaryUser,Int) -> Unit)? = null
+
+    fun setDeleteUserClickListener(listener: (SecondaryUser,Int) -> Unit) {
+        onDeleteUserClickListener = listener
     }
 
 

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/fragmentSplash">
 
     <fragment
         android:id="@+id/fragmentOnBoarding"
         android:name="com.hbeonlabs.smartguard.ui.fragments.onBoarding.FragmentViewPager"
+        tools:layout="@layout/fragment_onboarding"
         android:label="FragmentViewPager" >
         <action
             android:id="@+id/action_fragmentOnBoarding_to_fragmentAddAHub"
@@ -17,6 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSplash"
+        tools:layout="@layout/fragment_splash"
         android:name="com.hbeonlabs.smartguard.ui.fragments.splash.SplashFragment"
         android:label="FragmentViewPager" >
         <action
@@ -25,6 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentAddAHub"
+        tools:layout="@layout/fragment_add_a_hub"
         android:name="com.hbeonlabs.smartguard.ui.fragments.addAHub.FragmentAddAHub"
         android:label="Add A Hub" >
         <action
@@ -33,6 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSelectAHub"
+        tools:layout="@layout/fragment_hub"
         android:name="com.hbeonlabs.smartguard.ui.fragments.selectHub.FragmentSelectAHub"
         android:label="Select Your Hub" >
         <action
@@ -44,6 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentPostAddHub"
+        tools:layout="@layout/fragment_add_hub_post_verification"
         android:name="com.hbeonlabs.smartguard.ui.fragments.postAddHub.FragmentPostAddHub"
         android:label="Add A Hub" >
         <action
@@ -52,6 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentHubDetails"
+        tools:layout="@layout/fragment_hub_detail_screen"
         android:name="com.hbeonlabs.smartguard.ui.fragments.hubDetails.FragmentHubDetails"
         android:label="FragmentHubDetails" >
 <!--        <argument
@@ -61,16 +68,27 @@
             android:id="@+id/action_fragmentHubDetails_to_fragmentActivityHistory"
             app:destination="@id/fragmentActivityHistory" />
         <action
-            android:id="@+id/action_fragmentHubDetails_to_secondaryUsersFragment"
-            app:destination="@id/secondaryUsersFragment" />
+            android:id="@+id/action_fragmentHubDetails_to_fragmentHubSettings"
+            app:destination="@id/fragmentHubSettings" />
     </fragment>
     <fragment
         android:id="@+id/fragmentActivityHistory"
+        tools:layout="@layout/fragment_activity_history"
         android:name="com.hbeonlabs.smartguard.ui.fragments.activityHistory.FragmentActivityHistory"
         android:label="Activity History" />
     <fragment
         android:id="@+id/secondaryUsersFragment"
+        tools:layout="@layout/fragment_secondary_users"
         android:name="com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUsersFragment"
         android:label="SecondaryUsersFragment" />
+    <fragment
+        android:id="@+id/fragmentHubSettings"
+        tools:layout="@layout/fragment_hub_settings"
+        android:name="com.hbeonlabs.smartguard.ui.fragments.hubSettings.FragmentHubSettings"
+        android:label="FragmentHubSettings" >
+        <action
+            android:id="@+id/action_fragmentHubSettings_to_secondaryUsersFragment"
+            app:destination="@id/secondaryUsersFragment" />
+    </fragment>
 
 </navigation>
