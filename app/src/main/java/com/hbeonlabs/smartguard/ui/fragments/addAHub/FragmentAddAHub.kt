@@ -11,6 +11,7 @@ import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.ui.dialogs.dialogVerifyHubAddition
 import com.hbeonlabs.smartguard.utils.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
@@ -81,10 +82,15 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>(),
             }
             else{
 
+                dialogVerifyHubAddition(hubSimNo,addAHubViewModel) {
+                    getViewModel().addHub(hubSerialNo, hubSimNo)
+                }
+
                 smsBroadcastReceiver.setListener(this)
 
                 sendSMS(hubSimNo.trim(),hubSerialNo.trim()+" R"){
                     // SMS Delivered Intent
+                    getViewModel().hubSmsDelivered()
                 }
             }
 
@@ -116,18 +122,26 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>(),
                 is AddAHubEvent.SQLErrorEvent -> {
                     makeToast(it.message)
                 }
+                AddAHubEvent.HubRegisteredEvent -> {
+
+                }
+                is AddAHubEvent.HubRegistrationErrorEvent -> {
+                    makeToast(it.message)
+                }
+                AddAHubEvent.MessageDeliveredEvent -> {
+
+                }
             }
         }
     }
 
     override fun onTextReceived(text: String?, smsSender: String?) {
-        //makeToast("Text received $text $smsSender")
         if (text.equals("You have been registered."))
         {
-            getViewModel().addHub(hubSerialNo,hubSimNo)
+            getViewModel().hubRegistrationSuccess()
         }
         else{
-            makeToast(text.toString())
+            getViewModel().hubAdditionError(text.toString())
         }
     }
 

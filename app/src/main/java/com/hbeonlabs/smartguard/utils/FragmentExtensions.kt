@@ -150,13 +150,8 @@ private fun Fragment.sendSMS2(phoneNumber:String,message:String,SENT:PendingInte
 
             when(resultCode)
             {
-                Activity.RESULT_OK->
-                    Toast.makeText(requireContext(), "SMS delivered",
-                        Toast.LENGTH_SHORT).show()
-                Activity.RESULT_CANCELED->
-
-                    Toast.makeText(requireContext(), "SMS not delivered",
-                        Toast.LENGTH_SHORT).show();
+                Activity.RESULT_OK-> deliveredListener()
+                Activity.RESULT_CANCELED-> makeToast("SMS not delivered")
 
 
             }
