@@ -48,10 +48,35 @@ private val hubRepositoryImp: HubRepositoryImp
 
         }
     }
+
+    fun hubSmsDelivered()
+    {
+        viewModelScope.launch {
+            _addHubEvents.emit(AddAHubEvent.MessageDeliveredEvent)
+        }
+    }
+
+    fun hubAdditionError(message: String)
+    {
+        viewModelScope.launch {
+            _addHubEvents.emit(AddAHubEvent.HubRegistrationErrorEvent(message))
+        }
+    }
+
+    fun hubRegistrationSuccess()
+    {
+        viewModelScope.launch {
+            _addHubEvents.emit(AddAHubEvent.HubRegisteredEvent)
+        }
+    }
 }
 
 sealed class AddAHubEvent{
     object NavigateToPostHubEvent:AddAHubEvent()
+    object MessageDeliveredEvent:AddAHubEvent()
+    object HubRegisteredEvent:AddAHubEvent()
+    class HubRegistrationErrorEvent(val message:String):AddAHubEvent()
+
     class SerialNumberValidationErrorEvent(val message:String):AddAHubEvent()
     class PhoneValidationErrorEvent(val message: String):AddAHubEvent()
     class SQLErrorEvent(val message: String):AddAHubEvent()

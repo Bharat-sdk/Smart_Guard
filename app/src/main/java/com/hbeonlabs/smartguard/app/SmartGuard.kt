@@ -13,7 +13,7 @@ import org.koin.core.context.GlobalContext.startKoin
 
 
 class SmartGuard : Application() {
-    lateinit var smsBroadcastReceiver:SmsBroadcastReceiver
+    //lateinit var smsBroadcastReceiver:SmsBroadcastReceiver
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
@@ -27,15 +27,15 @@ class SmartGuard : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        smsBroadcastReceiver = SmsBroadcastReceiver()
+        /*smsBroadcastReceiver = SmsBroadcastReceiver()
         registerReceiver(
             smsBroadcastReceiver,
             IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)
-        )
+        )*/
     }
 
     override fun onTerminate() {
-        unregisterReceiver(smsBroadcastReceiver)
+        //unregisterReceiver(smsBroadcastReceiver)
         super.onTerminate()
     }
 }

@@ -141,7 +141,6 @@
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         android:textSize="@dimen/_12ssp"
-        android:inputType="number"
         />
 
     <TextView

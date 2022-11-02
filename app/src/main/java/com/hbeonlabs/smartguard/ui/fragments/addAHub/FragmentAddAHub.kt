@@ -1,25 +1,25 @@
 package com.hbeonlabs.smartguard.ui.fragments.addAHub
 
 import android.Manifest
-import android.content.pm.PackageManager
+import android.content.IntentFilter
+import android.provider.Telephony
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
-import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
-import com.hbeonlabs.smartguard.utils.hideKeyboard
-import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.ui.dialogs.dialogVerifyHubAddition
+import com.hbeonlabs.smartguard.utils.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
+class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>(),
+    SmsBroadcastReceiver.Listener {
 
     private  val addAHubViewModel: AddAHubViewModel by inject()
     val requestMultiplePermissions = registerForActivityResult(
@@ -29,6 +29,10 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
            // Log.d("DEBUG", "${it.key} = ${it.value}")
         }
     }
+    var hubSimNo = ""
+    var hubSerialNo = ""
+    lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
+
 
     override fun getViewModel(): AddAHubViewModel {
             return addAHubViewModel
@@ -40,11 +44,16 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
 
     override fun initView() {
         super.initView()
+        smsBroadcastReceiver = SmsBroadcastReceiver()
+        requireActivity().registerReceiver(smsBroadcastReceiver, IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION));
+
         observe()
         requestMultiplePermissions.launch(
             arrayOf(
                 Manifest.permission.READ_SMS,
-                Manifest.permission.SEND_SMS
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.RECEIVE_SMS,
+                Manifest.permission.RECEIVE_MMS
             )
         )
         //requestReadAndSendSmsPermission()
@@ -57,9 +66,35 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
 
         binding.btnAddHub.setOnClickListener {
-            val hubSerialNo = binding.edtAddHubSerial.text.toString()
-            val hubSimNo = binding.edtAddHubSimNo.text.toString()
-            addAHubViewModel.addHub(hubSerialNo,hubSimNo)
+             hubSerialNo = binding.edtAddHubSerial.text.toString()
+             hubSimNo = binding.edtAddHubSimNo.text.toString()
+
+            if (hubSerialNo.isEmpty()){
+                makeToast("Please Enter Hub Serial Number")
+            }
+            else if(hubSimNo.isEmpty())
+            {
+                makeToast("Please Enter Your Phone Number")
+            }
+            else if (hubSimNo.length < 10)
+            {
+               makeToast("Please Enter Valid Phone Number")
+            }
+            else{
+
+                dialogVerifyHubAddition(hubSimNo,addAHubViewModel) {
+                    getViewModel().addHub(hubSerialNo, hubSimNo)
+                }
+
+                smsBroadcastReceiver.setListener(this)
+
+                sendSMS(hubSimNo.trim(),hubSerialNo.trim()+" R"){
+                    // SMS Delivered Intent
+                    getViewModel().hubSmsDelivered()
+                }
+            }
+
+            requireContext().hideKeyboard(it)
         }
 
         binding.clAddAHub.setOnClickListener {
@@ -87,41 +122,28 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
                 is AddAHubEvent.SQLErrorEvent -> {
                     makeToast(it.message)
                 }
+                AddAHubEvent.HubRegisteredEvent -> {
+
+                }
+                is AddAHubEvent.HubRegistrationErrorEvent -> {
+                    makeToast(it.message)
+                }
+                AddAHubEvent.MessageDeliveredEvent -> {
+
+                }
             }
         }
     }
 
-/*
-    fun isSmsPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.READ_SMS
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    */
-/**
-     * Request runtime SMS permission
-     *//*
-
-    private fun requestReadAndSendSmsPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                Manifest.permission.READ_SMS
-            )
-        ) {
-            // You may display a non-blocking explanation here, read more in the documentation:
-            // https://developer.android.com/training/permissions/requesting.html
+    override fun onTextReceived(text: String?, smsSender: String?) {
+        if (text.equals("You have been registered."))
+        {
+            getViewModel().hubRegistrationSuccess()
         }
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.READ_SMS),
-            100
-        )
+        else{
+            getViewModel().hubAdditionError(text.toString())
+        }
     }
-*/
-
-
 
 
 }

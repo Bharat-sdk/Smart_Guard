@@ -1,13 +1,19 @@
 package com.hbeonlabs.smartguard.utils
 
+import android.app.Activity
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.telephony.SmsManager
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -69,7 +75,7 @@ fun Context.hideKeyboard(view:View)
 }
 
 
-fun Fragment.sendSMS(phoneNumber:String,message:String)
+private fun Fragment.sendSMS2(phoneNumber:String,message:String,SENT:PendingIntent?,DELIVERY:PendingIntent?)
 {
     try {
         val smsManager: SmsManager
@@ -80,12 +86,79 @@ fun Fragment.sendSMS(phoneNumber:String,message:String)
             smsManager = SmsManager.getDefault()
         }
 
-        smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+        smsManager.sendTextMessage(phoneNumber, null, message, SENT, DELIVERY)
 
         Toast.makeText(this.requireContext(), "Message Sent", Toast.LENGTH_LONG).show()
 
     } catch (e: Exception) {
-        Toast.makeText(this.requireContext(), "Please enter all the data.."+e.message.toString(), Toast.LENGTH_LONG)
+        Toast.makeText(this.requireContext(), e.message.toString(), Toast.LENGTH_LONG)
             .show()
+        Log.d("TAG", "sendSMS: "+e.localizedMessage)
     }
+}
+
+ fun Fragment.sendSMS(phoneNumber:String,  message:String, deliveredListener:()->Unit ) {
+    val SENT = "SMS_SENT"
+    val  DELIVERED = "SMS_DELIVERED"
+
+    val sentPI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        PendingIntent.getBroadcast(requireContext(), 0, Intent(SENT),PendingIntent.FLAG_IMMUTABLE)
+    } else {
+        PendingIntent.getBroadcast(requireContext(), 0, Intent(SENT),0)
+    }
+    val deliveredPI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        PendingIntent.getBroadcast(requireContext(), 0,  Intent(DELIVERED), PendingIntent.FLAG_IMMUTABLE)
+    } else {
+        PendingIntent.getBroadcast(requireContext(), 0,  Intent(DELIVERED), 0)
+    }
+
+    requireActivity().registerReceiver(object: BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent?) {
+
+            when(resultCode)
+            {
+                Activity.RESULT_OK->
+                    Toast.makeText(requireContext(), "SMS sent",
+                        Toast.LENGTH_SHORT).show()
+                SmsManager.RESULT_ERROR_GENERIC_FAILURE->
+
+                    Toast.makeText(requireContext(), "Generic failure",
+                        Toast.LENGTH_SHORT).show()
+                SmsManager.RESULT_ERROR_NO_SERVICE->
+
+                    Toast.makeText(requireContext(), "No service",
+                        Toast.LENGTH_SHORT).show()
+                SmsManager.RESULT_ERROR_NULL_PDU->
+
+                    Toast.makeText(requireContext(), "Null PDU",
+                        Toast.LENGTH_SHORT).show()
+
+
+                SmsManager.RESULT_ERROR_RADIO_OFF->
+
+                    Toast.makeText(requireContext(), "Radio off",
+                        Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+    }, IntentFilter(SENT))
+
+
+    requireActivity().registerReceiver(object: BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent?) {
+
+            when(resultCode)
+            {
+                Activity.RESULT_OK-> deliveredListener()
+                Activity.RESULT_CANCELED-> makeToast("SMS not delivered")
+
+
+            }
+        }
+
+    }, IntentFilter(SENT))
+
+    sendSMS2(phoneNumber, message,sentPI,deliveredPI)
+
 }
