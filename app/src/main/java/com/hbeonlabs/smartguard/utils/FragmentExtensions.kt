@@ -159,6 +159,6 @@ private fun Fragment.sendSMS2(phoneNumber:String,message:String,SENT:PendingInte
 
     }, IntentFilter(SENT))
 
-    sendSMS2(phoneNumber,"$message R",sentPI,deliveredPI)
+    sendSMS2(phoneNumber, message,sentPI,deliveredPI)
 
 }

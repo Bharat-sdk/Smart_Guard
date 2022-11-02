@@ -1,8 +1,12 @@
 package com.hbeonlabs.smartguard.ui.dialogs
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +25,9 @@ fun Fragment.dialogVerifyHubAddition(
     val dialog = Dialog(requireContext())
 
     val binding = DataBindingUtil.inflate(LayoutInflater.from(requireContext()), R.layout.dialog_verify_add_hub, null, false) as DialogVerifyAddHubBinding
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setContentView(binding.root)
+    dialog.window!!.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
     dialog.show()
     dialog.setCancelable(false)
 
@@ -58,7 +64,6 @@ fun Fragment.dialogVerifyHubAddition(
                 binding.llVerifying.visibility = View.GONE
                 binding.llVerificationFailed.visibility = View.VISIBLE
             }
-
             else -> {}
         }
     }
