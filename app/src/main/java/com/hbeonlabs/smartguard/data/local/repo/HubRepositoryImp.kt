@@ -63,6 +63,22 @@ class HubRepositoryImp constructor(
        return dao.checkIfHubPhoneNumberAlreadyPresent(hub_phone_number)
     }
 
+    override suspend fun setArmRegistered(hub_serial_no: String) {
+        dao.setHubArmRegisteredState(true,hub_serial_no)
+    }
+
+    override suspend fun setDisarmRegistered(hub_serial_no: String) {
+        dao.setHubDisArmRegisteredState(true,hub_serial_no)
+    }
+
+    override suspend fun setRingRegistered(hub_serial_no: String) {
+        dao.setHubRingRegisteredState(true,hub_serial_no)
+    }
+
+    override suspend fun setSirenRegistered(hub_serial_no: String) {
+        dao.setHubSilenceRegisteredState(true,hub_serial_no)
+    }
+
 
 }
 

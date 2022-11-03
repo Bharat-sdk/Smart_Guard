@@ -184,6 +184,18 @@ class FragmentPagerSirenArming:BaseFragment<HubDetailsViewModel,FragmentPagerSir
                 hubDetailsViewModel.stopLoading()
                 hubSirenRemoteDialog = dialogArmDisarmRingSilenceRemote(text)
             }
+            else if(text == "Remote ID : 01 saved" || text == "Remote ID : 02 saved" ||text == "Remote ID : 03 saved"||text == "Remote ID : 04 saved" )
+            {
+               /* when(text[13])
+                {
+                    "1" -> hubDetailsViewModel.armRegistered()
+                }*/
+                hubSirenRemoteDialog.cancel()
+            }
+            else if(text == "Configuration timeout")
+            {
+
+            }
         }
     }
 

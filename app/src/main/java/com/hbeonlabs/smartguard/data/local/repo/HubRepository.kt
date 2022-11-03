@@ -28,4 +28,12 @@ interface HubRepository {
     suspend fun getHubFromId(hub_serial_no: String): Flow<Hub>
 
     suspend fun checkIfHubNumberAlreadyAdded(hub_phone_number:String):Boolean
+
+    suspend fun setArmRegistered(hub_serial_no: String)
+
+    suspend fun setDisarmRegistered(hub_serial_no: String)
+
+    suspend fun setRingRegistered(hub_serial_no: String)
+
+    suspend fun setSirenRegistered(hub_serial_no: String)
 }

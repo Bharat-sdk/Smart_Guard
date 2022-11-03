@@ -37,6 +37,18 @@ interface HubDao {
     @Query("UPDATE hub SET hub_name = :hub_name , hub_image = :hubImage WHERE hub_serial_number in(:hub_serial_no)")
     suspend fun addUpdateHub(hub_name:String ,hubImage:String ,hub_serial_no:String)
 
+    @Query("UPDATE hub SET hub_arm_registered = :boolean WHERE hub_serial_number = :hub_serial_no")
+    suspend fun setHubArmRegisteredState(boolean:Boolean,hub_serial_no:String)
+
+    @Query("UPDATE hub SET hub_disarm_registered = :boolean WHERE hub_serial_number = :hub_serial_no")
+    suspend fun setHubDisArmRegisteredState(boolean:Boolean,hub_serial_no:String)
+
+    @Query("UPDATE hub SET hub_ring_registered = :boolean WHERE hub_serial_number = :hub_serial_no")
+    suspend fun setHubRingRegisteredState(boolean:Boolean,hub_serial_no:String)
+
+    @Query("UPDATE hub SET hub_silence_registered = :boolean WHERE hub_serial_number = :hub_serial_no")
+    suspend fun setHubSilenceRegisteredState(boolean:Boolean,hub_serial_no:String)
+
 
 
     // ================ ACTIVITY HISTORY SQL =========================

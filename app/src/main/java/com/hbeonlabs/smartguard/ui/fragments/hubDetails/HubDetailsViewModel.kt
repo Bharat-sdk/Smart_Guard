@@ -63,6 +63,58 @@ class HubDetailsViewModel constructor(
         }
     }
 
+    fun armRegistered()
+    {
+        viewModelScope.launch {
+            try {
+                repository.setArmRegistered(hub_id)
+            }  catch (e:Exception)
+            {
+                _hubEvents.emit(HubDetailsEvents.SQLErrorEvent(e.localizedMessage))
+            }
+
+        }
+    }
+
+    fun disarmRegistered()
+    {
+        viewModelScope.launch {
+            try {
+                repository.setDisarmRegistered(hub_id)
+            }  catch (e:Exception)
+            {
+                _hubEvents.emit(HubDetailsEvents.SQLErrorEvent(e.localizedMessage))
+            }
+
+        }
+    }
+
+    fun sirenRegistered()
+    {
+        viewModelScope.launch {
+            try {
+                repository.setArmRegistered(hub_id)
+            }  catch (e:Exception)
+            {
+                _hubEvents.emit(HubDetailsEvents.SQLErrorEvent(e.localizedMessage))
+            }
+
+        }
+    }
+
+    fun ringRegistered()
+    {
+        viewModelScope.launch {
+            try {
+                repository.setArmRegistered(hub_id)
+            }  catch (e:Exception)
+            {
+                _hubEvents.emit(HubDetailsEvents.SQLErrorEvent(e.localizedMessage))
+            }
+
+        }
+    }
+
     fun armDisarmHub(armState:Boolean){
         viewModelScope.launch {
             try {
