@@ -25,17 +25,4 @@ class SmartGuard : Application() {
         }
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        /*smsBroadcastReceiver = SmsBroadcastReceiver()
-        registerReceiver(
-            smsBroadcastReceiver,
-            IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)
-        )*/
-    }
-
-    override fun onTerminate() {
-        //unregisterReceiver(smsBroadcastReceiver)
-        super.onTerminate()
-    }
 }

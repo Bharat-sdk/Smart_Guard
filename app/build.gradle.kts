@@ -104,6 +104,10 @@ dependencies {
     //Image Picker Library
     implementation ("com.github.dhaval2404:imagepicker:2.1")
 
+    // Lottie dependency
+    implementation ("com.airbnb.android:lottie:3.4.0")
+
+
 
 
 

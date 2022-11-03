@@ -27,7 +27,7 @@ fun Fragment.dialogVerifyHubAddition(
     val binding = DataBindingUtil.inflate(LayoutInflater.from(requireContext()), R.layout.dialog_verify_add_hub, null, false) as DialogVerifyAddHubBinding
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setContentView(binding.root)
-    dialog.window!!.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+    dialog.window!!.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
     dialog.show()
     dialog.setCancelable(false)
 

@@ -21,10 +21,14 @@ class HubDetailsViewModel constructor(
     private val _progressIndicator = MutableStateFlow<Int>(0)
     val progressIndicatorLiveData: StateFlow<Int> = _progressIndicator
 
+    private val _loadingState = MutableStateFlow<Boolean>(false)
+    val loadingState: StateFlow<Boolean> = _loadingState
+
     private val _hubEvents = MutableSharedFlow<HubDetailsEvents>()
     val hubEvents: SharedFlow<HubDetailsEvents> = _hubEvents
 
     var hub_id = ""
+    var hub:Hub? = null
 
     var job: Job = viewModelScope.launch { }
 
@@ -42,6 +46,20 @@ class HubDetailsViewModel constructor(
         viewModelScope.launch {
             _progressIndicator.emit(0)
 
+        }
+    }
+
+    fun startLoading()
+    {
+        viewModelScope.launch {
+            _loadingState.emit(true)
+        }
+    }
+
+    fun stopLoading()
+    {
+        viewModelScope.launch {
+            _loadingState.emit(false)
         }
     }
 

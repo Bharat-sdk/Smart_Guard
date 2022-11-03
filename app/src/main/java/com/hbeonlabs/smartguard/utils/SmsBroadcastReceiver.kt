@@ -10,10 +10,7 @@ import android.util.Log
 import timber.log.Timber
 
 
-class SmsBroadcastReceiver(
-   // private val serviceProviderNumber: String,
-
-) : BroadcastReceiver() {
+class SmsBroadcastReceiver : BroadcastReceiver() {
     private var listener: Listener? = null
     override fun onReceive(context: Context?, intent: Intent) {
         Log.d(TAG, "onReceive: ")

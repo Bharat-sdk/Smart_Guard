@@ -51,6 +51,7 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             visibility = VISIBLE
         }
         binding.hubData = args.hub
+        hubDetailsViewModel.hub = args.hub
 
         observe()
 

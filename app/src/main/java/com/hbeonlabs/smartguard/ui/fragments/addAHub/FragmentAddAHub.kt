@@ -45,7 +45,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>(),
     override fun initView() {
         super.initView()
         smsBroadcastReceiver = SmsBroadcastReceiver()
-        requireActivity().registerReceiver(smsBroadcastReceiver, IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION));
+        requireActivity().registerReceiver(smsBroadcastReceiver, IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION))
 
         observe()
         requestMultiplePermissions.launch(
