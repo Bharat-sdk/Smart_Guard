@@ -20,7 +20,7 @@ class HubRepositoryImp constructor(
     override suspend fun getAllHubs(): Flow<List<Hub>> = dao.getAllHubsList()
     override suspend fun addHub(hubSerialNo:String, hubPhoneNumber:String) {
         val currentDate = Calendar.getInstance().timeInMillis
-        val hub = Hub(hubSerialNo,"", "",hubPhoneNumber, hub_siren = false, hub_arm_state = false,currentDate.toString())
+        val hub = Hub(hubSerialNo,"", "",hubPhoneNumber, hub_siren = false, hub_arm_state = false,currentDate.toString(),false,false,false,false)
         dao.addHub(hub)
     }
     override suspend fun checkIfHubAlreadyAdded(hubSerialNo: String): Boolean {

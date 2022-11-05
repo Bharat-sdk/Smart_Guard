@@ -16,9 +16,9 @@ data class Hub
    val hub_siren : Boolean,
    val hub_arm_state : Boolean,
    val hub_registered_on:String,
-   val hub_arm_registered:Boolean = false,
-   val hub_disarm_registered:Boolean = false,
-   val hub_silence_registered:Boolean = false,
-   val hub_ring_registered:Boolean = false,
+   val hub_arm_registered:Boolean ,
+   val hub_disarm_registered:Boolean ,
+   val hub_silence_registered:Boolean ,
+   val hub_ring_registered:Boolean ,
 
    ):Serializable
