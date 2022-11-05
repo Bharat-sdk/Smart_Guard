@@ -2,13 +2,14 @@ package com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent
-import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentPagerSosBinding
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
-import org.koin.android.ext.android.inject
+import com.hbeonlabs.smartguard.utils.AppConstants.COMPARISON
+import com.hbeonlabs.smartguard.utils.AppConstants.DONE
+import com.hbeonlabs.smartguard.utils.snackBar
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 @SuppressLint("ClickableViewAccessibility")
@@ -26,7 +27,7 @@ class FragmentPagerSOS:BaseFragment<HubDetailsViewModel,FragmentPagerSosBinding>
     override fun initView() {
         super.initView()
 
-        binding.btnSos.setOnTouchListener { view, motionEvent ->
+        binding.btnSos.setOnTouchListener { _, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN ->{
                     getViewModel().startPress()
@@ -42,9 +43,9 @@ class FragmentPagerSOS:BaseFragment<HubDetailsViewModel,FragmentPagerSosBinding>
         lifecycleScope.launchWhenStarted {
             getViewModel().progressIndicatorLiveData.collect{
                 binding.progress2Sec.progress = it
-                if (it ==100)
+                if (it ==COMPARISON)
                 {
-                    snackBar("Done")
+                    snackBar(DONE)
                 }
             }
 

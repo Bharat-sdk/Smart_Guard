@@ -51,7 +51,7 @@ class FragmentPostAddHub:BaseFragment<PostAddHubViewModel,FragmentAddHubPostVeri
                     snackBar(ImagePicker.getError(data))
                 }
                 else -> {
-                    snackBar("Task Cancelled")
+                    snackBar(AppConstants.TASK_CANCELLED)
                 }
             }
         }

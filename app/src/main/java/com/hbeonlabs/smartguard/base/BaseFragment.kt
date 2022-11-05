@@ -42,20 +42,20 @@ abstract class BaseFragment<T : BaseViewModel, V : ViewBinding> : Fragment() {
 
     }
 
-    fun snackBar(text: String) {
-        Snackbar.make(
-            requireView(),
-            text,
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
-
-    fun snackBar(@StringRes res: Int) {
-        Snackbar.make(
-            requireView(),
-            res,
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
+//    fun snackBar(text: String) {
+//        Snackbar.make(
+//            requireView(),
+//            text,
+//            Snackbar.LENGTH_SHORT
+//        ).show()
+//    }
+//
+//    fun snackBar(@StringRes res: Int) {
+//        Snackbar.make(
+//            requireView(),
+//            res,
+//            Snackbar.LENGTH_SHORT
+//        ).show()
+//    }
 
 }

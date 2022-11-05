@@ -1,22 +1,19 @@
 package com.hbeonlabs.smartguard.ui.fragments.secondoryUser
 
 import android.view.View
-import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
-import com.hbeonlabs.smartguard.data.local.models.SecondaryUser
-import com.hbeonlabs.smartguard.databinding.FragmentAddHubPostVerificationBinding
 import com.hbeonlabs.smartguard.databinding.FragmentSecondaryUsersBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.SecondaryUserAdapter
+import com.hbeonlabs.smartguard.utils.AppConstants
 import com.hbeonlabs.smartguard.utils.AppLists
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 import org.koin.android.ext.android.inject
 
@@ -29,9 +26,8 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
             return secondaryUserViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_secondary_users
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_secondary_users
+
 
     override fun initView() {
         super.initView()
@@ -42,16 +38,16 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
         secondaryUserViewModel.hubId = args.hubId
 
         adapter = SecondaryUserAdapter(requireContext())
-        adapter.setAddUserClickListener { secondaryUser, i ->
+        adapter.setAddUserClickListener { _, i ->
             // add user to the hub and slot given
             findNavController().navigate(SecondaryUsersFragmentDirections.actionSecondaryUsersFragmentToAddSecondaryUserFragment(i,secondaryUserViewModel.hubId))
         }
-        adapter.setEditUserClickListener { secondaryUser, i ->
+        adapter.setEditUserClickListener { secondaryUser, _ ->
 
             findNavController().navigate(SecondaryUsersFragmentDirections.actionSecondaryUsersFragmentToEditSecondaryUserFragment(secondaryUser))
 
         }
-        adapter.setDeleteUserClickListener { secondaryUser, i ->
+        adapter.setDeleteUserClickListener { secondaryUser, _ ->
             secondaryUserViewModel.deleteSecondaryUser(secondaryUser)
         }
 
@@ -84,7 +80,7 @@ class SecondaryUsersFragment:BaseFragment<SecondaryUserViewModel,FragmentSeconda
             when(it)
             {
                 SecondaryUserEvents.DeleteSecondaryUserSuccessEvent -> {
-                    makeToast("Deleted Secondary User Successfully")
+                    makeToast(AppConstants.DELETE_SECONDARY_USER_SUCCESSFULLY)
                 }
                 is SecondaryUserEvents.SQLErrorEvent -> {
                     makeToast(it.message)

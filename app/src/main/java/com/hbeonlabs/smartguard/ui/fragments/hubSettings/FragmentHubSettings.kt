@@ -13,20 +13,22 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.data.local.models.Hub
-import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
+
 import com.hbeonlabs.smartguard.databinding.FragmentHubSettingsBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.utils.AppConstants
 import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.snackBar
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+
 
 import org.koin.android.ext.android.inject
 
 
-class FragmentHubSettings:BaseFragment<HubSettingsViewModel,FragmentHubSettingsBinding>() {
-val args:FragmentHubSettingsArgs by navArgs()
+class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettingsBinding>() {
+    val args: FragmentHubSettingsArgs by navArgs()
     var imageUri = "".toUri()
-    lateinit var _hub:Hub
+    lateinit var _hub: Hub
 
 
     private val startImagePickerResult =
@@ -44,15 +46,15 @@ val args:FragmentHubSettingsArgs by navArgs()
                     snackBar(ImagePicker.getError(data))
                 }
                 else -> {
-                    snackBar("Task Cancelled")
+                    snackBar(AppConstants.TASK_CANCELLED)
                 }
             }
         }
 
 
-    private  val hubSettingsViewModel: HubSettingsViewModel by inject()
+    private val hubSettingsViewModel: HubSettingsViewModel by inject()
     override fun getViewModel(): HubSettingsViewModel {
-            return hubSettingsViewModel
+        return hubSettingsViewModel
     }
 
     override fun getLayoutResourceId(): Int {
@@ -68,7 +70,7 @@ val args:FragmentHubSettingsArgs by navArgs()
             // Edit Hub Functionality
             setOnClickListener {
                 val name = binding.edtAddHubName.text.toString()
-                hubSettingsViewModel.updateHubName(name,imageUri.toString(),args.hubId)
+                hubSettingsViewModel.updateHubName(name, imageUri.toString(), args.hubId)
             }
         }
 
@@ -78,7 +80,11 @@ val args:FragmentHubSettingsArgs by navArgs()
 
 
         binding.descManageSecondaryNum.setOnClickListener {
-            findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToSecondaryUsersFragment(args.hubId))
+            findNavController().navigate(
+                FragmentHubSettingsDirections.actionFragmentHubSettingsToSecondaryUsersFragment(
+                    args.hubId
+                )
+            )
         }
 
         binding.btnUploadFromGallery.setOnClickListener {
@@ -100,11 +106,9 @@ val args:FragmentHubSettingsArgs by navArgs()
         }
 
 
-
     }
 
-    private fun observe()
-    {
+    private fun observe() {
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             hubSettingsViewModel.hubSettingsEvents.collectLatest {
                 when (it) {
@@ -113,7 +117,11 @@ val args:FragmentHubSettingsArgs by navArgs()
                     }
                     HubSettingEvents.UpdateHubSuccessEvent -> {
                         hubSettingsViewModel.getHubFromId(args.hubId)
-                        findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(_hub))
+                        findNavController().navigate(
+                            FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(
+                                _hub
+                            )
+                        )
                     }
                 }
             }
@@ -121,21 +129,18 @@ val args:FragmentHubSettingsArgs by navArgs()
 
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            hubSettingsViewModel.getHubFromId(args.hubId).collectLatest {hub->
+            hubSettingsViewModel.getHubFromId(args.hubId).collectLatest { hub ->
                 _hub = hub
                 binding.edtAddHubName.setText(hub.hub_name)
-                if (hub.hub_image.isEmpty())
-                {
+                if (hub.hub_image.isEmpty()) {
                     binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
-                }
-                else{
+                } else {
                     imageUri = hub.hub_image.toUri()
                     binding.imgEditHubImage.setImageURI(hub.hub_image.toUri())
                 }
             }
         }
     }
-
 
 
 }

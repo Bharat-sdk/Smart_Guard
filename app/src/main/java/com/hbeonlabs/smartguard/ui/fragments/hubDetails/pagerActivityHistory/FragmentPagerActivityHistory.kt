@@ -29,9 +29,8 @@ class FragmentPagerActivityHistory:BaseFragment<HubDetailsViewModel,FragmentPage
             return hubDetailsViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_pager_activity_history
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_pager_activity_history
+
 
     override fun initView() {
         super.initView()

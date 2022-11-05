@@ -2,7 +2,7 @@ package com.hbeonlabs.smartguard.data.local.datastore
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import com.hbeonlabs.smartguard.utils.Constants
+import com.hbeonlabs.smartguard.utils.AppConstants
 
 
 class SharedPreferences constructor(
@@ -13,13 +13,13 @@ class SharedPreferences constructor(
     val editor = sharedPreferences.edit()
 
      fun isFirstTime():Boolean{
-       return sharedPreferences.getBoolean(Constants.isFirstTime,true)
+       return sharedPreferences.getBoolean(AppConstants.isFirstTime,true)
     }
 
 
     fun setIsFirstTime(isFirstTime:Boolean)
     {
-        editor.putBoolean(Constants.isFirstTime,isFirstTime)
+        editor.putBoolean(AppConstants.isFirstTime,isFirstTime)
         editor.commit()
     }
 

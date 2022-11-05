@@ -11,9 +11,7 @@ import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
-import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
-import com.hbeonlabs.smartguard.utils.hideKeyboard
-import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,9 +32,8 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
             return addAHubViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_add_a_hub
-    }
+    override fun getLayoutResourceId()=R.layout.fragment_add_a_hub
+
 
     override fun initView() {
         super.initView()
@@ -51,7 +48,7 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>() {
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             visibility = View.VISIBLE
             setImageResource(R.drawable.ic_baseline_help)
-            setOnClickListener { snackBar("Help") }
+            setOnClickListener { snackBar(AppConstants.HELP) }
         }
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE

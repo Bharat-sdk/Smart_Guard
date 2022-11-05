@@ -29,9 +29,8 @@ class FragmentActivityHistory:BaseFragment<ActivityHistoryViewModel,FragmentActi
             return activityHistoryViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_activity_history
-    }
+    override fun getLayoutResourceId()=R.layout.fragment_activity_history
+
 
     override fun initView() {
         super.initView()

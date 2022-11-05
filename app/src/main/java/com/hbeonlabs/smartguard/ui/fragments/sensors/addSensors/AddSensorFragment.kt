@@ -27,9 +27,8 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
             return addSensorViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_add_a_sensor
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_add_a_sensor
+
 
     override fun initView() {
         super.initView()

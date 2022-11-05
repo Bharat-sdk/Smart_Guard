@@ -9,6 +9,7 @@ import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentSensorListBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.SensorListAdapter
+import com.hbeonlabs.smartguard.utils.AppConstants
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
 
@@ -24,9 +25,8 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
             return sensorListViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_sensor_list
-    }
+    override fun getLayoutResourceId()=R.layout.fragment_sensor_list
+
 
     override fun initView() {
         super.initView()
@@ -47,17 +47,17 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
 
         adapter = SensorListAdapter(requireContext())
         binding.adapter = adapter
-        adapter.setDeleteSensorClickListener { sensor, i ->
+        adapter.setDeleteSensorClickListener { sensor, _ ->
             getViewModel().deleteSensor(sensor)
         }
 
-        adapter.setEditSensorClickListener{ sensor, i ->
+        adapter.setEditSensorClickListener{ sensor, _ ->
 
             findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToEditSensorFragment(sensor))
 
         }
 
-        adapter.setSensorClickListener { sensor, position ->
+        adapter.setSensorClickListener { sensor, _ ->
             findNavController().navigate(SensorListFragmentDirections.actionSensorListFragmentToSensorDetailsFragment(sensor))
         }
 
@@ -76,7 +76,7 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
                 when(it)
                 {
                     SensorViewModel.ManageSensorEvents.DeleteSensorSuccess -> {
-                        makeToast("Sensor Removed Successfully")
+                        makeToast(AppConstants.DELETE_SENSOR_SUCCESSFULLY)
                     }
                     is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {
                         makeToast(it.message)

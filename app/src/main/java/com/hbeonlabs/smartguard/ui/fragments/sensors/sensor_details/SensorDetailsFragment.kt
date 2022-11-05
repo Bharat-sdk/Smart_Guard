@@ -5,14 +5,13 @@ import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
-import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.databinding.FragmentSensorDetailsBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
+import com.hbeonlabs.smartguard.utils.AppConstants
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.makeToast
 
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import java.text.SimpleDateFormat
 
@@ -26,9 +25,8 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
             return sensorDetailViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_sensor_details
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_sensor_details
+
 
     override fun initView() {
         super.initView()
@@ -77,7 +75,7 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
             when(it)
             {
                 SensorViewModel.ManageSensorEvents.DeleteSensorSuccess -> {
-                    makeToast("Sensor Removed Successfully")
+                    makeToast(AppConstants.DELETE_SENSOR_SUCCESSFULLY)
                 }
 
                 is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {

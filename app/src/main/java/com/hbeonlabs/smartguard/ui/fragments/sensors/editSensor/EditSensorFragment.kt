@@ -16,8 +16,10 @@ import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.databinding.FragmentEditASensorBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
+import com.hbeonlabs.smartguard.utils.AppConstants
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.hideKeyboard
+import com.hbeonlabs.smartguard.utils.snackBar
 
 import org.koin.android.ext.android.inject
 
@@ -44,7 +46,7 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
                     snackBar(ImagePicker.getError(data))
                 }
                 else -> {
-                    snackBar("Task Cancelled")
+                    snackBar(AppConstants.TASK_CANCELLED)
                 }
             }
         }
@@ -54,9 +56,8 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
             return sensorViewModel
     }
 
-    override fun getLayoutResourceId(): Int {
-        return R.layout.fragment_edit_a_sensor
-    }
+    override fun getLayoutResourceId()= R.layout.fragment_edit_a_sensor
+
 
     override fun initView() {
         super.initView()

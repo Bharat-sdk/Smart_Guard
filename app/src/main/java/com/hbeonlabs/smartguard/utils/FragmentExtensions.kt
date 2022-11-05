@@ -81,11 +81,11 @@ fun Fragment.sendSMS(phoneNumber:String,message:String)
         }
 
         smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+        makeToast(AppConstants.MESSAGE_SENT)
 
-        Toast.makeText(this.requireContext(), "Message Sent", Toast.LENGTH_LONG).show()
 
     } catch (e: Exception) {
-        Toast.makeText(this.requireContext(), "Please enter all the data.."+e.message.toString(), Toast.LENGTH_LONG)
-            .show()
+        makeToast(AppConstants.ENTER_ALL_DATA)
+
     }
 }

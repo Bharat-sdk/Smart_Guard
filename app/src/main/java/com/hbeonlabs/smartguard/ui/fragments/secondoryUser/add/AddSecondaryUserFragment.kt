@@ -14,8 +14,10 @@ import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentAddSecandoryUserBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.utils.AppConstants
 import com.hbeonlabs.smartguard.utils.hideKeyboard
 import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.snackBar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -43,7 +45,7 @@ class AddSecondaryUserFragment:BaseFragment<AddSecondaryUserViewModel,FragmentAd
                     snackBar(ImagePicker.getError(data))
                 }
                 else -> {
-                    snackBar("Task Cancelled")
+                    snackBar(AppConstants.TASK_CANCELLED)
                 }
             }
         }

@@ -7,6 +7,7 @@ import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.repo.HubRepository
 import com.hbeonlabs.smartguard.data.local.repo.HubRepositoryImp
 import com.hbeonlabs.smartguard.ui.fragments.hubSettings.HubSettingEvents
+import com.hbeonlabs.smartguard.utils.AppConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -53,13 +54,14 @@ class HubDetailsViewModel constructor(
                 val timeInMills = date.time
                 if (armState)
                     {
-                        repository.addActivityHistory(hub_id,"Hub Armed",timeInMills)
-                        _hubEvents.emit(HubDetailsEvents.ArmDisarmEvent("Your hub is Armed"))
+                        repository.addActivityHistory(hub_id,AppConstants.HUB_ARMED,timeInMills)
+                        _hubEvents.emit(HubDetailsEvents.ArmDisarmEvent(AppConstants.YOUR_HUB_ARMED))
 
                     }
                 else{
-                    repository.addActivityHistory(hub_id,"Hub Disarmed",timeInMills)
-                    _hubEvents.emit(HubDetailsEvents.ArmDisarmEvent("Your hub is Disarmed"))
+                    repository.addActivityHistory(hub_id,AppConstants.HUB_DIS_ARMED,timeInMills)
+                    _hubEvents.emit(HubDetailsEvents.ArmDisarmEvent(AppConstants.YOUR_HUB_DIS_ARMED))
+
                     }
             }
             catch (e:Exception)
@@ -77,13 +79,13 @@ class HubDetailsViewModel constructor(
                 val timeInMills = date.time
                 if (silenceRingState)
                 {
-                    repository.addActivityHistory(hub_id,"Siren Enabled",timeInMills)
-                    _hubEvents.emit(HubDetailsEvents.SilenceRingEvent("Hub siren is Enabled"))
+                    repository.addActivityHistory(hub_id,AppConstants.SIREN_ENABLED,timeInMills)
+                    _hubEvents.emit(HubDetailsEvents.SilenceRingEvent(AppConstants.HUB_SIREN_IS_ENABLED))
 
                 }
                 else{
-                    repository.addActivityHistory(hub_id,"Siren Disabled",timeInMills)
-                    _hubEvents.emit(HubDetailsEvents.SilenceRingEvent("Hub siren is Disabled"))
+                    repository.addActivityHistory(hub_id,AppConstants.SIREN_DISABLED,timeInMills)
+                    _hubEvents.emit(HubDetailsEvents.SilenceRingEvent(AppConstants.HUB_SIREN_DISABLED))
                 }
             }
             catch (e:Exception)
