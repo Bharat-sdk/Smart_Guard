@@ -94,6 +94,7 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             hubDetailsViewModel.getHubFromId(args.hub.hub_serial_number).collectLatest { hub->
                 (requireActivity() as MainActivity).binding.toolbarTitle.text = hub.hub_name
                 binding.hubData = hub
+                hubDetailsViewModel.hub = hub
                 hubDetailsViewModel.hub_id = hub.hub_serial_number
             }
         }

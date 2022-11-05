@@ -115,6 +115,7 @@ class HubDetailsViewModel constructor(
         }
     }
 
+
     fun armDisarmHub(armState:Boolean){
         viewModelScope.launch {
             try {
