@@ -35,7 +35,7 @@ abstract class BaseFragment<T : BaseViewModel, V : ViewBinding> : Fragment() {
 
     abstract fun getViewModel(): T
     abstract fun getLayoutResourceId(): Int
-   /* open fun getBinding()=_viewBinding*/
+
 
 
     open fun initView() {
