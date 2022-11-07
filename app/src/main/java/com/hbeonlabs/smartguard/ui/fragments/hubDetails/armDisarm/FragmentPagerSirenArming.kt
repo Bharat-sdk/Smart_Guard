@@ -5,11 +5,13 @@ import android.content.IntentFilter
 import android.graphics.PorterDuff.Mode
 import android.os.Build
 import android.provider.Telephony
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.databinding.FragmentPagerSirenArmingBinding
+import com.hbeonlabs.smartguard.ui.dialogs.dialogArmDisarmRingSilenceRemote
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
 import com.hbeonlabs.smartguard.utils.SmsBroadcastReceiver
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
@@ -44,59 +46,65 @@ class FragmentPagerSirenArming :
         smsBroadcastReceiver.setListener(this)
         observe()
 
-        // =================== HUB DISARM =========================
+        // =================== HUB DISARM CODE = DI =========================
         binding.cardHubDisarm.setOnClickListener {
             hubDetailsViewModel.startLoading()
 
-            // ============== If Not Registered With Remote =====================
+            hubDetailsViewModel.hub?.let { hub ->
+                sendSMS(hub.hub_phone_number, hub.hub_serial_number + " DI") {
+                    hubDetailsViewModel.startLoading()
+                }
+            }
+
+           /* // ============== If Not Registered With Remote =====================
             if (hubDetailsViewModel.hub?.hub_disarm_registered == false) {
                 hubDetailsViewModel.hub?.let { hub ->
                     sendSMS(hub.hub_phone_number, hub.hub_serial_number + " K02") {
                         // Delivered Listener
                     }
                 }
-            }
-            // ============== If Registered With Remote =====================
-            else {
-                hubDetailsViewModel.hub?.let { hub ->
-                    sendSMS(hub.hub_phone_number, hub.hub_serial_number + " DI") {}
-                }
-            }
+            }*/
         }
 
 
-        // =================== HUB ARM =========================
+        // =================== HUB ARM CODE = EN =========================
         binding.cardHubArm.setOnClickListener {
             hubDetailsViewModel.startLoading()
-            if (hubDetailsViewModel.hub?.hub_arm_registered == false) {
+
+            hubDetailsViewModel.hub?.let { hub ->
+                sendSMS(hub.hub_phone_number, hub.hub_serial_number + " EN") {
+                    hubDetailsViewModel.startLoading()
+                }
+            }
+    /*        if (hubDetailsViewModel.hub?.hub_arm_registered == false) {
                 hubDetailsViewModel.hub?.let { hub ->
                     sendSMS(hub.hub_phone_number, hub.hub_serial_number + " K01") {
                         // Delivered Listener
                     }
                 }
-            }
-            // ============== If ARM Registered With Remote =====================
-            else {
-                hubDetailsViewModel.hub?.let { hub ->
-                    sendSMS(hub.hub_phone_number, hub.hub_serial_number + " EN") {}
+            }*/
+
+        }
+
+
+        // =================== HUB RING CODE = SON =========================
+        binding.cardHubRing.setOnClickListener {
+            hubDetailsViewModel.startLoading()
+            hubDetailsViewModel.hub?.let { hub ->
+                sendSMS(hub.hub_phone_number, hub.hub_serial_number + " SON") {
+                    hubDetailsViewModel.startLoading()
                 }
             }
         }
 
-
-
-        binding.cardHubRing.setOnClickListener {
-            hubDetailsViewModel.startLoading()
-            hubDetailsViewModel.hub?.let { hub ->
-                sendSMS(hub.hub_phone_number, hub.hub_serial_number + " SON") {}
-            }
-        }
-
+        // =================== HUB SILENCE CODE = SOF =========================
         binding.cardHubSilence.setOnClickListener {
             hubDetailsViewModel.startLoading()
             hubDetailsViewModel.hub?.let { hub
                 ->
-                sendSMS(hub.hub_phone_number, hub.hub_serial_number + " SOF") {}
+                sendSMS(hub.hub_phone_number, hub.hub_serial_number + " SOF") {
+                    hubDetailsViewModel.startLoading()
+                }
             }
         }
 
@@ -257,34 +265,56 @@ class FragmentPagerSirenArming :
     override fun onTextReceived(text: String?, smsSender: String?) {
 
         if (text != null) {
-            if (text.startsWith("Press Remote Button to save Remote")) {
-                hubDetailsViewModel.stopLoading()
-
-            } else if (text == "Remote ID : 01 saved" || text == "Remote ID : 02 saved") {
-                when (text.substring(13, 15)) {
-                    "01" -> hubDetailsViewModel.armRegistered()
-                    "02" -> hubDetailsViewModel.disarmRegistered()
-                    /*"03" -> hubDetailsViewModel.armRegistered()
-                    "04" -> hubDetailsViewModel.armRegistered()*/
+            val remoteText = "Press Remote Button to save Remote ID : "
+            val remoteTextSaved = "Remote ID : "
+            when (text) {
+/*                remoteText+"01",remoteText+"02"->{
+                   hubSirenRemoteDialog =  dialogArmDisarmRingSilenceRemote(text)
                 }
-                hubSirenRemoteDialog.cancel()
-            } else if (text == "Configuration timeout") {
-                hubSirenRemoteDialog.dismiss()
-                makeToast("Configuration Timeout Please Retry Again")
-            } else if (text == "Smart Guard is activated.") {
-                hubDetailsViewModel.armDisarmHub(true)
-                makeToast(text)
-            } else if (text == "Smart Guard is deactivated.") {
-                hubDetailsViewModel.armDisarmHub(false)
-                makeToast(text)
-            } else if (text == "Siren on.") {
-                hubDetailsViewModel.silenceRingHub(true)
-                makeToast(text)
-            } else if (text == "Siren off.") {
-                hubDetailsViewModel.silenceRingHub(false)
-                makeToast(text)
-            } else {
-                makeToast(text)
+
+                remoteTextSaved+"01 saved.", remoteTextSaved+"02 saved." -> {
+                    Log.d("TAG", "onTextReceived: "+text.substring(12, 14))
+                    when (text.substring(12, 14)) {
+                        "01" -> {
+                            hubDetailsViewModel.armRegistered()
+
+                        }
+                        "02" -> hubDetailsViewModel.disarmRegistered()
+                        *//*"03" -> hubDetailsViewModel.armRegistered()
+                            "04" -> hubDetailsViewModel.armRegistered()*//*
+                    }
+                    hubSirenRemoteDialog.cancel()
+                    hubDetailsViewModel.stopLoading()
+                }
+                "Configuration timeout" -> {
+                    hubSirenRemoteDialog.dismiss()
+                    makeToast("Configuration Timeout Please Retry Again")
+                    hubDetailsViewModel.stopLoading()
+                }*/
+                "Smart Guard is activated." -> {
+                    hubDetailsViewModel.armDisarmHub(true)
+                    makeToast(text)
+                    hubDetailsViewModel.stopLoading()
+                }
+                "Smart Guard is deactivated." -> {
+                    hubDetailsViewModel.armDisarmHub(false)
+                    makeToast(text)
+                    hubDetailsViewModel.stopLoading()
+                }
+                "Siren on." -> {
+                    hubDetailsViewModel.silenceRingHub(true)
+                    makeToast(text)
+                    hubDetailsViewModel.stopLoading()
+                }
+                "Siren off." -> {
+                    hubDetailsViewModel.silenceRingHub(false)
+                    makeToast(text)
+                    hubDetailsViewModel.stopLoading()
+                }
+                else -> {
+                    makeToast(text)
+                    hubDetailsViewModel.stopLoading()
+                }
             }
         }
     }

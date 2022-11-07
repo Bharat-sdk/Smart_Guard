@@ -18,10 +18,10 @@ class HubDetailsViewModel constructor(
     private val repository: HubRepositoryImp
 ):BaseViewModel() {
 
-    private val _progressIndicator = MutableStateFlow<Int>(0)
+    private val _progressIndicator = MutableStateFlow(0)
     val progressIndicatorLiveData: StateFlow<Int> = _progressIndicator
 
-    private val _loadingState = MutableStateFlow<Boolean>(false)
+    private val _loadingState = MutableStateFlow(false)
     val loadingState: StateFlow<Boolean> = _loadingState
 
     private val _hubEvents = MutableSharedFlow<HubDetailsEvents>()

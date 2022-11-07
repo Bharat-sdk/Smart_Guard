@@ -88,8 +88,6 @@ private fun Fragment.sendSMS2(phoneNumber:String,message:String,SENT:PendingInte
 
         smsManager.sendTextMessage(phoneNumber, null, message, SENT, DELIVERY)
 
-        Toast.makeText(this.requireContext(), "Message Sent", Toast.LENGTH_LONG).show()
-
     } catch (e: Exception) {
         Toast.makeText(this.requireContext(), e.message.toString(), Toast.LENGTH_LONG)
             .show()

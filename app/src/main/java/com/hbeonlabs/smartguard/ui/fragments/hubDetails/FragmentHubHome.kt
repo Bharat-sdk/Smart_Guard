@@ -1,8 +1,8 @@
 package com.hbeonlabs.smartguard.ui.fragments.hubDetails
 
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -18,8 +18,6 @@ import com.hbeonlabs.smartguard.ui.fragments.hubDetails.sos.FragmentPagerSOS
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.makeToast
 import kotlinx.coroutines.flow.collectLatest
-
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
@@ -52,8 +50,10 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
         }
         binding.hubData = args.hub
         hubDetailsViewModel.hub = args.hub
+        binding.loadingAnim = hubDetailsViewModel
 
         observe()
+        observe2()
 
 
 
@@ -99,7 +99,25 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             }
         }
 
+
         }
+
+    private fun observe2()
+    {
+
+        collectLatestLifeCycleFlow(hubDetailsViewModel.loadingState)
+        {
+            if (it)
+            {
+                binding.loading.visibility = VISIBLE
+                binding.loading.playAnimation()
+            }
+            else{
+                binding.loading.visibility  = GONE
+                binding.loading.pauseAnimation()
+            }
+        }
+    }
     }
 
 
