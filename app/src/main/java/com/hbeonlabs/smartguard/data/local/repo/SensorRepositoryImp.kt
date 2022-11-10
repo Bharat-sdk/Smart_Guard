@@ -29,6 +29,10 @@ class SensorRepositoryImp constructor(
        return dao.editSensor(sensor)
     }
 
+    override suspend fun getAllSensorsList(hub_serial_no: String): Array<Sensor> {
+        return dao.getAllSensorListHubId(hub_serial_no)
+    }
+
 
 }
 

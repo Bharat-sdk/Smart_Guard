@@ -268,29 +268,7 @@ class FragmentPagerSirenArming :
             val remoteText = "Press Remote Button to save Remote ID : "
             val remoteTextSaved = "Remote ID : "
             when (text) {
-/*                remoteText+"01",remoteText+"02"->{
-                   hubSirenRemoteDialog =  dialogArmDisarmRingSilenceRemote(text)
-                }
 
-                remoteTextSaved+"01 saved.", remoteTextSaved+"02 saved." -> {
-                    Log.d("TAG", "onTextReceived: "+text.substring(12, 14))
-                    when (text.substring(12, 14)) {
-                        "01" -> {
-                            hubDetailsViewModel.armRegistered()
-
-                        }
-                        "02" -> hubDetailsViewModel.disarmRegistered()
-                        *//*"03" -> hubDetailsViewModel.armRegistered()
-                            "04" -> hubDetailsViewModel.armRegistered()*//*
-                    }
-                    hubSirenRemoteDialog.cancel()
-                    hubDetailsViewModel.stopLoading()
-                }
-                "Configuration timeout" -> {
-                    hubSirenRemoteDialog.dismiss()
-                    makeToast("Configuration Timeout Please Retry Again")
-                    hubDetailsViewModel.stopLoading()
-                }*/
                 "Smart Guard is activated." -> {
                     hubDetailsViewModel.armDisarmHub(true)
                     makeToast(text)

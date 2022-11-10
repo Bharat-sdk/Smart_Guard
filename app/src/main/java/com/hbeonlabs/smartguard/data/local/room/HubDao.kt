@@ -68,6 +68,10 @@ interface HubDao {
     @Query("SELECT * FROM sensor WHERE hub_serial_number = :hub_id")
     fun getAllSensorUsingHubId(hub_id: String):Flow<List<Sensor>>
 
+    @Query("SELECT * FROM sensor WHERE hub_serial_number = :hub_id")
+    fun getAllSensorListHubId(hub_id: String):Array<Sensor>
+
+
     // delete sensor
     @Delete
     fun deleteSensor(sensor: Sensor):Int

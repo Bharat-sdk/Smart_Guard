@@ -66,7 +66,7 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
     private fun observe()
     {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            getViewModel().getHubList(args.hubSerialNo).collectLatest {
+            getViewModel().getSensorsList(args.hubSerialNo).collectLatest {
                 adapter.differ.submitList(it)
             }
         }

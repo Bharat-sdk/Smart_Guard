@@ -4,7 +4,6 @@ import com.hbeonlabs.smartguard.base.BaseViewModel
 import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.data.local.models.SensorTypes
 import com.hbeonlabs.smartguard.data.local.repo.SensorRepositoryImp
-import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,7 +24,19 @@ private val repo:SensorRepositoryImp
 
 
 
-    suspend fun getHubList(hub_serial_no:String):Flow<List<Sensor>> = repo.getAllSensors(hub_serial_no)
+    suspend fun getSensorsList(hub_serial_no:String):Flow<List<Sensor>> = repo.getAllSensors(hub_serial_no)
+
+     private suspend fun getSensorsArray(hub_serial_no:String):Array<Sensor> = repo.getAllSensorsList(hub_serial_no)
+
+    suspend fun getSensorsListSize(hub_serial_no:String):Int {
+        var size = -1
+        viewModelScope.launch {
+          val data =  repo.getAllSensorsList(hub_serial_no)
+            size = data.size
+        }
+        return size
+    }
+
 
     fun deleteSensor(sensor: Sensor)
     {
@@ -55,14 +66,30 @@ private val repo:SensorRepositoryImp
                 _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent("Please Fill All The Fields"))
             }
             else{
-                try {
-                    repo.addSensor(sensor)
-                    _mSensorEvents.emit(ManageSensorEvents.AddSensorSuccess)
-                }
-                catch (e:SQLException)
+                val size = getSensorsArray(sensor.hub_serial_number).size
+
+                if (size<0)
                 {
-                    _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent(e.message.toString()))
+                    _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent("Having an error please try again"))
                 }
+                else if (size>=8)
+                {
+                    _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent("8 Sensors are already added cant add more sensors."))
+                }
+                else{
+                    try {
+                        sensor.sensor_slot = "S0${size+1}"
+                        repo.addSensor(sensor)
+                        _mSensorEvents.emit(ManageSensorEvents.AddSensorSuccess)
+                    }
+                    catch (e:SQLException)
+                    {
+                        _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent(e.message.toString()))
+                    }
+                }
+
+
+
             }
 
 

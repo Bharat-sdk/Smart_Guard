@@ -14,5 +14,6 @@ data class Sensor(
     val sensor_arm_state:Boolean,
     val sensor_custom_sms: String,
     val sensor_registered_on:String,
-    val hub_serial_number: String
+    val hub_serial_number: String,
+    var sensor_slot:String
 ):Serializable

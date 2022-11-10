@@ -15,4 +15,6 @@ interface SensorRepository {
     suspend fun addSensor(sensor: Sensor)
 
     suspend fun editSensor(sensor: Sensor):Int
+
+    suspend fun getAllSensorsList(hub_serial_no:String): Array<Sensor>
 }
