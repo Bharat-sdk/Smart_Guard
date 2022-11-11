@@ -1,5 +1,8 @@
 package com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors
 
+import android.app.Dialog
+import android.content.IntentFilter
+import android.provider.Telephony
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -9,10 +12,9 @@ import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.ui.dialogs.dialogVerifySensorAddition
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
-import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
-import com.hbeonlabs.smartguard.utils.hideKeyboard
-import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -20,8 +22,11 @@ import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import java.util.*
 
 
-class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>() {
-
+class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding>(),
+    SmsBroadcastReceiver.Listener {
+    lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
+    lateinit var dialog:Dialog
+    lateinit var sensor: Sensor
     val args : AddSensorFragmentArgs by navArgs()
 
     private  val addSensorViewModel  by sharedStateViewModel<SensorViewModel>()
@@ -35,8 +40,14 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
 
     override fun initView() {
         super.initView()
+      // =========  Setting Sms Listener ==================
+        smsBroadcastReceiver = SmsBroadcastReceiver()
+        requireActivity().registerReceiver(
+            smsBroadcastReceiver,
+            IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)
+        )
+        smsBroadcastReceiver.setListener(this)
         observe()
-
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             setImageResource(R.drawable.ic_baseline_add)
             visibility = View.INVISIBLE
@@ -53,19 +64,26 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
             val sensorName = binding.edtAddSensorName.text.toString()
             val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
             val curTimeStamp = Calendar.getInstance().timeInMillis
-            val sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,false,customSmsMessage,curTimeStamp.toString(),addSensorViewModel.hub_serial_no,"")
+            sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,false,customSmsMessage,curTimeStamp.toString(),addSensorViewModel.hub_serial_no,"")
             lifecycleScope.launch{
               val size =   addSensorViewModel.getSensorsListSize(sensor.hub_serial_number)
+                // ======== Checking the no. of sensors already added to hub ===========
                 if (size <0 || size>=8)
                 {
-                    // todo toast
+                    makeToast("Maximum 8 Hubs are added")
                 }
-
                 else{
-                    // todo send sms to add sensor
+                    if (sensorName.isNotBlank() || customSmsMessage.isNotBlank())
+                    {
+                        binding.loading.visibility = View.VISIBLE
+                        addSensorViewModel.hub?.let { hub -> sendSMS(hub.hub_phone_number,"${hub.hub_serial_number} S0${size+1} $customSmsMessage #"){} }
+                    }
+                    else{
+                        makeToast("Please fill all the fields to continue")
+                    }
                 }
             }
-            addSensorViewModel.addSensor(sensor)
+
         }
 
     }
@@ -77,7 +95,7 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
             addSensorViewModel.mSensorEvents.collectLatest {
                 when (it) {
                     SensorViewModel.ManageSensorEvents.AddSensorSuccess -> {
-                        findNavController().navigate(AddSensorFragmentDirections.actionAddSensorFragmentToSensorListFragment(addSensorViewModel.hub_serial_no))
+                        findNavController().navigate(AddSensorFragmentDirections.actionAddSensorFragmentToSensorListFragment(addSensorViewModel.hub_serial_no,addSensorViewModel.hub!!))
                     }
                     is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {
                         makeToast(it.message)
@@ -91,6 +109,27 @@ class AddSensorFragment:BaseFragment<SensorViewModel,FragmentAddASensorBinding>(
 
     }
 
+    override fun onTextReceived(text: String?, smsSender: String?) {
+        binding.loading.visibility = View.INVISIBLE
+        if (text!=null)
+        {
+            if (text.startsWith("Activate Sensor to save Sensor"))
+            {
+                dialog = dialogVerifySensorAddition()
+
+            }
+            else if (text.startsWith("Sensor ID : "))
+            {
+                dialog.dismiss()
+                addSensorViewModel.addSensor(sensor)
+            }
+            else if (text == "Configuration timeout")
+            {
+                dialog.dismiss()
+            }
+
+        }
+    }
 
 
 }

@@ -23,10 +23,10 @@ import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBinding>() {
 
-    private  val hubDetailsViewModel by sharedStateViewModel<HubDetailsViewModel>()
-    val args :FragmentHubHomeArgs by navArgs()
+    private val hubDetailsViewModel by sharedStateViewModel<HubDetailsViewModel>()
+    val args: FragmentHubHomeArgs by navArgs()
     override fun getViewModel(): HubDetailsViewModel {
-            return hubDetailsViewModel
+        return hubDetailsViewModel
     }
 
     override fun getLayoutResourceId(): Int {
@@ -40,7 +40,11 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             setImageResource(R.drawable.ic_settings)
             visibility = VISIBLE
             setOnClickListener {
-                findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings(args.hub.hub_serial_number))
+                findNavController().navigate(
+                    FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings(
+                        args.hub.hub_serial_number
+                    )
+                )
             }
         }
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
@@ -56,69 +60,72 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
         observe2()
 
 
-
         val fragmentList = arrayListOf<Fragment>(
-            FragmentPagerSirenArming(),FragmentPagerSOS(),FragmentPagerActivityHistory()
+            FragmentPagerSirenArming(), FragmentPagerSOS(), FragmentPagerActivityHistory()
         )
 
-        val adapter = ViewPagerHubFragmentAdapter(fragmentList,requireActivity().supportFragmentManager,lifecycle)
+        val adapter = ViewPagerHubFragmentAdapter(
+            fragmentList,
+            requireActivity().supportFragmentManager,
+            lifecycle
+        )
 
         binding.hubScreenFragmentViewPager.adapter = adapter
 
         binding.circularIndicator.setViewPager(binding.hubScreenFragmentViewPager)
 
         binding.layoutManageSensors.setOnClickListener {
-            findNavController().navigate(FragmentHubHomeDirections.actionFragmentHubDetailsToSensorListFragment(hubDetailsViewModel.hub_id))
-        }
+            findNavController().navigate(
+                FragmentHubHomeDirections.actionFragmentHubDetailsToSensorListFragment(
+                    hubDetailsViewModel.hub_id, hubDetailsViewModel.hub!!
+                )
+            )
 
+        }
     }
 
 
-    fun observe()
-    {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            hubDetailsViewModel.hubEvents.collectLatest {
-                when(it)
-                {
-                    is HubDetailsViewModel.HubDetailsEvents.SQLErrorEvent -> {
-                        makeToast(it.message)
-                    }
+        fun observe() {
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                hubDetailsViewModel.hubEvents.collectLatest {
+                    when (it) {
+                        is HubDetailsViewModel.HubDetailsEvents.SQLErrorEvent -> {
+                            makeToast(it.message)
+                        }
 
-                    else -> {}
+                        else -> {}
+                    }
+                }
+            }
+
+
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                hubDetailsViewModel.getHubFromId(args.hub.hub_serial_number).collectLatest { hub ->
+                    (requireActivity() as MainActivity).binding.toolbarTitle.text = hub.hub_name
+                    binding.hubData = hub
+                    hubDetailsViewModel.hub = hub
+                    hubDetailsViewModel.hub_id = hub.hub_serial_number
+                }
+            }
+
+
+        }
+
+        private fun observe2() {
+
+            collectLatestLifeCycleFlow(hubDetailsViewModel.loadingState)
+            {
+                if (it) {
+                    binding.loading.visibility = VISIBLE
+                    binding.loading.playAnimation()
+                } else {
+                    binding.loading.visibility = GONE
+                    binding.loading.pauseAnimation()
                 }
             }
         }
-
-
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            hubDetailsViewModel.getHubFromId(args.hub.hub_serial_number).collectLatest { hub->
-                (requireActivity() as MainActivity).binding.toolbarTitle.text = hub.hub_name
-                binding.hubData = hub
-                hubDetailsViewModel.hub = hub
-                hubDetailsViewModel.hub_id = hub.hub_serial_number
-            }
-        }
-
-
-        }
-
-    private fun observe2()
-    {
-
-        collectLatestLifeCycleFlow(hubDetailsViewModel.loadingState)
-        {
-            if (it)
-            {
-                binding.loading.visibility = VISIBLE
-                binding.loading.playAnimation()
-            }
-            else{
-                binding.loading.visibility  = GONE
-                binding.loading.pauseAnimation()
-            }
-        }
     }
-    }
+
 
 
 

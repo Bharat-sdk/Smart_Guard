@@ -137,6 +137,18 @@
         android:layout_marginTop="@dimen/_10sdp"
         />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        android:elevation="45dp"
+        app:lottie_rawRes="@raw/lottie_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

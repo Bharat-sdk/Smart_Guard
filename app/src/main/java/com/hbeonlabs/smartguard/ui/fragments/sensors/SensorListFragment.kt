@@ -31,6 +31,7 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
     override fun initView() {
         super.initView()
         sensorListViewModel.hub_serial_no =args.hubSerialNo
+        sensorListViewModel.hub = args.hub
         observe()
         (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
             setImageResource(R.drawable.ic_baseline_add)

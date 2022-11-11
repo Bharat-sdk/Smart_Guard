@@ -1,6 +1,7 @@
 package com.hbeonlabs.smartguard.ui.fragments.sensors
 import androidx.lifecycle.viewModelScope
 import com.hbeonlabs.smartguard.base.BaseViewModel
+import com.hbeonlabs.smartguard.data.local.models.Hub
 import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.data.local.models.SensorTypes
 import com.hbeonlabs.smartguard.data.local.repo.SensorRepositoryImp
@@ -21,6 +22,7 @@ private val repo:SensorRepositoryImp
     val mSensorEvents: SharedFlow<ManageSensorEvents> = _mSensorEvents
 
     var hub_serial_no = ""
+    var hub:Hub? = null
 
 
 
