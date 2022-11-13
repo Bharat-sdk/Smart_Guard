@@ -79,6 +79,22 @@ class HubRepositoryImp constructor(
         dao.setHubSilenceRegisteredState(true,hub_serial_no)
     }
 
+    override suspend fun deleteHub(hub_serial_no: String) {
+        dao.deleteParticularHub(hub_serial_no)
+    }
+
+    override suspend fun deleteSensorsOfHub(hub_serial_no: String) {
+        dao.deleteAllSensorOfParticularHub(hub_serial_no)
+    }
+
+    override suspend fun deleteSecondaryUsersOfHub(hub_serial_no: String) {
+        dao.deleteAllSecondaryUserHub(hub_serial_no)
+    }
+
+    override suspend fun deleteActivityHistoryOfHub(hub_serial_no: String) {
+        dao.deleteAllActivityHistoryOfHubHub(hub_serial_no)
+    }
+
 
 }
 

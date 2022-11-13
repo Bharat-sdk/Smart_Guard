@@ -12,7 +12,7 @@ import com.hbeonlabs.smartguard.data.local.models.*
         ActivityHistory::class,
         SecondaryUser::class
     ],
-    version =  6
+    version =  7
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase :RoomDatabase(){

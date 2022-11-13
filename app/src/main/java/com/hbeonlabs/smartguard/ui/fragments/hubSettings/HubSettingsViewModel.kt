@@ -44,6 +44,23 @@ class HubSettingsViewModel @Inject constructor(
         }
     }
 
+    fun formatHub(hub_id: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                hubRepository.deleteSensorsOfHub(hub_id)
+                hubRepository.deleteSensorsOfHub(hub_id)
+                hubRepository.deleteActivityHistoryOfHub(hub_id)
+                hubRepository.deleteHub(hub_id)
+                _hubSettingsEvents.emit(HubSettingEvents.UpdateHubSuccessEvent)
+            }
+            catch (e:Exception)
+            {
+                _hubSettingsEvents.emit(HubSettingEvents.SQLErrorEvent(e.localizedMessage))
+            }
+        }
+    }
+
 
 
 }
@@ -51,4 +68,5 @@ class HubSettingsViewModel @Inject constructor(
 sealed class HubSettingEvents{
     class SQLErrorEvent(val message: String):HubSettingEvents()
     object UpdateHubSuccessEvent:HubSettingEvents()
+    object FormatHubSuccessEvent:HubSettingEvents()
 }

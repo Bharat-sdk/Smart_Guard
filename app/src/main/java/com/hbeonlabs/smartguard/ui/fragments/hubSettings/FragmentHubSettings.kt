@@ -1,7 +1,9 @@
 package com.hbeonlabs.smartguard.ui.fragments.hubSettings
 
 import android.app.Activity
+import android.content.IntentFilter
 import android.os.Environment
+import android.provider.Telephony
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,20 +15,22 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
 import com.hbeonlabs.smartguard.data.local.models.Hub
-import com.hbeonlabs.smartguard.databinding.FragmentAddAHubBinding
 import com.hbeonlabs.smartguard.databinding.FragmentHubSettingsBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
+import com.hbeonlabs.smartguard.ui.dialogs.dialogFormatHub
+import com.hbeonlabs.smartguard.utils.SmsBroadcastReceiver
 import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.sendSMS
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-
 import org.koin.android.ext.android.inject
 
 
-class FragmentHubSettings:BaseFragment<HubSettingsViewModel,FragmentHubSettingsBinding>() {
-val args:FragmentHubSettingsArgs by navArgs()
+class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettingsBinding>(),
+    SmsBroadcastReceiver.Listener {
+    val args: FragmentHubSettingsArgs by navArgs()
     var imageUri = "".toUri()
-    lateinit var _hub:Hub
+    lateinit var _hub: Hub
+    lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
 
 
     private val startImagePickerResult =
@@ -50,9 +54,9 @@ val args:FragmentHubSettingsArgs by navArgs()
         }
 
 
-    private  val hubSettingsViewModel: HubSettingsViewModel by inject()
+    private val hubSettingsViewModel: HubSettingsViewModel by inject()
     override fun getViewModel(): HubSettingsViewModel {
-            return hubSettingsViewModel
+        return hubSettingsViewModel
     }
 
     override fun getLayoutResourceId(): Int {
@@ -68,17 +72,28 @@ val args:FragmentHubSettingsArgs by navArgs()
             // Edit Hub Functionality
             setOnClickListener {
                 val name = binding.edtAddHubName.text.toString()
-                hubSettingsViewModel.updateHubName(name,imageUri.toString(),args.hubId)
+                hubSettingsViewModel.updateHubName(name, imageUri.toString(), args.hubId)
             }
         }
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
-
         observe()
+        // =========  Setting Sms Listener ==================
 
+        smsBroadcastReceiver = SmsBroadcastReceiver()
+        requireActivity().registerReceiver(
+            smsBroadcastReceiver,
+            IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)
+        )
+        smsBroadcastReceiver.setListener(this)
 
         binding.descManageSecondaryNum.setOnClickListener {
-            findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToSecondaryUsersFragment(args.hubId))
+
+            findNavController().navigate(
+                FragmentHubSettingsDirections.actionFragmentHubSettingsToSecondaryUsersFragment(
+                    args.hubId
+                )
+            )
         }
 
         binding.btnUploadFromGallery.setOnClickListener {
@@ -99,12 +114,16 @@ val args:FragmentHubSettingsArgs by navArgs()
                 }
         }
 
+        binding.descFormatHub.setOnClickListener {
+            dialogFormatHub {
+                sendSMS(_hub.hub_phone_number, "${_hub.hub_serial_number} F") {}
+            }
+        }
 
 
     }
 
-    private fun observe()
-    {
+    private fun observe() {
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             hubSettingsViewModel.hubSettingsEvents.collectLatest {
                 when (it) {
@@ -113,22 +132,27 @@ val args:FragmentHubSettingsArgs by navArgs()
                     }
                     HubSettingEvents.UpdateHubSuccessEvent -> {
                         hubSettingsViewModel.getHubFromId(args.hubId)
-                        findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(_hub))
+                        findNavController().navigate(
+                            FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentHubDetails(
+                                _hub
+                            )
+                        )
                     }
+                    HubSettingEvents.FormatHubSuccessEvent -> {
+                        findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentSelectAHub())
+                   }
                 }
             }
         }
 
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            hubSettingsViewModel.getHubFromId(args.hubId).collectLatest {hub->
+            hubSettingsViewModel.getHubFromId(args.hubId).collectLatest { hub ->
                 _hub = hub
                 binding.edtAddHubName.setText(hub.hub_name)
-                if (hub.hub_image.isEmpty())
-                {
+                if (hub.hub_image.isEmpty()) {
                     binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
-                }
-                else{
+                } else {
                     imageUri = hub.hub_image.toUri()
                     binding.imgEditHubImage.setImageURI(hub.hub_image.toUri())
                 }
@@ -136,6 +160,16 @@ val args:FragmentHubSettingsArgs by navArgs()
         }
     }
 
+    override fun onTextReceived(text: String?, smsSender: String?) {
+        if (text!= null)
+        {
+            if (text == "Master user has formatted the system.")
+            {
+               hubSettingsViewModel.formatHub(_hub.hub_serial_number)
+
+            }
+        }
+    }
 
 
 }

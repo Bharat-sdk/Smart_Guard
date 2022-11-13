@@ -94,7 +94,8 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
                 args.sensor.sensor_arm_state,
                 customMessage,
                 args.sensor.sensor_registered_on,
-                args.sensor.hub_serial_number
+                args.sensor.hub_serial_number,
+                args.sensor.sensor_slot
             )
 
             sensorViewModel.editSensor(sensor)
@@ -125,7 +126,9 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
             when(it)
             {
                 SensorViewModel.ManageSensorEvents.EditSensorSuccess -> {
-                    findNavController().navigate(EditSensorFragmentDirections.actionEditSensorFragmentToSensorListFragment(args.sensor.hub_serial_number))
+                    findNavController().navigate(EditSensorFragmentDirections.actionEditSensorFragmentToSensorListFragment(args.sensor.hub_serial_number,
+                        sensorViewModel.hub!!
+                    ))
                 }
                 is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> TODO()
                 else -> {}

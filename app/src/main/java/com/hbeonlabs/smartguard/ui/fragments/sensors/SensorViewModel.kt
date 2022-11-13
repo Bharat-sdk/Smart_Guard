@@ -1,4 +1,5 @@
 package com.hbeonlabs.smartguard.ui.fragments.sensors
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.hbeonlabs.smartguard.base.BaseViewModel
 import com.hbeonlabs.smartguard.data.local.models.Hub
@@ -21,6 +22,9 @@ private val repo:SensorRepositoryImp
     private val _mSensorEvents = MutableSharedFlow<ManageSensorEvents>()
     val mSensorEvents: SharedFlow<ManageSensorEvents> = _mSensorEvents
 
+    private val _listSizeEvent = MutableSharedFlow<Int>()
+    val listSizeEvent: SharedFlow<Int> = _listSizeEvent
+
     var hub_serial_no = ""
     var hub:Hub? = null
 
@@ -30,13 +34,12 @@ private val repo:SensorRepositoryImp
 
      private suspend fun getSensorsArray(hub_serial_no:String):Array<Sensor> = repo.getAllSensorsList(hub_serial_no)
 
-    suspend fun getSensorsListSize(hub_serial_no:String):Int {
-        var size = -1
-        viewModelScope.launch {
-          val data =  repo.getAllSensorsList(hub_serial_no)
-            size = data.size
-        }
-        return size
+     fun getSensorsListSize(hub_serial_no:String) {
+         viewModelScope.launch (Dispatchers.IO){
+             val data =  repo.getAllSensorsList(hub_serial_no)
+             _listSizeEvent.emit(data.size)
+         }
+
     }
 
 

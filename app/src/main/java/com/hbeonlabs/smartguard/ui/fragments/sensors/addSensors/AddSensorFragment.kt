@@ -3,6 +3,7 @@ package com.hbeonlabs.smartguard.ui.fragments.sensors.addSensors
 import android.app.Dialog
 import android.content.IntentFilter
 import android.provider.Telephony
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,8 +16,11 @@ import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.dialogs.dialogVerifySensorAddition
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
 import com.hbeonlabs.smartguard.utils.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import java.util.*
@@ -61,29 +65,8 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
         }
 
         binding.btnAddSensor.setOnClickListener {
-            val sensorName = binding.edtAddSensorName.text.toString()
-            val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
-            val curTimeStamp = Calendar.getInstance().timeInMillis
-            sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,false,customSmsMessage,curTimeStamp.toString(),addSensorViewModel.hub_serial_no,"")
-            lifecycleScope.launch{
-              val size =   addSensorViewModel.getSensorsListSize(sensor.hub_serial_number)
-                // ======== Checking the no. of sensors already added to hub ===========
-                if (size <0 || size>=8)
-                {
-                    makeToast("Maximum 8 Hubs are added")
-                }
-                else{
-                    if (sensorName.isNotBlank() || customSmsMessage.isNotBlank())
-                    {
-                        binding.loading.visibility = View.VISIBLE
-                        addSensorViewModel.hub?.let { hub -> sendSMS(hub.hub_phone_number,"${hub.hub_serial_number} S0${size+1} $customSmsMessage #"){} }
-                    }
-                    else{
-                        makeToast("Please fill all the fields to continue")
-                    }
-                }
-            }
 
+            addSensorViewModel.getSensorsListSize(addSensorViewModel.hub_serial_no)
         }
 
     }
@@ -105,9 +88,32 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
             }
         }
 
+        collectLatestLifeCycleFlow(addSensorViewModel.listSizeEvent){ size->
+
+            val sensorName = binding.edtAddSensorName.text.toString()
+            val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
+            val curTimeStamp = Calendar.getInstance().timeInMillis
+            sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,false,customSmsMessage,curTimeStamp.toString(),addSensorViewModel.hub_serial_no,"")
+            // ======== Checking the no. of sensors already added to hub ===========
+            if (size <0 || size>=8)
+            {
+                makeToast("Maximum 8 Hubs are added")
+            }
+            else{
+                if (sensorName.isNotBlank() || customSmsMessage.isNotBlank())
+                {
+                    binding.loading.visibility = View.VISIBLE
+                    addSensorViewModel.hub?.let { hub -> sendSMS(hub.hub_phone_number,"${hub.hub_serial_number} S0${size+1} $customSmsMessage #"){} }
+                }
+                else{
+                    makeToast("Please fill all the fields to continue")
+                }
+            }
+        }
 
 
     }
+
 
     override fun onTextReceived(text: String?, smsSender: String?) {
         binding.loading.visibility = View.INVISIBLE

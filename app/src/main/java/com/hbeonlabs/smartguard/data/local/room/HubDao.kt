@@ -97,6 +97,19 @@ interface HubDao {
     fun deleteSecondaryUser(secondaryUser: SecondaryUser)
 
 
+    //============== FORMAT HUB ===============
+    @Query("DELETE FROM sensor WHERE hub_serial_number = :hub_serial_no ")
+    fun deleteAllSensorOfParticularHub(hub_serial_no: String)
+
+    @Query("DELETE FROM secondaryuser WHERE hub_serial_number = :hub_serial_no ")
+    fun deleteAllSecondaryUserHub(hub_serial_no: String)
+
+    @Query("DELETE FROM hub WHERE hub_serial_number = :hub_serial_no ")
+    fun deleteParticularHub(hub_serial_no: String)
+
+    @Query("DELETE FROM activityhistory WHERE hub_serial_number = :hub_serial_no ")
+    fun deleteAllActivityHistoryOfHubHub(hub_serial_no: String)
+
 
 
 

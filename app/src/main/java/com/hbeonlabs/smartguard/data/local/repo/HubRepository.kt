@@ -36,4 +36,13 @@ interface HubRepository {
     suspend fun setRingRegistered(hub_serial_no: String)
 
     suspend fun setSirenRegistered(hub_serial_no: String)
+
+    // FORMAT HUB
+    suspend fun deleteHub(hub_serial_no: String)
+
+    suspend fun deleteSensorsOfHub(hub_serial_no: String)
+
+    suspend fun deleteSecondaryUsersOfHub(hub_serial_no: String)
+
+    suspend fun deleteActivityHistoryOfHub(hub_serial_no: String)
 }
