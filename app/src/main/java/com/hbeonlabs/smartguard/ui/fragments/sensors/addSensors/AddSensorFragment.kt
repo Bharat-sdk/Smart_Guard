@@ -66,7 +66,13 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
 
         binding.btnAddSensor.setOnClickListener {
 
-            addSensorViewModel.getSensorsListSize(addSensorViewModel.hub_serial_no)
+            if (sensor.sensor_name.isBlank() || sensor.sensor_custom_sms.isBlank())
+            {
+               makeToast("Please Fill All The Fields")
+            }
+            else{
+                addSensorViewModel.getSensorsListSize(addSensorViewModel.hub_serial_no)
+            }
         }
 
     }

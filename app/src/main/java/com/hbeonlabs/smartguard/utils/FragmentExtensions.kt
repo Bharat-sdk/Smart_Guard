@@ -116,8 +116,7 @@ private fun Fragment.sendSMS2(phoneNumber:String,message:String,SENT:PendingInte
             when(resultCode)
             {
                 Activity.RESULT_OK->
-                    Toast.makeText(requireContext(), "SMS sent",
-                        Toast.LENGTH_SHORT).show()
+                {}
                 SmsManager.RESULT_ERROR_GENERIC_FAILURE->
 
                     Toast.makeText(requireContext(), "Generic failure",

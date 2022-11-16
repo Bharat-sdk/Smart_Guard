@@ -29,7 +29,7 @@ fun Fragment.dialogFormatHub(onYesClick : ()->Unit): Dialog {
     dialog.show()
     dialog.setCancelable(false)
 
-    binding.txtAreUSure.setOnClickListener {
+    binding.txtFormat.setOnClickListener {
         onYesClick()
         dialog.dismiss()
     }
