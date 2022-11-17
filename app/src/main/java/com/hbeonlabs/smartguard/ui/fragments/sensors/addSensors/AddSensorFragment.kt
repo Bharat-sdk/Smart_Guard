@@ -66,7 +66,7 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
 
         binding.btnAddSensor.setOnClickListener {
 
-            if (sensor.sensor_name.isBlank() || sensor.sensor_custom_sms.isBlank())
+            if (binding.edtAddSensorName.text.isBlank() || binding.edtAddSensorCustomSmsMessage.text.isBlank())
             {
                makeToast("Please Fill All The Fields")
             }
