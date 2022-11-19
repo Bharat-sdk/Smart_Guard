@@ -1,5 +1,6 @@
 package com.hbeonlabs.smartguard.ui.fragments.hubDetails
 
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -40,6 +41,7 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
             setImageResource(R.drawable.ic_settings)
             visibility = VISIBLE
             setOnClickListener {
+
                 findNavController().navigate(
                     FragmentHubHomeDirections.actionFragmentHubDetailsToFragmentHubSettings(
                         args.hub.hub_serial_number
@@ -101,10 +103,12 @@ class FragmentHubHome:BaseFragment<HubDetailsViewModel,FragmentHubDetailScreenBi
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 hubDetailsViewModel.getHubFromId(args.hub.hub_serial_number).collectLatest { hub ->
-                    (requireActivity() as MainActivity).binding.toolbarTitle.text = hub.hub_name
+                    if (hub != null) {
+                        (requireActivity() as MainActivity).binding.toolbarTitle.text = hub.hub_name
                     binding.hubData = hub
                     hubDetailsViewModel.hub = hub
-                    hubDetailsViewModel.hub_id = hub.hub_serial_number
+                        hubDetailsViewModel.hub_id = hub.hub_serial_number
+                    }
                 }
             }
 

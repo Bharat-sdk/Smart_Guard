@@ -145,15 +145,17 @@ class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettin
         }
 
 
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             hubSettingsViewModel.getHubFromId(args.hubId).collectLatest { hub ->
-                _hub = hub
-                binding.edtAddHubName.setText(hub.hub_name)
-                if (hub.hub_image.isEmpty()) {
-                    binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
-                } else {
-                    imageUri = hub.hub_image.toUri()
-                    binding.imgEditHubImage.setImageURI(hub.hub_image.toUri())
+                if (hub != null) {
+                    _hub = hub
+                    binding.edtAddHubName.setText(hub.hub_name)
+                    if (hub.hub_image.isEmpty()) {
+                        binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
+                    } else {
+                        imageUri = hub.hub_image.toUri()
+                        binding.imgEditHubImage.setImageURI(hub.hub_image.toUri())
+                    }
                 }
             }
         }

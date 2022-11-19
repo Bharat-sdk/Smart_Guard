@@ -17,7 +17,7 @@ interface HubDao {
     fun getAllHubsList(): Flow<List<Hub>>
 
     @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id LIMIT 1")
-    fun getHubFromId(hub_id: String):Flow<Hub>
+    fun getHubFromId(hub_id: String):Flow<Hub?>
 
     @Query("UPDATE hub SET hub_arm_state = :armDisarmState WHERE hub_serial_number in(:hub_id)")
     suspend fun armDisarmHub(armDisarmState:Boolean,hub_id:String)

@@ -166,7 +166,10 @@ class HubDetailsViewModel constructor(
 
     suspend fun getActivityHistory() :Flow<List<ActivityHistory>> = repository.getActivityHistory(hub_id)
 
-    suspend fun getHubFromId(hubId:String):Flow<Hub> = repository.getHubFromId(hubId)
+    suspend fun getHubFromId(hubId:String):Flow<Hub?> {
+        val data =  repository.getHubFromId(hubId)
+        return data
+    }
 
 
 
@@ -174,6 +177,11 @@ class HubDetailsViewModel constructor(
         class SilenceRingEvent(val message:String):HubDetailsEvents()
         class ArmDisarmEvent(val message: String):HubDetailsEvents()
         class SQLErrorEvent(val message: String):HubDetailsEvents()
-        class GetHubDataEvent(val hub:Hub):HubDetailsEvents()
     }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
+
+
 }

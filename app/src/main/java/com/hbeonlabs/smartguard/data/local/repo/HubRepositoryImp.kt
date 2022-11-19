@@ -47,7 +47,7 @@ class HubRepositoryImp constructor(
         dao.addActivityHistory(ActivityHistory(timeStamp,message,hub_serial_no))
     }
 
-    override suspend fun getHubDetails(hub_serial_no: String): Flow<Hub> {
+    override suspend fun getHubDetails(hub_serial_no: String): Flow<Hub?> {
         return dao.getHubFromId(hub_serial_no)
     }
 
@@ -55,7 +55,7 @@ class HubRepositoryImp constructor(
         return dao.getAllActivities(hub_serial_no)
     }
 
-    override suspend fun getHubFromId(hub_serial_no: String): Flow<Hub> {
+    override suspend fun getHubFromId(hub_serial_no: String): Flow<Hub?> {
         return dao.getHubFromId(hub_serial_no)
     }
 

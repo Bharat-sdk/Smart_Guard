@@ -18,7 +18,7 @@ class HubSettingsViewModel @Inject constructor(
     private val _hubSettingsEvents = MutableSharedFlow<HubSettingEvents>()
     val hubSettingsEvents: SharedFlow<HubSettingEvents> = _hubSettingsEvents
 
-    suspend fun getHubFromId(hubId:String) : Flow<Hub> = hubRepository.getHubFromId(hubId)
+    suspend fun getHubFromId(hubId:String) : Flow<Hub?> = hubRepository.getHubFromId(hubId)
 
     fun updateHubName(hubName:String,hubImage:String,hub_id:String)
     {
@@ -48,7 +48,7 @@ class HubSettingsViewModel @Inject constructor(
     {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                hubRepository.deleteSensorsOfHub(hub_id)
+               hubRepository.deleteSensorsOfHub(hub_id)
                 hubRepository.deleteSensorsOfHub(hub_id)
                 hubRepository.deleteActivityHistoryOfHub(hub_id)
                 hubRepository.deleteHub(hub_id)

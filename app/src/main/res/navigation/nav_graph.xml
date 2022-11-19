@@ -183,25 +183,16 @@
             android:name="hub_id"
             app:argType="string" />
         <action
-            android:id="@+id/action_fragmentHubSettings_to_fragmentHubDetails"
-            app:destination="@id/fragmentHubDetails"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/fragmentHubSettings"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_fragmentHubSettings_to_fragmentSelectAHub"
             app:destination="@id/fragmentSelectAHub"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/fragmentHubSettings"
+            app:popUpToInclusive="true"
             app:launchSingleTop="true"
-            app:popUpToInclusive="true" />
+
+            />
+        <action
+            android:id="@+id/action_fragmentHubSettings_to_fragmentHubDetails"
+            app:destination="@id/fragmentHubDetails" />
     </fragment>
     <fragment
         android:id="@+id/sensorListFragment"
