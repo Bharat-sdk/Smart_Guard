@@ -18,6 +18,9 @@ class SensorTypesListAdapter(val context:Context) : RecyclerView.Adapter<SensorT
     inner class SensorTypeViewHolder(val binding: ItemTypeOfSensorsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SensorTypes) {
+            binding.ivSensorImage.setImageResource(data.sensor_image)
+            binding.tvSensorName.text = data.sensor_name
+
 
         }
 
