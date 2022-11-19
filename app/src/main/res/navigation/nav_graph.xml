@@ -29,7 +29,7 @@
         android:label="Splash" >
         <action
             android:id="@+id/action_fragmentSplash_to_fragmentOnBoarding"
-            app:popUpTo="@id/fragmentSplash"
+
             app:launchSingleTop="true"
             app:popUpToInclusive="true"
             app:destination="@id/fragmentOnBoarding" />

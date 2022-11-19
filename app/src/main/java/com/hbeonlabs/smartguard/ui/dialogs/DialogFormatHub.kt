@@ -16,10 +16,17 @@ import com.hbeonlabs.smartguard.databinding.DialogFormatHubBinding
 import com.hbeonlabs.smartguard.databinding.DialogVerifyAddHubBinding
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubEvent
 import com.hbeonlabs.smartguard.ui.fragments.addAHub.AddAHubViewModel
+import com.hbeonlabs.smartguard.ui.fragments.hubSettings.HubSettingEvents
+import com.hbeonlabs.smartguard.ui.fragments.hubSettings.HubSettingsViewModel
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import kotlinx.coroutines.flow.collectLatest
 
-fun Fragment.dialogFormatHub(onYesClick : ()->Unit): Dialog {
+fun Fragment.dialogFormatHub(
+    viewModel:HubSettingsViewModel,
+    onYesClick : ()->Unit,
+    onButtonContinue:()-> Unit
+)
+: Dialog {
     val dialog = Dialog(requireContext())
 
     val binding = DataBindingUtil.inflate(LayoutInflater.from(requireContext()), R.layout.dialog_format_hub, null, false) as DialogFormatHubBinding
@@ -30,8 +37,28 @@ fun Fragment.dialogFormatHub(onYesClick : ()->Unit): Dialog {
     dialog.setCancelable(false)
 
     binding.txtFormat.setOnClickListener {
+        binding.clAreYouSure.visibility = View.GONE
+        binding.llFormatting.visibility = View.VISIBLE
+        binding.progressHorizontalDialogVerifyHub.visibility = View.VISIBLE
         onYesClick()
-        dialog.dismiss()
+    }
+
+    binding.btnContinue.setOnClickListener {
+
+    }
+
+    collectLatestLifeCycleFlow(viewModel.hubSettingsEvents)
+    {
+        when(it)
+        {
+            HubSettingEvents.FormatHubSuccessEvent -> {
+                onButtonContinue()
+            }
+            is HubSettingEvents.SQLErrorEvent -> {
+
+            }
+            else -> {}
+        }
     }
 
 

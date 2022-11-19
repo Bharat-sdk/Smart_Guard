@@ -52,7 +52,7 @@ class HubSettingsViewModel @Inject constructor(
                 hubRepository.deleteSensorsOfHub(hub_id)
                 hubRepository.deleteActivityHistoryOfHub(hub_id)
                 hubRepository.deleteHub(hub_id)
-                _hubSettingsEvents.emit(HubSettingEvents.UpdateHubSuccessEvent)
+                _hubSettingsEvents.emit(HubSettingEvents.FormatHubSuccessEvent)
             }
             catch (e:Exception)
             {

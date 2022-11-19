@@ -115,9 +115,10 @@ class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettin
         }
 
         binding.descFormatHub.setOnClickListener {
-            dialogFormatHub {
-                sendSMS(_hub.hub_phone_number, "${_hub.hub_serial_number} F") {}
-            }
+            dialogFormatHub(hubSettingsViewModel,
+                { sendSMS(_hub.hub_phone_number, "${_hub.hub_serial_number} F"){} },
+                {  findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentSelectAHub())}
+            )
         }
 
 
@@ -138,9 +139,7 @@ class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettin
                             )
                         )
                     }
-                    HubSettingEvents.FormatHubSuccessEvent -> {
-                        findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentSelectAHub())
-                   }
+                   else ->{}
                 }
             }
         }

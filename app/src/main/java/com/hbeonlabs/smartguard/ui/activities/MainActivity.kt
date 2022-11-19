@@ -34,6 +34,13 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
 
         setupActionBarWithNavController(navController)
         hideShowToolbar()
+
+        navController.addOnDestinationChangedListener{_, destination, _ ->
+            if (destination.id == R.id.fragmentSelectAHub) {
+                binding.toolbar.navigationIcon = null
+            } else {
+            }
+        }
     }
 
 
@@ -50,6 +57,7 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
                 R.id.fragmentOnBoarding -> {
                     supportActionBar?.hide()
                 }
+
                 else -> {
                     supportActionBar?.show()
                 }
