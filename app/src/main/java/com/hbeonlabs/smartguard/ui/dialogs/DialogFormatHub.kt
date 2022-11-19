@@ -44,7 +44,8 @@ fun Fragment.dialogFormatHub(
     }
 
     binding.btnContinue.setOnClickListener {
-
+        dialog.cancel()
+        onButtonContinue()
     }
 
     collectLatestLifeCycleFlow(viewModel.hubSettingsEvents)
@@ -52,7 +53,9 @@ fun Fragment.dialogFormatHub(
         when(it)
         {
             HubSettingEvents.FormatHubSuccessEvent -> {
-                onButtonContinue()
+               binding.llFormatted.visibility = View.VISIBLE
+                binding.llFormatting.visibility = View.GONE
+
             }
             is HubSettingEvents.SQLErrorEvent -> {
 
