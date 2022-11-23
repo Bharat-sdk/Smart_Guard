@@ -24,6 +24,7 @@ import kotlinx.coroutines.runBlocking
 
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 import java.util.*
+import kotlin.math.log
 
 
 class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding>(),
@@ -127,7 +128,13 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
         {
             if (text.startsWith("Activate Sensor to save Sensor"))
             {
-                dialog = dialogVerifySensorAddition()
+                try {
+                    dialog = dialogVerifySensorAddition()
+                }catch (e:Exception)
+                {
+                    makeToast(e.localizedMessage)
+
+                }
 
             }
             else if (text.startsWith("Sensor ID : "))

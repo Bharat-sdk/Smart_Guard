@@ -140,6 +140,11 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>(),
         {
             getViewModel().hubRegistrationSuccess()
         }
+        else if(text.equals("You have been already registered."))
+        {
+            makeToast(text?:"You have been already registered.")
+            requireActivity().onBackPressed()
+        }
         else{
             getViewModel().hubAdditionError(text.toString())
         }
