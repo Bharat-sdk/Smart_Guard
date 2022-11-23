@@ -79,7 +79,7 @@ private fun Fragment.sendSMS2(phoneNumber:String,message:String,SENT:PendingInte
 {
     try {
         val smsManager: SmsManager
-        if (Build.VERSION.SDK_INT>=23) {
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.S) {
             smsManager = this.requireActivity().getSystemService(SmsManager::class.java)
         }
         else{

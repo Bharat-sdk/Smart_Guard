@@ -28,11 +28,12 @@ class AppLists(
     )
 
     val sensorTypeLists = arrayListOf(
-        SensorTypes("7485","PIR SENSOR",R.drawable.wireless_pir_sensor),
-        SensorTypes("4786","LPG SENSOR",R.drawable.wireless_lpg_gas_sensor),
-        SensorTypes("2455","ORDER SYSTEM SENSOR",R.drawable.wireless_order_system),
-        SensorTypes("4428","SMOKE SENSOR",R.drawable.wireless_smoke_sensor),
-        SensorTypes("8956","GLASS BREAK SENSOR",R.drawable.wireless_glass_break_sensor),
+        SensorTypes("7485","PIR Motion Sensor",R.drawable.wireless_pir_sensor),
+        SensorTypes("4786","LPG Sensor",R.drawable.wireless_lpg_gas_sensor),
+        SensorTypes("2455","Door Sensor",R.drawable.wireless_order_system),
+        SensorTypes("4428","Smoke Sensor",R.drawable.wireless_smoke_sensor),
+        SensorTypes("8956","Glass Break Sensor",R.drawable.wireless_glass_break_sensor),
+        SensorTypes("8956","Water Overflow Sensor",R.drawable.wireless_glass_break_sensor),
     )
 
 }
