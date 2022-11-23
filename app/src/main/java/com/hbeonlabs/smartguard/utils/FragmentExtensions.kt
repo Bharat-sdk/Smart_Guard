@@ -78,12 +78,10 @@ fun Context.hideKeyboard(view:View)
 private fun Fragment.sendSMS2(phoneNumber:String,message:String,SENT:PendingIntent?,DELIVERY:PendingIntent?)
 {
     try {
-        val smsManager: SmsManager
-        if (Build.VERSION.SDK_INT>=23) {
-            smsManager = this.requireActivity().getSystemService(SmsManager::class.java)
-        }
-        else{
-            smsManager = SmsManager.getDefault()
+        val smsManager: SmsManager = if (Build.VERSION.SDK_INT>=23) {
+            this.requireActivity().getSystemService(SmsManager::class.java)
+        } else{
+            SmsManager.getDefault()
         }
 
         smsManager.sendTextMessage(phoneNumber, null, message, SENT, DELIVERY)

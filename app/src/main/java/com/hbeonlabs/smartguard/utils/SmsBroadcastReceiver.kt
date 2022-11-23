@@ -24,10 +24,9 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
             Timber.tag(TAG).d("onReceive: "+ smsBody+smsSender)
             /*  if (smsSender == serviceProviderNumber) {
 
+
             }*/
-            if (listener != null) {
-                listener!!.onTextReceived(smsBody, smsSender)
-            }
+            listener?.onTextReceived(smsBody, smsSender)
         }
     }
 
