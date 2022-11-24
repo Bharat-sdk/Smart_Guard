@@ -137,6 +137,7 @@
         android:id="@+id/edt_add_hub_serial"
         android:maxLines="1"
         android:hint="@string/_91_xxxx_xx_xxxx"
+        android:inputType="numberPassword"
         app:layout_constraintTop_toBottomOf="@id/tv_serial_no."
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
