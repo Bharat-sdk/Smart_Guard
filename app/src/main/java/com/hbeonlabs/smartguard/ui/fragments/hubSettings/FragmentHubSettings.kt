@@ -151,7 +151,7 @@ class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettin
                     _hub = hub
                     binding.edtAddHubName.setText(hub.hub_name)
                     if (hub.hub_image.isEmpty()) {
-                        binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
+                        binding.imgEditHubImage.setImageResource(R.drawable.doorsensor)
                     } else {
                         imageUri = hub.hub_image.toUri()
                         binding.imgEditHubImage.setImageURI(hub.hub_image.toUri())

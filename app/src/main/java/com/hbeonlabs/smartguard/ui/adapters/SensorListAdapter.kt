@@ -22,7 +22,7 @@ class SensorListAdapter(val context:Context) : RecyclerView.Adapter<SensorListAd
                 binding.ibIconSensorMenu.setImageResource(R.drawable.ic_three_dots)
             if (data.sensor_image == "")
             {
-                binding.ivSensorPic.setImageResource(R.drawable.default_sensor_image)
+                binding.ivSensorPic.setImageResource(R.drawable.doorsensor)
             }
             else{
                 binding.ivSensorPic.setImageURI(data.sensor_image.toUri())

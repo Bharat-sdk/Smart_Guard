@@ -57,7 +57,7 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
 
         binding.sensorRegisteredOn.text = registeredOn
         if (args.sensor.sensor_image.isEmpty()) {
-            binding.ivDetailHubImage.setImageResource(R.drawable.default_sensor_image)
+            binding.ivDetailHubImage.setImageResource(R.drawable.doorsensor)
 
         }
         else{

@@ -74,7 +74,7 @@ class EditSensorFragment:BaseFragment<SensorViewModel,FragmentEditASensorBinding
         binding.edtEditSensorCustomMessage.setText(sensor.sensor_custom_sms)
         if (sensor.sensor_image.isBlank())
         {
-            binding.imgEditHubImage.setImageResource(R.drawable.default_sensor_image)
+            binding.imgEditHubImage.setImageResource(R.drawable.doorsensor)
         }
         else{
             binding.imgEditHubImage.setImageURI(sensor.sensor_image.toUri())
