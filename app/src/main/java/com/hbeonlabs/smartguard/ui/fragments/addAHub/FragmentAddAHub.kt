@@ -57,11 +57,11 @@ class FragmentAddAHub:BaseFragment<AddAHubViewModel,FragmentAddAHubBinding>(),
             )
         )
         //requestReadAndSendSmsPermission()
-        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
-            visibility = View.VISIBLE
-            setImageResource(R.drawable.ic_baseline_help)
-            setOnClickListener { snackBar("Help") }
-        }
+//        (requireActivity() as MainActivity).binding.toolbarIconEnd.apply {
+//           // visibility = View.VISIBLE
+//           // setImageResource(R.drawable.ic_baseline_help)
+//            //setOnClickListener { snackBar("Help") }
+//        }
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.visibility = View.INVISIBLE
 
