@@ -140,7 +140,6 @@
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/_10sdp"
         />
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loading"
         android:layout_width="100dp"
@@ -153,6 +152,31 @@
         app:lottie_autoPlay="true"
         android:elevation="45dp"
         app:lottie_rawRes="@raw/lottie_loading" />
+
+    <!--<ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:text="Loading..."/>-->
+
+    <include
+        android:id="@+id/add_sensor_confirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/dialog_add_sensor_message"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

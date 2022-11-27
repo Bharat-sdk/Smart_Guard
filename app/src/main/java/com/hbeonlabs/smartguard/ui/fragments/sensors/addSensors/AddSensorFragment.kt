@@ -30,7 +30,6 @@ import kotlin.math.log
 class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding>(),
     SmsBroadcastReceiver.Listener {
     lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
-    lateinit var dialog:Dialog
     lateinit var sensor: Sensor
     val args : AddSensorFragmentArgs by navArgs()
 
@@ -66,12 +65,12 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
         }
 
         binding.btnAddSensor.setOnClickListener {
-
             if (binding.edtAddSensorName.text.isBlank() || binding.edtAddSensorCustomSmsMessage.text.isBlank())
             {
                makeToast("Please Fill All The Fields")
             }
             else{
+                binding.btnAddSensor.isEnabled = false
                 addSensorViewModel.getSensorsListSize(addSensorViewModel.hub_serial_no)
             }
         }
@@ -96,7 +95,6 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
         }
 
         collectLatestLifeCycleFlow(addSensorViewModel.listSizeEvent){ size->
-
             val sensorName = binding.edtAddSensorName.text.toString()
             val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
             val curTimeStamp = Calendar.getInstance().timeInMillis
@@ -104,6 +102,7 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
             // ======== Checking the no. of sensors already added to hub ===========
             if (size <0 || size>=8)
             {
+                binding.btnAddSensor.isEnabled = true
                 makeToast("Maximum 8 Hubs are added")
             }
             else{
@@ -113,6 +112,7 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
                     addSensorViewModel.hub?.let { hub -> sendSMS(hub.hub_phone_number,"${hub.hub_serial_number} S0${size+1} $customSmsMessage #"){} }
                 }
                 else{
+                    binding.btnAddSensor.isEnabled = true
                     makeToast("Please fill all the fields to continue")
                 }
             }
@@ -123,28 +123,22 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
 
 
     override fun onTextReceived(text: String?, smsSender: String?) {
-        binding.loading.visibility = View.INVISIBLE
+        binding.loading.visibility = View.GONE
+        binding.btnAddSensor.isEnabled = true
         if (text!=null)
         {
             if (text.startsWith("Activate Sensor to save Sensor"))
             {
-                try {
-                    dialog = dialogVerifySensorAddition()
-                }catch (e:Exception)
-                {
-                    makeToast(e.localizedMessage)
-
-                }
-
+                binding.addSensorConfirmation.root.visibility = View.VISIBLE
             }
             else if (text.startsWith("Sensor ID : "))
             {
-                dialog.dismiss()
+                binding.addSensorConfirmation.root.visibility = View.GONE
                 addSensorViewModel.addSensor(sensor)
             }
             else if (text == "Configuration timeout")
             {
-                dialog.dismiss()
+                binding.addSensorConfirmation.root.visibility = View.GONE
             }
 
         }
