@@ -140,7 +140,7 @@ class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettin
                     }
                     HubSettingEvents.FormatHubSuccessEvent -> {
                         findNavController().navigate(FragmentHubSettingsDirections.actionFragmentHubSettingsToFragmentSelectAHub())
-                   }
+                    }
                 }
             }
         }
@@ -161,11 +161,9 @@ class FragmentHubSettings : BaseFragment<HubSettingsViewModel, FragmentHubSettin
     }
 
     override fun onTextReceived(text: String?, smsSender: String?) {
-        if (text!= null)
-        {
-            if (text == "Master user has formatted the system.")
-            {
-               hubSettingsViewModel.formatHub(_hub.hub_serial_number)
+        if (text != null) {
+            if (text == "Master user has formatted the system.") {
+                hubSettingsViewModel.formatHub(_hub.hub_serial_number)
 
             }
         }
