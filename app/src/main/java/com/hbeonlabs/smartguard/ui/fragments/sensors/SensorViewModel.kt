@@ -71,21 +71,23 @@ private val repo:SensorRepositoryImp
                 _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent("Please Fill All The Fields"))
             }
             else{
-                val size = getSensorsArray(sensor.hub_serial_number).size
+                val sensors = getSensorsArray(sensor.hub_serial_number)
 
-                if (size<0)
+                if (sensors.size<0)
                 {
                     _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent("Having an error please try again"))
                 }
-                else if (size>=8)
+                else if (sensors.size>=8)
                 {
                     _mSensorEvents.emit(ManageSensorEvents.SQLErrorEvent("8 Sensors are already added cant add more sensors."))
                 }
                 else{
                     try {
-                        sensor.sensor_slot = "S0${size+1}"
-                        repo.addSensor(sensor)
-                        _mSensorEvents.emit(ManageSensorEvents.AddSensorSuccess)
+                        if(!sensors.any { it.sensor_name == sensor.sensor_name }) {
+                            sensor.sensor_slot = "S0${sensors.size + 1}"
+                            repo.addSensor(sensor)
+                            _mSensorEvents.emit(ManageSensorEvents.AddSensorSuccess)
+                        }
                     }
                     catch (e:SQLException)
                     {
