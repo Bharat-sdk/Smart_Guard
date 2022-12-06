@@ -84,7 +84,16 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
             addSensorViewModel.mSensorEvents.collectLatest {
                 when (it) {
                     SensorViewModel.ManageSensorEvents.AddSensorSuccess -> {
-                        findNavController().navigate(AddSensorFragmentDirections.actionAddSensorFragmentToSensorListFragment(addSensorViewModel.hub_serial_no,addSensorViewModel.hub!!))
+                        try {
+                            findNavController().navigate(
+                                AddSensorFragmentDirections.actionAddSensorFragmentToSensorListFragment(
+                                    addSensorViewModel.hub_serial_no,
+                                    addSensorViewModel.hub!!
+                                )
+                            )
+                        }catch (exp : Exception){
+                            exp.printStackTrace()
+                        }
                     }
                     is SensorViewModel.ManageSensorEvents.SQLErrorEvent -> {
                         makeToast(it.message)
@@ -103,7 +112,7 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
             if (size <0 || size>=8)
             {
                 binding.btnAddSensor.isEnabled = true
-                makeToast("Maximum 8 Hubs are added")
+                makeToast("Maximum 8 sensors are added")
             }
             else{
                 if (sensorName.isNotBlank() || customSmsMessage.isNotBlank())
