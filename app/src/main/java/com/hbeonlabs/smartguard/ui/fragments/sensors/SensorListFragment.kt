@@ -1,28 +1,42 @@
 package com.hbeonlabs.smartguard.ui.fragments.sensors
 
+import android.content.IntentFilter
+import android.provider.Telephony
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hbeonlabs.smartguard.R
 import com.hbeonlabs.smartguard.base.BaseFragment
+import com.hbeonlabs.smartguard.data.local.models.Hub
+import com.hbeonlabs.smartguard.data.local.models.Sensor
 import com.hbeonlabs.smartguard.databinding.FragmentSensorListBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.adapters.SensorListAdapter
+import com.hbeonlabs.smartguard.utils.SmsBroadcastReceiver
 import com.hbeonlabs.smartguard.utils.makeToast
+import com.hbeonlabs.smartguard.utils.sendSMS
 import kotlinx.coroutines.flow.collectLatest
 
 import org.koin.androidx.viewmodel.ext.android.sharedStateViewModel
 
 
-class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>() {
+class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>(),
+    SmsBroadcastReceiver.Listener {
     private val args:SensorListFragmentArgs by navArgs()
     lateinit var adapter: SensorListAdapter
+    lateinit var hub:Hub
+    lateinit var sensor :Sensor
+
+    lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
+
 
     private  val sensorListViewModel by sharedStateViewModel<SensorViewModel>()
     override fun getViewModel(): SensorViewModel {
             return sensorListViewModel
     }
+
+
 
     override fun getLayoutResourceId(): Int {
         return R.layout.fragment_sensor_list
@@ -30,6 +44,16 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
 
     override fun initView() {
         super.initView()
+        hub = args.hub
+
+        // =========  Setting Sms Listener ==================
+        smsBroadcastReceiver = SmsBroadcastReceiver()
+        requireActivity().registerReceiver(
+            smsBroadcastReceiver,
+            IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)
+        )
+        smsBroadcastReceiver.setListener(this)
+
         sensorListViewModel.hub_serial_no =args.hubSerialNo
         sensorListViewModel.hub = args.hub
         observe()
@@ -49,7 +73,8 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
         adapter = SensorListAdapter(requireContext())
         binding.adapter = adapter
         adapter.setDeleteSensorClickListener { sensor, i ->
-            getViewModel().deleteSensor(sensor)
+            //====================== Deleting Sensor Code Is DO1 to D08 ===============
+            sendSMS(hub.hub_phone_number,"${hub.hub_serial_number} D0${sensor.sensor_slot}"){}
         }
 
         adapter.setEditSensorClickListener{ sensor, i ->
@@ -88,6 +113,12 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
         }
     }
 
+    override fun onTextReceived(text: String?, smsSender: String?) {
+        //
+
+        getViewModel().deleteSensor(sensor)
+
+    }
 
 
 }

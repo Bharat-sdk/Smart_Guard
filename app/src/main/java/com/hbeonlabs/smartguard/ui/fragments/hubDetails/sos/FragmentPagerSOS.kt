@@ -44,6 +44,7 @@ class FragmentPagerSOS:BaseFragment<HubDetailsViewModel,FragmentPagerSosBinding>
                 binding.progress2Sec.progress = it
                 if (it ==100)
                 {
+                    // Send Current Location maps to secondary all users
                     snackBar("Done")
                 }
             }

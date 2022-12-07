@@ -107,7 +107,13 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
             val sensorName = binding.edtAddSensorName.text.toString()
             val customSmsMessage = binding.edtAddSensorCustomSmsMessage.text.toString()
             val curTimeStamp = Calendar.getInstance().timeInMillis
-            sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,false,customSmsMessage,curTimeStamp.toString(),addSensorViewModel.hub_serial_no,"")
+            try {
+                sensor = Sensor(null,sensorName,"",args.sensorType.sensor_model_number,false,customSmsMessage,curTimeStamp.toString(),addSensorViewModel.hub_serial_no,"")
+            }
+            catch (e:Exception)
+            {
+                Log.d("TAG", "size exception"+e.localizedMessage+"    "+e.message)
+            }
             // ======== Checking the no. of sensors already added to hub ===========
             if (size <0 || size>=8)
             {
@@ -118,8 +124,14 @@ class AddSensorFragment: BaseFragment<SensorViewModel, FragmentAddASensorBinding
                 if (sensorName.isNotBlank() || customSmsMessage.isNotBlank())
                 {
                     binding.loading.visibility = View.VISIBLE
+                    try {
                     addSensorViewModel.hub?.let { hub -> sendSMS(hub.hub_phone_number,"${hub.hub_serial_number} S0${size+1} $customSmsMessage #"){} }
-                }
+                    }
+                    catch (e:Exception)
+                    {
+                        Log.d("TAG", "size exception2"+e.localizedMessage+"    "+e.message)
+                    }
+                    }
                 else{
                     binding.btnAddSensor.isEnabled = true
                     makeToast("Please fill all the fields to continue")

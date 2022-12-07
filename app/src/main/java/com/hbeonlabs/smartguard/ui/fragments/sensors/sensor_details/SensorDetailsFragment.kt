@@ -1,5 +1,7 @@
 package com.hbeonlabs.smartguard.ui.fragments.sensors.sensor_details
 
+import android.content.IntentFilter
+import android.provider.Telephony
 import android.view.View
 import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
@@ -9,6 +11,7 @@ import com.hbeonlabs.smartguard.databinding.FragmentAddASensorBinding
 import com.hbeonlabs.smartguard.databinding.FragmentSensorDetailsBinding
 import com.hbeonlabs.smartguard.ui.activities.MainActivity
 import com.hbeonlabs.smartguard.ui.fragments.sensors.SensorViewModel
+import com.hbeonlabs.smartguard.utils.SmsBroadcastReceiver
 import com.hbeonlabs.smartguard.utils.collectLatestLifeCycleFlow
 import com.hbeonlabs.smartguard.utils.makeToast
 
@@ -18,6 +21,7 @@ import java.text.SimpleDateFormat
 
 
 class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetailsBinding>() {
+
 
     val args:SensorDetailsFragmentArgs by navArgs()
 
@@ -33,6 +37,8 @@ class SensorDetailsFragment: BaseFragment<SensorViewModel, FragmentSensorDetails
     override fun initView() {
         super.initView()
         observe()
+
+
 
         (requireActivity() as MainActivity).binding.toolbarIconEnd2.apply {
             setImageResource(R.drawable.ic_baseline_edit_24)
