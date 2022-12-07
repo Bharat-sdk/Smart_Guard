@@ -64,6 +64,8 @@ dependencies {
     implementation (Libs.MATERIAL_LIB)
     implementation (Libs.CONSTRAINT_LAYOUT_LIB)
     implementation(Libs.ROOM_RUN_TIME)
+    implementation("com.google.android.gms:play-services-maps:18.0.2")
+    implementation("com.google.android.gms:play-services-location:19.0.1")
     kapt(Libs.ROOM_COMPILER)
     implementation(Libs.ROOM_KTX)
     testImplementation(Libs.JUNIT_LIB)
