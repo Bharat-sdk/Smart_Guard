@@ -116,7 +116,10 @@ class SensorListFragment:BaseFragment<SensorViewModel,FragmentSensorListBinding>
     override fun onTextReceived(text: String?, smsSender: String?) {
         //
 
-        getViewModel().deleteSensor(sensor)
+        if (text == "")
+        {
+            getViewModel().deleteSensor(sensor)
+        }
 
     }
 

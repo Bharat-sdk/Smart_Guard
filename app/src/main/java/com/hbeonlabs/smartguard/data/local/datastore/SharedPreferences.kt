@@ -16,10 +16,25 @@ class SharedPreferences constructor(
        return sharedPreferences.getBoolean(Constants.isFirstTime,true)
     }
 
+    fun getLocationLat(): String {
+        return sharedPreferences.getString(Constants.originLatitude, "0") ?: "0"
+    }
+
+    fun getLocationLong():String{
+        return sharedPreferences.getString(Constants.originLongitude,"0") ?: "0"
+    }
+
 
     fun setIsFirstTime(isFirstTime:Boolean)
     {
         editor.putBoolean(Constants.isFirstTime,isFirstTime)
+        editor.commit()
+    }
+
+    fun setLocation(longitude:String,latitude:String)
+    {
+        editor.putString(Constants.originLongitude,longitude)
+        editor.putString(Constants.originLatitude,latitude)
         editor.commit()
     }
 
