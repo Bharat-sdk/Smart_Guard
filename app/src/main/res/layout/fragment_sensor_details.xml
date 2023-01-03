@@ -69,7 +69,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_sensor_slot"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_sensor_slot"
-            android:text="Sensor Slot"
+            android:text="@{sensor_data.sensor_slot}"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginEnd="@dimen/_20sdp"
@@ -105,7 +105,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_sensor_registered"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_sensor_registered"
-            android:text="Sensor Slot"
+            android:text="@{sensor_data.sensor_registered_on}"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_marginEnd="@dimen/_20sdp"
@@ -192,108 +192,66 @@
             />
 
 
-<!--        Control With Master Remote-->
-        <TextView
-            android:id="@+id/tv_master_remote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/divider4"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="Control with Master Remote"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="20dp"
-            android:textSize="17sp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/sensor_control_master"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_master_remote"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="Sensor Slot"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="@dimen/_20sdp"
-            app:layout_constraintEnd_toStartOf="@id/switch_master"
-            />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_master"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/sensor_control_master"
-            app:layout_constraintBottom_toBottomOf="@id/sensor_control_master"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/_20sdp"
-            />
-
-
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/sensor_control_master"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
-            />
-
         <!--Permanently arm sensor-->
 
         <TextView
             android:id="@+id/tv_sensor_arm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/divider5"
+            app:layout_constraintTop_toBottomOf="@id/divider4"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="Permanently Arm This Sensor?"
+            android:text="Arm Sensor"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="20dp"
-            android:textSize="17sp"
-            android:textColor="@color/black"
             />
-        <TextView
-            android:id="@+id/sensor_arm"
-            android:layout_width="0dp"
+        <RadioGroup
+            android:id="@+id/rg_sensor_arm_way"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_sensor_arm"
             app:layout_constraintStart_toStartOf="parent"
             android:text="Sensor Slot"
-            android:layout_marginEnd="20dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:layout_marginStart="@dimen/_20sdp"
-            app:layout_constraintEnd_toStartOf="@id/switch_arm"
-            />
+            >
+            <RadioButton
+                android:id="@+id/rb_permanently_arm_sensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Permenantly Arm Sensor"
+                android:padding="0dp"
+                android:textSize="12sp"
+                />
+            <RadioButton
+                android:id="@+id/rb_permanently_disarm_sensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Permenantly Disarm Sensor"
+                android:padding="0dp"
+                android:textSize="12sp"
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_arm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/sensor_arm"
-            app:layout_constraintBottom_toBottomOf="@id/sensor_arm"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/_20sdp"
-            />
-
+                />
+            <RadioButton
+                android:id="@+id/rb_control_with_hub_sensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Control with Hub"
+                android:textSize="12sp"
+                android:padding="0dp"
+                />
+        </RadioGroup>
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/sensor_arm"
+            app:layout_constraintTop_toBottomOf="@id/rg_sensor_arm_way"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp"
             />
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

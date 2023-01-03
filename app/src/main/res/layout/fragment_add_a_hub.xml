@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_add_a_hub"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,7 +40,10 @@
     <TextView
         android:id="@+id/tv_add_hub_heading"
         android:layout_width="0dp"
+        android:textSize="@dimen/_11ssp"
         android:layout_height="wrap_content"
+        android:autoSizeMaxTextSize="14sp"
+        android:autoSizeMinTextSize="8sp"
         android:text="@string/add_hub_heading"
         app:layout_constraintTop_toBottomOf="@id/guideline_top"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
@@ -63,7 +72,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
             android:text="@string/add_hub_point1"
+            android:textSize="@dimen/_11ssp"
             android:layout_marginStart="@dimen/_15sdp"
         />
 
@@ -87,6 +99,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_hub_point2"
+            android:textSize="@dimen/_11ssp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
             android:layout_marginStart="@dimen/_15sdp"
             />
 
@@ -109,7 +124,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/_11ssp"
             android:text="@string/add_hub_point_3"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeMinTextSize="8sp"
             android:layout_marginStart="@dimen/_15sdp"
             />
 
@@ -132,7 +150,6 @@
         android:id="@+id/edt_add_hub_serial"
         android:maxLines="1"
         android:hint="@string/_91_xxxx_xx_xxxx"
-        android:inputType="numberPassword"
         app:layout_constraintTop_toBottomOf="@id/tv_serial_no."
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
@@ -161,17 +178,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
         app:layout_constraintTop_toBottomOf="@id/tv_sim_no." />
+
     <Button
         android:id="@+id/btn_add_hub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/edt_add_hub_sim_no"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/btn_add_hub"
-        android:backgroundTint="#D3D3D3"
-        android:textColor="#4C4949"
         android:layout_marginTop="@dimen/_10sdp"
-        />
+        android:backgroundTint="#D3D3D3"
+        android:text="@string/btn_add_hub"
+        android:textColor="#4C4949"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_add_hub_sim_no" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

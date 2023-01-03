@@ -11,6 +11,7 @@ import com.hbeonlabs.smartguard.data.local.models.SecondaryUser
 import com.hbeonlabs.smartguard.databinding.FragmentPagerSosBinding
 import com.hbeonlabs.smartguard.ui.fragments.hubDetails.HubDetailsViewModel
 import com.hbeonlabs.smartguard.ui.fragments.secondoryUser.SecondaryUserViewModel
+import com.hbeonlabs.smartguard.utils.makeToast
 import com.hbeonlabs.smartguard.utils.sendSMS
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.android.ext.android.inject
@@ -57,6 +58,8 @@ class FragmentPagerSOS : BaseFragment<HubDetailsViewModel, FragmentPagerSosBindi
             getViewModel().progressIndicatorLiveData.collect {
                 binding.progress2Sec.progress = it
                 if (it == 100) {
+                    binding.progress2Sec.progress = 0
+                    makeToast("Location Sent to all users")
                     // Send Current Location maps to secondary all users
                     secondaryUserList.forEach { secondaryUser ->
                         try {
@@ -77,11 +80,7 @@ class FragmentPagerSOS : BaseFragment<HubDetailsViewModel, FragmentPagerSosBindi
         }
 
         lifecycleScope.launchWhenStarted {
-
-            secondaryUserViewModel.getSecondaryUsersUsingHub(hubDetailsViewModel.hub_id)
-                .collectLatest {
-                    secondaryUserList = it
-                }
+           secondaryUserList = secondaryUserViewModel.getSecondaryUsersUsingHubOnly(hubDetailsViewModel.hub_id)
         }
     }
 

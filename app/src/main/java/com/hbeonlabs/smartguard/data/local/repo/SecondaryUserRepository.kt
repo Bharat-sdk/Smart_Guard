@@ -14,5 +14,5 @@ interface SecondaryUserRepository {
     suspend fun deleteSecondaryUser(secondaryUser: SecondaryUser)
 
 
-
+    suspend fun getAllSecondaryUserByHubOnly(hub_serial_no: String): List<SecondaryUser>
 }

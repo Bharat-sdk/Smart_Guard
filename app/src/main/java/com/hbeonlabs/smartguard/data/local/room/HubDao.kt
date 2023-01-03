@@ -16,6 +16,7 @@ interface HubDao {
     @Query("SELECT * FROM hub")
     fun getAllHubsList(): Flow<List<Hub>>
 
+
     @Query("SELECT * FROM hub WHERE hub_serial_number = :hub_id LIMIT 1")
     fun getHubFromId(hub_id: String):Flow<Hub?>
 
@@ -88,6 +89,9 @@ interface HubDao {
 
     @Query("SELECT * FROM secondaryuser WHERE hub_serial_number = :hubId")
     fun getSecondaryUsersUsingHub(hubId: String):Flow<List<SecondaryUser>>
+
+    @Query("SELECT * FROM secondaryuser WHERE hub_serial_number = :hubId")
+    fun getSecondaryUsersUsingHubOnly(hubId: String):List<SecondaryUser>
 
 
     @Query("UPDATE secondaryuser SET user_name = :name , user_pic = :image , hub_serial_number =:hub_serial_no , user_phone_number =:number WHERE hub_serial_number in(:hub_serial_no)")

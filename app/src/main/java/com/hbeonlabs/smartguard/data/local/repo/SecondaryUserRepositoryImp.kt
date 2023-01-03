@@ -19,6 +19,7 @@ class SecondaryUserRepositoryImp constructor(
 
 
     override suspend fun getAllSecondaryUserByHub(hub_serial_no: String): Flow<List<SecondaryUser>> = dao.getSecondaryUsersUsingHub(hub_serial_no)
+    override suspend fun getAllSecondaryUserByHubOnly(hub_serial_no: String): List<SecondaryUser> = dao.getSecondaryUsersUsingHubOnly(hub_serial_no)
     override suspend fun addSecondaryUser(secondaryUser: SecondaryUser) {
         dao.addSecondaryUser(secondaryUser)
     }

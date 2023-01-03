@@ -25,6 +25,7 @@ class SecondaryUserViewModel  @Inject constructor(
     var hubId = ""
 
     suspend fun getSecondaryUsersUsingHub(hubId:String):Flow<List<SecondaryUser>> = repo.getAllSecondaryUserByHub(hubId)
+    suspend fun getSecondaryUsersUsingHubOnly(hubId:String):List<SecondaryUser> = repo.getAllSecondaryUserByHubOnly(hubId)
 
     fun deleteSecondaryUser(secondaryUser: SecondaryUser) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cl_add_a_sensor"
     android:layout_width="match_parent"
@@ -124,7 +131,7 @@
         app:layout_constraintVertical_bias=".8"
         android:layout_marginBottom="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:text="Make sure that the sensor is powered on before proceeding.\nThe sensor will be added to slot 001"
+        android:text="Make sure that the sensor is powered on before proceeding."
         />
 
     <Button
@@ -179,4 +186,6 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </layout>
